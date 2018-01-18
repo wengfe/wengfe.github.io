@@ -304,6 +304,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/18/优秀代码片段1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wengfe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旦暮">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/18/优秀代码片段1/" itemprop="url">优秀代码片段1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T17:57:22+08:00">
+                2018-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/18/优秀代码片段1/" class="leancloud_visitors" data-flag-title="优秀代码片段1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.简洁的表达式，比如if/else放在一行里面<br>‘’def test(m):<br>‘’        return ‘a’ if m==1 else ‘b’<br>2.构成一个字典序列<br>‘’print(dict(zip(‘abcd’,range(4))) )<br>‘’&gt;&gt;{‘a’: 0, ‘c’: 2, ‘b’: 1, ‘d’: 3}<br>3.if else print 一行搞定<br>‘’print(‘ok’ if a==1 else ‘ko’)<br>4.一行代码，巧妙的求解<br>‘’#列出1到20的数字，若是3的倍数就用apple代替，若是5的倍数就用orange代替，<br>‘’#若既是3的倍数又是5的倍数就用appleorange代替<br>‘’print [‘apple’[i%35::]+’orange’[i%56::] or i for i in range(1,21)]<br>关键字or在上下文对算中，若有真假值，返回真值，若同为假值，返回最后一个假值<br>‘’#&gt;&gt;&gt; print(‘’ or 1)<br>‘’ 1<br>‘’ &gt;&gt;&gt; print(‘’+”” or 1)<br>‘’ 1<br>5.推导列表生成字典<br>‘’list1=((1,’a’),(2,’b’))<br>‘’print({x[0]:x[1] for x in list1 })<br>‘’print({x:y for x in range(4) for y in range(10,14)})<br>6.非常漂亮的取列表,字典里面的排序<br>‘’import heapq<br>‘’ nums=[10,2,9,100,80]<br>‘’ print heapq.nlargest(3,nums)<br>‘’ print heapq.nsmallest(3,nums)<br>‘’<br>‘’ students=[{‘names’:’CC’,’score’:100,’height’:189},<br>‘’           {‘names’:’BB’,’score’:10,’height’:169},<br>‘’           {‘names’:’AA’,’score’:80,’height’:179}]<br>‘’<br>‘’ print heapq.nsmallest(2,students,key=lambda x:x[‘height’])</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/07/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -480,7 +611,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -493,7 +624,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

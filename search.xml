@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[优秀代码片段1]]></title>
+    <url>%2F2018%2F01%2F18%2F%E4%BC%98%E7%A7%80%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B51%2F</url>
+    <content type="text"><![CDATA[1.简洁的表达式，比如if/else放在一行里面‘’def test(m):‘’ return ‘a’ if m==1 else ‘b’2.构成一个字典序列‘’print(dict(zip(‘abcd’,range(4))) )‘’&gt;&gt;{‘a’: 0, ‘c’: 2, ‘b’: 1, ‘d’: 3}3.if else print 一行搞定‘’print(‘ok’ if a==1 else ‘ko’)4.一行代码，巧妙的求解‘’#列出1到20的数字，若是3的倍数就用apple代替，若是5的倍数就用orange代替，‘’#若既是3的倍数又是5的倍数就用appleorange代替‘’print [‘apple’[i%35::]+’orange’[i%56::] or i for i in range(1,21)]关键字or在上下文对算中，若有真假值，返回真值，若同为假值，返回最后一个假值‘’#&gt;&gt;&gt; print(‘’ or 1)‘’ 1‘’ &gt;&gt;&gt; print(‘’+”” or 1)‘’ 15.推导列表生成字典‘’list1=((1,’a’),(2,’b’))‘’print({x[0]:x[1] for x in list1 })‘’print({x:y for x in range(4) for y in range(10,14)})6.非常漂亮的取列表,字典里面的排序‘’import heapq‘’ nums=[10,2,9,100,80]‘’ print heapq.nlargest(3,nums)‘’ print heapq.nsmallest(3,nums)‘’‘’ students=[{‘names’:’CC’,’score’:100,’height’:189},‘’ {‘names’:’BB’,’score’:10,’height’:169},‘’ {‘names’:’AA’,’score’:80,’height’:179}]‘’‘’ print heapq.nsmallest(2,students,key=lambda x:x[‘height’])]]></content>
+      <tags>
+        <tag>python</tag>
+        <tag>code part</tag>
+        <tag>categories</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2017%2F07%2F07%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post` bash$ hexo new “My New Post”` More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
