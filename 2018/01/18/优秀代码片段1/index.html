@@ -86,7 +86,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/18/优秀代码片段1/index.html">
 <meta property="og:site_name" content="旦暮">
 <meta property="og:description" content="正所谓，人生苦短，我用 python 。在python 中，有非常多的令人影响深刻的好东西。">
-<meta property="og:updated_time" content="2018-01-19T03:19:17.000Z">
+<meta property="og:updated_time" content="2018-01-22T02:22:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="优秀代码一">
 <meta name="twitter:description" content="正所谓，人生苦短，我用 python 。在python 中，有非常多的令人影响深刻的好东西。">
@@ -409,7 +409,20 @@
 <p>正所谓，人生苦短，我用 python 。在python 中，有非常多的令人影响深刻的好东西。</p>
 </blockquote>
 <a id="more"></a>
-<p>1.简洁的表达式，比如if/else放在一行里面<br>‘’def test(m):<br>‘’        return ‘a’ if m==1 else ‘b’<br>2.构成一个字典序列<br>‘’print(dict(zip(‘abcd’,range(4))) )<br>‘’&gt;&gt;{‘a’: 0, ‘c’: 2, ‘b’: 1, ‘d’: 3}<br>3.if else print 一行搞定<br>‘’print(‘ok’ if a==1 else ‘ko’)<br>4.一行代码，巧妙的求解<br>‘’#列出1到20的数字，若是3的倍数就用apple代替，若是5的倍数就用orange代替，<br>‘’#若既是3的倍数又是5的倍数就用appleorange代替<br>‘’print [‘apple’[i%35::]+’orange’[i%56::] or i for i in range(1,21)]<br>关键字or在上下文对算中，若有真假值，返回真值，若同为假值，返回最后一个假值<br>‘’#&gt;&gt;&gt; print(‘’ or 1)<br>‘’ 1<br>‘’ &gt;&gt;&gt; print(‘’+”” or 1)<br>‘’ 1<br>5.推导列表生成字典<br>‘’list1=((1,’a’),(2,’b’))<br>‘’print({x[0]:x[1] for x in list1 })<br>‘’print({x:y for x in range(4) for y in range(10,14)})<br>6.非常漂亮的取列表,字典里面的排序<br>‘’import heapq<br>‘’ nums=[10,2,9,100,80]<br>‘’ print heapq.nlargest(3,nums)<br>‘’ print heapq.nsmallest(3,nums)<br>‘’<br>‘’ students=[{‘names’:’CC’,’score’:100,’height’:189},<br>‘’           {‘names’:’BB’,’score’:10,’height’:169},<br>‘’           {‘names’:’AA’,’score’:80,’height’:179}]<br>‘’<br>‘’ print heapq.nsmallest(2,students,key=lambda x:x[‘height’])</p>
+<p>1.三目运算，if/else放在一行里面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def test(m):</div><div class="line">    return &apos;a&apos; if m==1 else &apos;b&apos;</div></pre></td></tr></table></figure>
+<p>2.构成一个字典序列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(dict(zip(&apos;abcd&apos;,range(4))) )</div><div class="line">&gt;&gt;&#123;&apos;a&apos;: 0, &apos;c&apos;: 2, &apos;b&apos;: 1, &apos;d&apos;: 3&#125;</div></pre></td></tr></table></figure>
+<p>3.print 中使用三目运算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(&apos;ok&apos; if a==1 else &apos;ko&apos;)</div></pre></td></tr></table></figure>
+<p>4.字符串切片的妙用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> #列出1到20的数字，若是3的倍数就用apple代替，若是5的倍数就用orange代替，</div><div class="line"> #若既是3的倍数又是5的倍数就用appleorange代替</div><div class="line">print [&apos;apple&apos;[i%35::]+&apos;orange&apos;[i%56::] or i for i in range(1,21)]</div></pre></td></tr></table></figure>
+<p>关键字or在上下文对算中，若有真假值，返回真值，若同为假值，返回最后一个假值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#&gt;&gt;&gt; print(&apos;&apos; or 1)</div><div class="line">1</div><div class="line">&gt;&gt;&gt; print(&apos;&apos;+&quot;&quot; or 1)</div><div class="line">1</div></pre></td></tr></table></figure>
+<p>5.推导列表生成字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">list1=((1,&apos;a&apos;),(2,&apos;b&apos;))</div><div class="line">print(&#123;x[0]:x[1] for x in list1 &#125;)</div><div class="line">print(&#123;x:y for x in range(4) for y in range(10,14)&#125;)</div></pre></td></tr></table></figure>
+<p>6.漂亮的取表操作,字典排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">import heapq</div><div class="line">nums=[10,2,9,100,80]</div><div class="line">print heapq.nlargest(3,nums)</div><div class="line">print heapq.nsmallest(3,nums)</div><div class="line"> </div><div class="line">students=[&#123;&apos;names&apos;:&apos;CC&apos;,&apos;score&apos;:100,&apos;height&apos;:189&#125;,</div><div class="line">    &#123;&apos;names&apos;:&apos;BB&apos;,&apos;score&apos;:10,&apos;height&apos;:169&#125;,</div><div class="line">    &#123;&apos;names&apos;:&apos;AA&apos;,&apos;score&apos;:80,&apos;height&apos;:179&#125;]</div><div class="line"></div><div class="line">print heapq.nsmallest(2,students,key=lambda x:x[&apos;height&apos;])</div></pre></td></tr></table></figure>
 
       
     </div>
