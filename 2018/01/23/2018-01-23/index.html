@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python,excel,xlrd/xlwt," />
 
 
 
@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="书生意气，乱写一气">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta name="description" content="本来我是要写一个删除数据库日志的脚本来辅助工作(这个脚本故事放到以后再说)，因为考虑到数据库删除后没有数据备份，当时想着可以在删除操作之前把查询到的数据库记录挑选几个主键外键写到本地 excel 内, 所以简单学习了一下 python 对 excel 的操作。">
+<meta name="keywords" content="python,excel,xlrd&#x2F;xlwt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 xlrd,xlwt 操作 excel">
+<meta property="og:url" content="http://yoursite.com/2018/01/23/2018-01-23/index.html">
 <meta property="og:site_name" content="旦暮">
-<meta property="og:description" content="书生意气，乱写一气">
-<meta property="og:updated_time" content="2018-01-10T04:57:48.000Z">
+<meta property="og:description" content="本来我是要写一个删除数据库日志的脚本来辅助工作(这个脚本故事放到以后再说)，因为考虑到数据库删除后没有数据备份，当时想着可以在删除操作之前把查询到的数据库记录挑选几个主键外键写到本地 excel 内, 所以简单学习了一下 python 对 excel 的操作。">
+<meta property="og:updated_time" content="2018-01-23T09:10:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="书生意气，乱写一气">
+<meta name="twitter:title" content="使用 xlrd,xlwt 操作 excel">
+<meta name="twitter:description" content="本来我是要写一个删除数据库日志的脚本来辅助工作(这个脚本故事放到以后再说)，因为考虑到数据库删除后没有数据备份，当时想着可以在删除操作之前把查询到的数据库记录挑选几个主键外键写到本地 excel 内, 所以简单学习了一下 python 对 excel 的操作。">
 
 
 
@@ -118,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/23/2018-01-23/"/>
 
 
 
 
 
-  <title>categories | 旦暮</title>
+  <title>使用 xlrd,xlwt 操作 excel | 旦暮</title>
   
 
 
@@ -292,40 +293,227 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/23/2018-01-23/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wengfe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旦暮">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">categories</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                目前共计 4 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/python/exercise/">exercise</a><span class="category-list-count">2</span></li></ul></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">使用 xlrd,xlwt 操作 excel</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T14:02:44+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/23/2018-01-23/" class="leancloud_visitors" data-flag-title="使用 xlrd,xlwt 操作 excel">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>本来我是要写一个删除数据库日志的脚本来辅助工作(这个脚本故事放到以后再说)，因为考虑到数据库删除后没有数据备份，当时想着可以在删除操作之前把查询到的数据库记录挑选几个主键外键写到本地 excel 内, 所以简单学习了一下 python 对 excel 的操作。<br><a id="more"></a></p>
+<p>以下是 xlrd/wlwt 的基础操作：</p>
+<h3 id="xlrd-读取数据"><a href="#xlrd-读取数据" class="headerlink" title="xlrd 读取数据"></a>xlrd 读取数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; import xlrd,xlwt,os</div><div class="line"></div><div class="line"></div><div class="line">&gt;&gt;&gt; wb = xlrd.open_workbook(&apos;/Users/fuyiweng/Downloads/源码/Python处理Excel入门/input.xls&apos;)</div><div class="line">#获得所有表格名</div><div class="line">&gt;&gt;&gt; print(wb.sheet_names())</div><div class="line">[&apos;data&apos;]</div><div class="line">#通过sheet名或序号得到表格</div><div class="line">&gt;&gt;&gt; sheet = wb.sheet_</div><div class="line">wb.sheet_by_index(  wb.sheet_by_name(   wb.sheet_loaded(wb.sheet_names(</div><div class="line">&gt;&gt;&gt; sheet = wb.sheet_by_name(&apos;data&apos;)</div><div class="line">#获得 data 表 行列数</div><div class="line">&gt;&gt;&gt; print(sheet.nrows)</div><div class="line">11</div><div class="line">&gt;&gt;&gt; print(sheet.ncols)</div><div class="line">3</div><div class="line">#打印第一行</div><div class="line">&gt;&gt;&gt; print(sheet.row(0))</div><div class="line">[text:&apos;时间&apos;, text:&apos;人数1&apos;, text:&apos;人数2&apos;]</div><div class="line">&gt;&gt;&gt; print(sheet.row(1))</div><div class="line">[xldate:42736.0, number:16.0, number:26.0]</div><div class="line">#获取单元格</div><div class="line">&gt;&gt;&gt; print(sheet.cell(1,2))</div><div class="line">number:26.0</div><div class="line">#ctype = 1 # 类型 0 empty,1 string, 2 number, 3 date, 4 boolean, 5 error</div><div class="line">&gt;&gt;&gt; print(sheet.cell(1,2).ctype)</div><div class="line">2</div><div class="line">&gt;&gt;&gt; print(sheet.cell(1,2).value)</div><div class="line">26.0</div></pre></td></tr></table></figure>
+<p>另外读取的时候注意，所读取的数据是否是以下<br>xlrd 对 excel 内容分成的 7 种枚举类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(</div><div class="line">XL_CELL_EMPTY,</div><div class="line">XL_CELL_TEXT,</div><div class="line">XL_CELL_NUMBER,</div><div class="line">XL_CELL_DATE,</div><div class="line">XL_CELL_BOOLEAN,</div><div class="line">XL_CELL_ERROR,</div><div class="line">XL_CELL_BLANK, # for use in debugging, gathering stats, etc</div><div class="line">) = range(7)</div></pre></td></tr></table></figure>
+<h3 id="xlwt-写入数据"><a href="#xlwt-写入数据" class="headerlink" title="xlwt 写入数据"></a>xlwt 写入数据</h3><h4 id="打开-excel-文件"><a href="#打开-excel-文件" class="headerlink" title="打开 excel 文件"></a>打开 excel 文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; import xlrd,xlwt,os</div><div class="line"> #通过xlrd 打开excel 文件</div><div class="line">&gt;&gt;&gt; wb = xlrd.open_workbook(&apos;/Users/fuyiweng/Downloads/源码/Python处理Excel入门/input.xls&apos;)</div><div class="line">&gt;&gt;&gt; type(wb)</div><div class="line">&lt;class &apos;xlrd.book.Book&apos;&gt;</div><div class="line"> #通过xlwt.Workbook()转为可写模式</div><div class="line">&gt;&gt;&gt; wb = xlwt.Workbook()</div><div class="line">&gt;&gt;&gt; type(wb)</div><div class="line">&lt;class &apos;xlwt.Workbook.Workbook&apos;&gt;</div></pre></td></tr></table></figure>
+<h4 id="写入数据"><a href="#写入数据" class="headerlink" title="写入数据"></a>写入数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sheetname.write(row,col,value,style)</div></pre></td></tr></table></figure>
+<p> 这里的 style 其实就是这个内容单元格的格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#写入第一行,标题栏</div><div class="line">style=xlwt.easyxf(&apos;align: vertical center, horizontal center&apos;)</div><div class="line">wsheet.write(0,0,u&apos;时间&apos;,style)</div><div class="line">wsheet.write(0,1,u&apos;人数1&apos;,style)</div><div class="line">wsheet.write(0,2,u&apos;人数2&apos;,style)</div><div class="line">wsheet.write(0,3,u&apos;总分&apos;,style)</div></pre></td></tr></table></figure>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/excel/" rel="tag"># excel</a>
+          
+            <a href="/tags/xlrd-xlwt/" rel="tag"># xlrd/xlwt</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/19/2018-01-19-1/" rel="next" title="菜鸟训练营第二期">
+                <i class="fa fa-chevron-left"></i> 菜鸟训练营第二期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
   </div>
 
 
@@ -334,6 +522,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzEwMy85NjYy"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -354,8 +551,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -435,6 +641,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#xlrd-读取数据"><span class="nav-number">1.</span> <span class="nav-text">xlrd 读取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xlwt-写入数据"><span class="nav-number">2.</span> <span class="nav-text">xlwt 写入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#打开-excel-文件"><span class="nav-number">2.1.</span> <span class="nav-text">打开 excel 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写入数据"><span class="nav-number">2.2.</span> <span class="nav-text">写入数据</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -614,6 +836,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
