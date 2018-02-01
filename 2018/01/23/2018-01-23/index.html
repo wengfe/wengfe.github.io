@@ -86,7 +86,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/23/2018-01-23/index.html">
 <meta property="og:site_name" content="旦暮">
 <meta property="og:description" content="本来我是要写一个删除数据库日志的脚本来辅助工作(这个脚本故事放到以后再说)，因为考虑到数据库删除后没有数据备份，当时想着可以在删除操作之前把查询到的数据库记录挑选几个主键外键写到本地 excel 内, 所以简单学习了一下 python 对 excel 的操作。">
-<meta property="og:updated_time" content="2018-01-23T09:10:28.000Z">
+<meta property="og:updated_time" content="2018-01-23T09:17:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 xlrd,xlwt 操作 excel">
 <meta name="twitter:description" content="本来我是要写一个删除数据库日志的脚本来辅助工作(这个脚本故事放到以后再说)，因为考虑到数据库删除后没有数据备份，当时想着可以在删除操作之前把查询到的数据库记录挑选几个主键外键写到本地 excel 内, 所以简单学习了一下 python 对 excel 的操作。">
@@ -406,7 +406,10 @@
 
       
         <p>本来我是要写一个删除数据库日志的脚本来辅助工作(这个脚本故事放到以后再说)，因为考虑到数据库删除后没有数据备份，当时想着可以在删除操作之前把查询到的数据库记录挑选几个主键外键写到本地 excel 内, 所以简单学习了一下 python 对 excel 的操作。<br><a id="more"></a></p>
-<p>以下是 xlrd/wlwt 的基础操作：</p>
+<p>值得注意的是， xlrd 和 xlwt 是分开的两个库，另外还有功能补充的 xlutils 库。安装时候需要分别执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install xlrd</div><div class="line">pip install xlwt</div><div class="line">pip install xlutils</div></pre></td></tr></table></figure>
+<p>并且在使用的时候，如果要使用也要分别 import 导入。</p>
+<p>以下是 xlrd/xlwt 的基础操作：</p>
 <h3 id="xlrd-读取数据"><a href="#xlrd-读取数据" class="headerlink" title="xlrd 读取数据"></a>xlrd 读取数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; import xlrd,xlwt,os</div><div class="line"></div><div class="line"></div><div class="line">&gt;&gt;&gt; wb = xlrd.open_workbook(&apos;/Users/fuyiweng/Downloads/源码/Python处理Excel入门/input.xls&apos;)</div><div class="line">#获得所有表格名</div><div class="line">&gt;&gt;&gt; print(wb.sheet_names())</div><div class="line">[&apos;data&apos;]</div><div class="line">#通过sheet名或序号得到表格</div><div class="line">&gt;&gt;&gt; sheet = wb.sheet_</div><div class="line">wb.sheet_by_index(  wb.sheet_by_name(   wb.sheet_loaded(wb.sheet_names(</div><div class="line">&gt;&gt;&gt; sheet = wb.sheet_by_name(&apos;data&apos;)</div><div class="line">#获得 data 表 行列数</div><div class="line">&gt;&gt;&gt; print(sheet.nrows)</div><div class="line">11</div><div class="line">&gt;&gt;&gt; print(sheet.ncols)</div><div class="line">3</div><div class="line">#打印第一行</div><div class="line">&gt;&gt;&gt; print(sheet.row(0))</div><div class="line">[text:&apos;时间&apos;, text:&apos;人数1&apos;, text:&apos;人数2&apos;]</div><div class="line">&gt;&gt;&gt; print(sheet.row(1))</div><div class="line">[xldate:42736.0, number:16.0, number:26.0]</div><div class="line">#获取单元格</div><div class="line">&gt;&gt;&gt; print(sheet.cell(1,2))</div><div class="line">number:26.0</div><div class="line">#ctype = 1 # 类型 0 empty,1 string, 2 number, 3 date, 4 boolean, 5 error</div><div class="line">&gt;&gt;&gt; print(sheet.cell(1,2).ctype)</div><div class="line">2</div><div class="line">&gt;&gt;&gt; print(sheet.cell(1,2).value)</div><div class="line">26.0</div></pre></td></tr></table></figure>
 <p>另外读取的时候注意，所读取的数据是否是以下<br>xlrd 对 excel 内容分成的 7 种枚举类型</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(</div><div class="line">XL_CELL_EMPTY,</div><div class="line">XL_CELL_TEXT,</div><div class="line">XL_CELL_NUMBER,</div><div class="line">XL_CELL_DATE,</div><div class="line">XL_CELL_BOOLEAN,</div><div class="line">XL_CELL_ERROR,</div><div class="line">XL_CELL_BLANK, # for use in debugging, gathering stats, etc</div><div class="line">) = range(7)</div></pre></td></tr></table></figure>
@@ -457,6 +460,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/01/2018-02-01/" rel="prev" title="SQLAlchemy 预使用 -- 本地环境配置">
+                SQLAlchemy 预使用 -- 本地环境配置 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -580,7 +587,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -591,7 +598,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -602,7 +609,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
