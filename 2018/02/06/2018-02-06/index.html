@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="上一篇所用的代码，是廖雪峰大大 python 数据库章节中的 SQLAlchemy 中的部分。因为踩到不少坑，所以又找到相关的资料进行学习。这一片主要将 sqlalchemy-orm 部分进行总结。">
+<meta name="description" content="上一篇所用的代码，是廖雪峰大大 python 数据库章节中的 SQLAlchemy 中的部分。因为踩到不少坑，所以又找到相关的资料进行学习。这一片主要将 sqlalchemy-orm 部分进行总结。ORM（Object Relational Mapper）可以理解为「将数据库中的表映射为程序中的类」。表中的一行即为该类的一个实例。">
 <meta name="keywords" content="python,SQLAlchemy,MYSQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQLAlchemy-ORM">
 <meta property="og:url" content="http://yoursite.com/2018/02/06/2018-02-06/index.html">
 <meta property="og:site_name" content="旦暮">
-<meta property="og:description" content="上一篇所用的代码，是廖雪峰大大 python 数据库章节中的 SQLAlchemy 中的部分。因为踩到不少坑，所以又找到相关的资料进行学习。这一片主要将 sqlalchemy-orm 部分进行总结。">
-<meta property="og:updated_time" content="2018-02-06T03:25:59.000Z">
+<meta property="og:description" content="上一篇所用的代码，是廖雪峰大大 python 数据库章节中的 SQLAlchemy 中的部分。因为踩到不少坑，所以又找到相关的资料进行学习。这一片主要将 sqlalchemy-orm 部分进行总结。ORM（Object Relational Mapper）可以理解为「将数据库中的表映射为程序中的类」。表中的一行即为该类的一个实例。">
+<meta property="og:updated_time" content="2018-02-06T07:51:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQLAlchemy-ORM">
-<meta name="twitter:description" content="上一篇所用的代码，是廖雪峰大大 python 数据库章节中的 SQLAlchemy 中的部分。因为踩到不少坑，所以又找到相关的资料进行学习。这一片主要将 sqlalchemy-orm 部分进行总结。">
+<meta name="twitter:description" content="上一篇所用的代码，是廖雪峰大大 python 数据库章节中的 SQLAlchemy 中的部分。因为踩到不少坑，所以又找到相关的资料进行学习。这一片主要将 sqlalchemy-orm 部分进行总结。ORM（Object Relational Mapper）可以理解为「将数据库中的表映射为程序中的类」。表中的一行即为该类的一个实例。">
 
 
 
@@ -417,14 +417,20 @@
 
       
         <blockquote>
-<p>上一篇所用的代码，是廖雪峰大大 python 数据库章节中的 SQLAlchemy 中的部分。因为踩到不少坑，所以又找到相关的资料进行学习。这一片主要将 sqlalchemy-orm 部分进行总结。</p>
+<p>上一篇所用的代码，是廖雪峰大大 python 数据库章节中的 SQLAlchemy 中的部分。因为踩到不少坑，所以又找到相关的资料进行学习。这一片主要将 sqlalchemy-orm 部分进行总结。ORM（Object Relational Mapper）可以理解为「将数据库中的表映射为程序中的类」。表中的一行即为该类的一个实例。</p>
 </blockquote>
 <a id="more"></a>
-<p>在使用 sqlalchemy 之前，需要先导入相关的库，在导入之前当然也是需要先安装。<br>在终端输入：</p>
+<p>在使用 sqlalchemy 之前，需要先导入相关的库，在导入之前当然也是需要先安装。<br>因为在代码中写入了大量的注释，所以就多 BB 了，文末会贴上本文代码的 github 的项目地址。<br>在终端输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install sqlalchemy</div></pre></td></tr></table></figure>
 <p>打开 pycharm 新建一个项目，然后导入以下库：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">import sqlalchemy</div><div class="line">from sqlalchemy import create_engine, ForeignKey</div><div class="line">from sqlalchemy.ext.declarative import declarative_base</div><div class="line">from sqlalchemy import Column, String, Integer</div><div class="line">from sqlalchemy.orm import sessionmaker</div></pre></td></tr></table></figure>
 <p><strong>注：</strong>第二行的最后一个库是之后双表建立外键的时候需要添加的库</p>
+<h3 id="创建「表-类」映射"><a href="#创建「表-类」映射" class="headerlink" title="创建「表-类」映射"></a>创建「表-类」映射</h3><h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"># 利用数据库字符串构造engine, echo为True将打印所有的sql语句</div><div class="line">engine = create_engine(&apos;sqlite:///foo.db&apos;, echo=True)</div><div class="line"></div><div class="line"># 首先需要生成一个BaseModel类,作为所有模型类的基类</div><div class="line">Base = declarative_base()</div><div class="line"></div><div class="line"></div><div class="line">class User(Base):</div><div class="line">    __tablename__ = &apos;user&apos;</div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    name = Column(String)</div><div class="line">    fullname = Column(String)</div><div class="line">    passward = Column(String)</div><div class="line"></div><div class="line">    def __repr__(self):</div><div class="line">        return &apos;&lt;User(name=&quot;%s&quot;, fullname=&quot;%s&quot;, passward=&quot;%s&quot;)&gt;&apos; % (</div><div class="line">            self.name, self.fullname, self.passward)</div><div class="line"></div><div class="line"></div><div class="line"># 创建所有表,如果表已经存在,则不会创建</div><div class="line"># Base.metadata.create_all(engine)</div><div class="line"># 删除所有表</div><div class="line"># Base.metadata.drop_all(engine)</div></pre></td></tr></table></figure>
+<h4 id="创建表实例"><a href="#创建表实例" class="headerlink" title="创建表实例"></a>创建表实例</h4><p>创建一个 User 实例， sqlalchemy ORM 通过 session（会话）来操作表，一个 session 实例可以添加多个事务，然后通过 commit 提交事务，未提交的表操作事务是不会反馈到表中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#创建一个 User 类实例</div><div class="line">ed_user = User(name=&apos;ed&apos;, fullname=&apos;Ed jones&apos;, passward=&apos;edspassward&apos;)</div><div class="line"># print(ed_user)</div><div class="line"></div><div class="line"># 利用Session对象连接数据库</div><div class="line">#创建会话类和会话类的对象</div><div class="line">Session = sessionmaker(bind=engine)</div><div class="line">session = Session()</div><div class="line"></div><div class="line"># 向事务会话中添加实例对象，向表中插入数据需要提交事务， 调用 commit() 方法</div><div class="line"># session.add(ed_user)</div><div class="line">#</div><div class="line">#查询符合条件的第一条</div><div class="line"># our_user = session.query(User).filter_by(name=&apos;ed&apos;).first()</div><div class="line"># 相等于下方的 sql 语句</div><div class="line">#  select * from User where name=&apos;ed&apos; limit 1;</div><div class="line">#</div><div class="line"># session.add_all([</div><div class="line">#     User(name=&apos;wendy&apos;, fullname=&apos;Wendy Williams&apos;, passward=&apos;foobar&apos;),</div><div class="line">#     User(name=&apos;wendy2&apos;, fullname=&apos;Wendy Williams&apos;, passward=&apos;foobar&apos;),</div><div class="line">#     User(name=&apos;wendy3&apos;, fullname=&apos;Wendy Williams&apos;, passward=&apos;foobar&apos;)</div><div class="line">#     ])</div><div class="line"># session.commit()</div></pre></td></tr></table></figure>
+<h4 id="通过-session-事务进行查询操作"><a href="#通过-session-事务进行查询操作" class="headerlink" title="通过 session 事务进行查询操作"></a>通过 session 事务进行查询操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">#查询全部</div><div class="line"># print(session.query(User).all())</div><div class="line"></div><div class="line">#查询符合条件的第一条</div><div class="line"># our_user = session.query(User).filter_by(name=&apos;ed&apos;).first()</div><div class="line"></div><div class="line">#排序</div><div class="line"># for row in session.query(User).order_by(User.id):</div><div class="line">#     print(row)</div><div class="line"></div><div class="line"># 查询 in 操作</div><div class="line"># for row in session.query(User).filter(User.name.in_([&apos;ed&apos;, &apos;wendy&apos;])):</div><div class="line">#     print(row)</div><div class="line"></div><div class="line"># 查询 not in 操作</div><div class="line"># for row in session.query(User).filter(~User.name.in_([&apos;ed&apos;, &apos;wendy&apos;])):</div><div class="line">#     print(row)</div><div class="line"></div><div class="line"># count 操作</div><div class="line"># print(session.query(User).filter(User.name ==&apos;ed&apos;).count())</div><div class="line"></div><div class="line"># and 和 or 操作, 需要导入模块</div><div class="line"># from sqlalchemy import and_, or_</div><div class="line"># for row in session.query(User).filter(and_(User.name == &apos;ed&apos;, User.fullname == &apos;Ed jones&apos;)):</div><div class="line">#     print(row)</div><div class="line"># for row in session.query(User).filter(or_(User.name == &apos;ed&apos;, User.name ==&apos;wendy&apos;)):</div><div class="line">#     print(row)</div><div class="line"></div><div class="line"># 创建外键</div><div class="line">from sqlalchemy import ForeignKey</div><div class="line">from sqlalchemy.orm import relationship, backref</div><div class="line"></div><div class="line"></div><div class="line">class Address(Base):</div><div class="line">    __tablename__ = &apos;addresses&apos;</div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    email_address = Column(String, nullable=False)</div><div class="line">    user_id = Column(Integer, ForeignKey(&apos;user.id&apos;))</div><div class="line"></div><div class="line">    # 关联 User  表主键为外键，此处为 多对1</div><div class="line">    user_i = relationship(&quot;User&quot;, backref=backref(&apos;addresses&apos;, order_by=id))</div><div class="line"></div><div class="line">    def __repr__(self):</div><div class="line">        return &quot;&lt;Address(email_address=&apos;%s&apos;)&gt;&quot; % self.email_address</div><div class="line"></div><div class="line"># Base.metadata.create_all(engine)</div><div class="line"></div><div class="line"># jack = User(name=&apos;jack&apos;, fullname=&apos;Jack Bean&apos;, passward=&apos;giffs&apos;)</div><div class="line"># jack.addresses = [</div><div class="line">#     Address(email_address=&apos;jack@google.com&apos;),</div><div class="line">#     Address(email_address=&apos;j25@yahoo.com&apos;)]</div><div class="line">#</div><div class="line"># session.add(jack)</div><div class="line"># session.commit()</div><div class="line"></div><div class="line"># 双表联合查询</div><div class="line">for u, a in session.query(User, Address).\</div><div class="line">        filter(User.id == Address.user_id).\</div><div class="line">        filter(Address.email_address == &apos;jack@google.com&apos;).\</div><div class="line">        all():</div><div class="line">    print(u, a)</div></pre></td></tr></table></figure>
+<h4 id="表数据修改操作"><a href="#表数据修改操作" class="headerlink" title="表数据修改操作"></a>表数据修改操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># 表修改</div><div class="line"># 造数据</div><div class="line">he_user = User(id=15, name=&apos;he&apos;, fullname=&apos;He jones&apos;, passward=&apos;edspassward&apos;)</div><div class="line"># session.add(he_user)</div><div class="line"># session.commit()</div><div class="line"></div><div class="line"># 使用merge方法，如果指定的主键已存在，修改记录，不存在新增一条记录</div><div class="line">session.merge(he_user)</div><div class="line"></div><div class="line">session.commit()</div><div class="line"># 关闭 session</div><div class="line">session.close()</div></pre></td></tr></table></figure>
+<p>github 地址：<a href="https://github.com/wengfe/NiuCodeLesson/tree/master/SQLalchemytest" target="_blank" rel="external">NiuCodeLesson/SQLalchemytest/SQLAlchemy.py</a></p>
 
       
     </div>
@@ -562,8 +568,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -643,6 +658,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建「表-类」映射"><span class="nav-number">1.</span> <span class="nav-text">创建「表-类」映射</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表"><span class="nav-number">1.1.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表实例"><span class="nav-number">1.2.</span> <span class="nav-text">创建表实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过-session-事务进行查询操作"><span class="nav-number">1.3.</span> <span class="nav-text">通过 session 事务进行查询操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表数据修改操作"><span class="nav-number">1.4.</span> <span class="nav-text">表数据修改操作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
