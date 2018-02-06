@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[SQLAlchemy-ORM]]></title>
+    <url>%2F2018%2F02%2F06%2F2018-02-06%2F</url>
+    <content type="text"><![CDATA[上一篇所用的代码，是廖雪峰大大 python 数据库章节中的 SQLAlchemy 中的部分。因为踩到不少坑，所以又找到相关的资料进行学习。这一片主要将 sqlalchemy-orm 部分进行总结。 在使用 sqlalchemy 之前，需要先导入相关的库，在导入之前当然也是需要先安装。在终端输入： 1pip install sqlalchemy 打开 pycharm 新建一个项目，然后导入以下库： 12345import sqlalchemyfrom sqlalchemy import create_engine, ForeignKeyfrom sqlalchemy.ext.declarative import declarative_basefrom sqlalchemy import Column, String, Integerfrom sqlalchemy.orm import sessionmaker 注：第二行的最后一个库是之后双表建立外键的时候需要添加的库]]></content>
+      <categories>
+        <category>python</category>
+        <category>SQL</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>SQLAlchemy</tag>
+        <tag>MYSQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[SQLAlchemy 预使用 -- 本地环境配置]]></title>
     <url>%2F2018%2F02%2F01%2F2018-02-01%2F</url>
     <content type="text"><![CDATA[因为之前使用 Python 操作数据库表时，目的是为了辅助工作，所以是直接对公司测试服务器上的数据库进行操作的。这次因为在学习 ORM ，所以需要在本地创建数据库。踩了一堆的烂坑，不得不说，大学时候没有听一节课，付出的时间代价会更大，我花了一天的时间进行踩坑学习才补回。 SQLAlchemy 是 python 平台上较为成熟的 ORM 框架。ORM -&gt; 对象关系映射，用于实现面向对象编程语言里不同类型系统的数据之间的转换。从效果上说，它其实是创建了一个可在编程语言里使用的–“虚拟对象数据库”抛开百度百科，就我的使用方向说，就是建立函数与数据库表之间的映射关系，所以需要映射的数据库表的是需要事先创建好的。我就是在这里踩了大坑。 安装本地 MySQL首先需要启动本地的 MySQLserver，我使用的是 Mac，前往官网下载，直接安装就好了。安装好后会给你一个随机密码。请记住这个密码。 当然忘记了问题也不大。 链接本地数据库这里问题就有点多了，当我安装好 MySQL 后，打开 Navicat 新建本地数据库链接的时候，跳出很多的小问题。 Can’t connect to remote MySQL server with error 61一只瞎捷豹乱搜，找到原因： Mac 下安装mysql，安装完成后是无用户无密码的状态，并且数据库只有 information_schema 也找到了解决之道: 为 root 账户新建密码。 鬼知道为什么无用户无密码状态，还给了我一个默认密码。按照随便找到的解决方法指导： [x] 关闭本地 MySQL 服务（在系统偏好设置的最下面一栏） [x] 进入 MySQL 文件目录下 [x] 启动超级账户 [x] 安全模式启动 MySQL [ ] 另起终端，使用 root 用户启动 MySQL:执行 mysql -u root [ ] 为root用户设置新的密码 UPDATE mysql.user SET Password=PASSWORD(&#39;password&#39;) WHERE User=&#39;root&#39;; [ ] 刷新，生效设置。FLUSH PRIVILEGES; 1234567/usr/local/mysql/binsudo suPassword:sh-3.2# ./mysqld_safe --skip-grant-tables &amp;[1] 33563sh-3.2# 2018-02-01T05:43:01.6NZ mysqld_safe Logging to &apos;/usr/local/mysql-5.7.21-macos10.13-x86_64/data/fuyiwengdeMacBook-Pro.local.err&apos;.2018-02-01T05:43:01.6NZ mysqld_safe Starting mysqld daemon with databases from /usr/local/mysql-5.7.21-macos10.13-x86_64/data 嗯，没错，我卡在了第五步 T&gt;T。 终端启用 MySQL 命令经过了惨无人道的瞎捷豹二次搜索，又成功找到了答案。 首先查看是否已添加 MySQL 的 PATH 路径 echo $PATH 如果能找到 mysql 的 PATH 路径（这是不可能的），问题解决 找不到，添加 MySQL 的路径，PATH=&quot;$PATH&quot;:/usr/local/mysql/bin 查看是否添加成功 12$ which mysql/usr/local/mysql/bin/mysql 如上所示，就是添加成功，我们可以继续放回上一个问题继续操作了。注：添加的 MySQL 路径为临时路径，关闭此终端后，下次打开将不再能运行 Your password has expired. To log in you must change it using a client that supports expired passwords.whatFuc—-A?瞎捷豹有点累，所以这次凭着我的三级英语，解密了这英文。密码过期，需要改密码。所以我刚刚改的是一个加密码？/usr/local/mysql/bin/mysqladmin -u root -p password输入旧密码，新密码。 然后就碰上了交学费的问题。 1049 (42000): Unknown database ‘test’ 和 1146 (42S02): Table ‘test.user’ doesn’t exist在之前配置了 MySQL 路径的终端中 使用 mysql 命令，show databases 果然发现没有需要链接的表。 1234567891011mysql&gt; show databases -&gt; ;+--------------------+| Database |+--------------------+| information_schema || mysql || performance_schema || sys |+--------------------+4 rows in set (0.00 sec) 创建数据库和表吧，这里对自己的蠢不予置评。 Q^Q 我竟然还在这花了1个小时。 再次运行代码，皆大欢喜。 参考链接：终端数据库管理修改数据库密码]]></content>
@@ -74,7 +88,7 @@
   <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2017%2F07%2F07%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post` bash$ hexo new “My New Post”` More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick Start Create a new post` bash$ hexo new “My New Post”` More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
       <tags>
         <tag>Testing</tag>
         <tag>Another Tag</tag>
