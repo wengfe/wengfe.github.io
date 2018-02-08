@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python,MYSQL," />
 
 
 
@@ -79,15 +79,20 @@
 
 
 
-<meta name="description" content="在沙滩边拣贝壳，跌跌撞撞。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="旦暮༗">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+<meta name="description" content="对数据库的增删改查平时的工作中用的比较多，也比较熟悉。忽然发现都没有使用过 insert 操作，因此在学习 python 的过程中，通过 mysql.connector 对 44w行 的 ip地址记录进行数据库批量插入工作。">
+<meta name="keywords" content="python,MYSQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MYSQL 批量插入操作">
+<meta property="og:url" content="http://yoursite.com/2018/02/07/2018-02-07/index.html">
 <meta property="og:site_name" content="旦暮༗">
-<meta property="og:description" content="在沙滩边拣贝壳，跌跌撞撞。">
+<meta property="og:description" content="对数据库的增删改查平时的工作中用的比较多，也比较熟悉。忽然发现都没有使用过 insert 操作，因此在学习 python 的过程中，通过 mysql.connector 对 44w行 的 ip地址记录进行数据库批量插入工作。">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-e3cY2Xdj38A/WnurXbakx6I/AAAAAAAAAD8/6f1hGOhXlD46jd9TfHpNgD_2I-L_F1L_wCHMYCw/I/15180542360363.png">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-WkiXCB9eWCM/WnqrJSZdnTI/AAAAAAAAACg/eoGC0oY1UhgkWctNBjVyOtX1VCRWAzDgwCHMYCw/I/15179886333472.png">
+<meta property="og:updated_time" content="2018-02-08T02:17:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="旦暮༗">
-<meta name="twitter:description" content="在沙滩边拣贝壳，跌跌撞撞。">
+<meta name="twitter:title" content="MYSQL 批量插入操作">
+<meta name="twitter:description" content="对数据库的增删改查平时的工作中用的比较多，也比较熟悉。忽然发现都没有使用过 insert 操作，因此在学习 python 的过程中，通过 mysql.connector 对 44w行 的 ip地址记录进行数据库批量插入工作。">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/-e3cY2Xdj38A/WnurXbakx6I/AAAAAAAAAD8/6f1hGOhXlD46jd9TfHpNgD_2I-L_F1L_wCHMYCw/I/15180542360363.png">
 
 
 
@@ -117,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2017/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/07/2018-02-07/"/>
 
 
 
 
 
-  <title>归档 | 旦暮༗</title>
+  <title>MYSQL 批量插入操作 | 旦暮༗</title>
   
 
 
@@ -161,7 +166,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -289,74 +294,282 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/07/2018-02-07/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wengfe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旦暮༗">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/07/07/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">MYSQL 批量插入操作</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-07T22:08:47+08:00"
-              content="2017-07-07" >
-          07-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-07T15:10:41+08:00">
+                2018-02-07
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/07/2018-02-07/" class="leancloud_visitors" data-flag-title="MYSQL 批量插入操作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <blockquote>
+<p>对数据库的增删改查平时的工作中用的比较多，也比较熟悉。忽然发现都没有使用过 insert 操作，因此在学习 python 的过程中，通过 <strong>mysql.connector</strong> 对 <strong>44w行</strong> 的 ip地址记录进行数据库批量插入工作。</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<p>步骤分为以下五步：</p>
+<pre><code>1. 创建表
+2. 连接表
+3. 读取本地文件数据
+4. 数据格式整理
+5. 批量写入
+</code></pre><hr>
+<h2 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h2><p>首先通过 navicat 创建本地的数据库。数据库格式如下图：</p>
+<p><img src="https://lh3.googleusercontent.com/-e3cY2Xdj38A/WnurXbakx6I/AAAAAAAAAD8/6f1hGOhXlD46jd9TfHpNgD_2I-L_F1L_wCHMYCw/I/15180542360363.png" alt=""></p>
+<h2 id="连接表"><a href="#连接表" class="headerlink" title="连接表"></a>连接表</h2><h3 id="首先连接本地数据库"><a href="#首先连接本地数据库" class="headerlink" title="首先连接本地数据库"></a>首先连接本地数据库</h3><p>因为我的表示创建在本地数据库下的，连接的库的时候不需要添加 host 参数<br>连接本地数据库的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conn = mysql.connector.connect(user=&apos;root&apos;, password=&apos;admin&apos;, database=&apos;test&apos;)</div></pre></td></tr></table></figure>
+<p>连接远程数据库的代码如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conn = connection.MySQLConnection(host=host_d, user=user_d, password=password_d, database=database_d)</div></pre></td></tr></table></figure>
+<h2 id="读取-csv-数据文件"><a href="#读取-csv-数据文件" class="headerlink" title="读取 csv 数据文件"></a>读取 csv 数据文件</h2><p>一般来说，读取文件的方法有两种；推荐一下方法来读取文件，可以避免忘记 关闭文件句柄的尴尬：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">with open(&apos;./ipdata.csv&apos;, &apos;r&apos;) as f:</div><div class="line">    lines = f.readlines()</div></pre></td></tr></table></figure>
+<h3 id="读取文件格式采坑"><a href="#读取文件格式采坑" class="headerlink" title="读取文件格式采坑"></a>读取文件格式采坑</h3><p>在读取文件的过程中发现了报错。</p>
+<h4 id="报错信息："><a href="#报错信息：" class="headerlink" title="报错信息："></a>报错信息：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UnicodeDecodeError: &apos;ascii&apos; codec can&apos;t decode byte 0xe4 in position 29: ordinal not in range(128)</div></pre></td></tr></table></figure>
+<h4 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h4><p>出错的原因是因为 csv 内的编码方式与程序环境编码方式不一致所致。csv 的编码格式是 gbk， 只要能够用 unicode 编码格式处理读取进来的数据就解决了。</p>
+<h4 id="搜索解决方案："><a href="#搜索解决方案：" class="headerlink" title="搜索解决方案："></a>搜索解决方案：</h4><p>自从上次瞎捷豹连续操劳后，已经很久没有让它出门了，这次又要有劳它了。<br>经过搜索后，发现很多方案：</p>
+<h5 id="方案一-代码头部申明编码"><a href="#方案一-代码头部申明编码" class="headerlink" title="方案一 代码头部申明编码"></a>方案一 代码头部申明编码</h5><p>有两种写法，然而在试验后，表示并没有解决问题ㄟ( ▔, ▔ )ㄏ。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># -*- coding: utf-8 -*-</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># coding = utf-8</div></pre></td></tr></table></figure>
+<h5 id="方案二-IDE-设置编码格式"><a href="#方案二-IDE-设置编码格式" class="headerlink" title="方案二 IDE 设置编码格式"></a>方案二 IDE 设置编码格式</h5><p>虽然在 「偏好设置 - Editor - File Encodings」 内全都设置（默认设置）了 UTF-8，但是在读入数据文件 ipdata.csv 的时候，还是出现了错误。我也很奇怪为什么没有生效。</p>
+<h5 id="方案三-修改默认-encoding-格式"><a href="#方案三-修改默认-encoding-格式" class="headerlink" title="方案三 修改默认 encoding 格式"></a>方案三 修改默认 encoding 格式</h5><ol>
+<li>在代码头部导入 sys 库；</li>
+<li>重载 sys 库，网上说 Python 文件运行后，会删除 setdefaultencoding 方法？</li>
+<li>设置默认 encoding 格式。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import sys</div><div class="line">reload(sys) </div><div class="line">sys.setdefaultencoding(&apos;utf-8&apos;)</div></pre></td></tr></table></figure>
+<p>运行后显示找不到 setdefaultending 方法.</p>
+<p><img src="https://lh3.googleusercontent.com/-WkiXCB9eWCM/WnqrJSZdnTI/AAAAAAAAACg/eoGC0oY1UhgkWctNBjVyOtX1VCRWAzDgwCHMYCw/I/15179886333472.png" width="140" alt="MySQL"></p>
+<p>瞎捷豹愤而暴走，告诉我因为在 py3 中默认的编码格式为 unicode 解码？所以取消了 setdefaultending 方法。</p>
+<h5 id="正解：引入-codecs-库"><a href="#正解：引入-codecs-库" class="headerlink" title="正解：引入 codecs 库"></a>正解：引入 codecs 库</h5><p>codecs 库中的 open 方法可以添加 encoding 参数，完美解决。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import codecs</div><div class="line"></div><div class="line">with open(&apos;./ipdata.csv&apos;, &apos;r&apos;, encoding=&apos;utf-8&apos;) as f:</div><div class="line">    lines = f.readlines()</div></pre></td></tr></table></figure>
+<p>后来发现其实 3.6 版本的 py 早就集成了 open 函数的 encoding 参数。所以并不用导入 codecs 库。</p>
+<h3 id="数据库插入中文错误"><a href="#数据库插入中文错误" class="headerlink" title="数据库插入中文错误"></a>数据库插入中文错误</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1366 (HY000): Incorrect string value: &apos;\xE4\xBF\x9D\xE7\x95\x99...&apos; for column &apos;carrier&apos; at row 1</div></pre></td></tr></table></figure>
+<p>在 navicat 表设计 - DDL 中查看 ipdata 的表结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE `ipdata` (</div><div class="line">  `id` int(11) NOT NULL,</div><div class="line">  `startip` bigint(20) DEFAULT NULL,</div><div class="line">  `endip` bigint(20) DEFAULT NULL,</div><div class="line">  `country` text,</div><div class="line">  `carrier` text,</div><div class="line">  PRIMARY KEY (`id`)</div><div class="line">) ENGINE=InnoDB DEFAULT CHARSET=latin1;</div></pre></td></tr></table></figure>
+<p>发现表编码为 latin1 。 可以通过 navicat 查询功能修改表编码格式，输入一下代码并执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alter table ipdata convert to character set utf8;</div></pre></td></tr></table></figure>
+<p>重新查看表结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE `ipdata` (</div><div class="line">  `id` int(11) NOT NULL,</div><div class="line">  `startip` bigint(20) DEFAULT NULL,</div><div class="line">  `endip` bigint(20) DEFAULT NULL,</div><div class="line">  `country` text,</div><div class="line">  `carrier` text,</div><div class="line">  PRIMARY KEY (`id`)</div><div class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8;</div></pre></td></tr></table></figure>
+<p>计划通！</p>
+<hr>
+<p>参考链接：<br>    『mysql.connector 批量插入』：<a href="https://my.oschina.net/hhdys412/blog/182762" target="_blank" rel="external">https://my.oschina.net/hhdys412/blog/182762</a></p>
+<p>源码地址:<br>    『NiuCodeLesson/insertSQL/』：<a href="https://github.com/wengfe/NiuCodeLesson/tree/master/insertSQL" target="_blank" rel="external">https://github.com/wengfe/NiuCodeLesson/tree/master/insertSQL</a></p>
+<p>博客地址:<br>    『wengfe.win』：<a href="http://www.wengfe.win/" target="_blank" rel="external">http://www.wengfe.win/</a></p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/MYSQL/" rel="tag"># MYSQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/06/2018-02-06/" rel="next" title="SQLAlchemy-ORM">
+                <i class="fa fa-chevron-left"></i> SQLAlchemy-ORM
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -364,6 +577,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzEwMy85NjYy"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -384,8 +606,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -465,6 +696,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建表"><span class="nav-number">1.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接表"><span class="nav-number">2.</span> <span class="nav-text">连接表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先连接本地数据库"><span class="nav-number">2.1.</span> <span class="nav-text">首先连接本地数据库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取-csv-数据文件"><span class="nav-number">3.</span> <span class="nav-text">读取 csv 数据文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读取文件格式采坑"><span class="nav-number">3.1.</span> <span class="nav-text">读取文件格式采坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#报错信息："><span class="nav-number">3.1.1.</span> <span class="nav-text">报错信息：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原因分析："><span class="nav-number">3.1.2.</span> <span class="nav-text">原因分析：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索解决方案："><span class="nav-number">3.1.3.</span> <span class="nav-text">搜索解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方案一-代码头部申明编码"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">方案一 代码头部申明编码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案二-IDE-设置编码格式"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">方案二 IDE 设置编码格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方案三-修改默认-encoding-格式"><span class="nav-number">3.1.3.3.</span> <span class="nav-text">方案三 修改默认 encoding 格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正解：引入-codecs-库"><span class="nav-number">3.1.3.4.</span> <span class="nav-text">正解：引入 codecs 库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库插入中文错误"><span class="nav-number">3.2.</span> <span class="nav-text">数据库插入中文错误</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -612,6 +859,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -640,6 +891,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
