@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Testing,Another Tag," />
+  <meta name="keywords" content="python,MYSQL," />
 
 
 
@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta name="keywords" content="Testing,Another Tag">
+<meta name="description" content="本文主要目的就是对数据库的优化查询，但查询过程中碰到了一个不明缘由的问题，希望有大神能够帮忙解释一波。">
+<meta name="keywords" content="python,MYSQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/07/07/hello-world/index.html">
+<meta property="og:title" content="MYSQL 查询优化">
+<meta property="og:url" content="http://yoursite.com/2018/02/08/2018-02-08/index.html">
 <meta property="og:site_name" content="旦暮༗">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta property="og:updated_time" content="2018-02-06T03:35:25.000Z">
+<meta property="og:description" content="本文主要目的就是对数据库的优化查询，但查询过程中碰到了一个不明缘由的问题，希望有大神能够帮忙解释一波。">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-DSlRdJkahQw/Wn0NYQj7g4I/AAAAAAAAAE8/g4XE-atLN2MeANH5ZU_mNsrWRcE3uFCeQCHMYCw/I/15181447886330.png">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-2AM1CQajz5I/Wn0UnC1xR1I/AAAAAAAAAFM/YCcLuMZPZTwGOmbkIzWjEnzc8X4Z0nh_wCHMYCw/I/15181466856116.png">
+<meta property="og:updated_time" content="2018-02-09T03:37:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="MYSQL 查询优化">
+<meta name="twitter:description" content="本文主要目的就是对数据库的优化查询，但查询过程中碰到了一个不明缘由的问题，希望有大神能够帮忙解释一波。">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/-DSlRdJkahQw/Wn0NYQj7g4I/AAAAAAAAAE8/g4XE-atLN2MeANH5ZU_mNsrWRcE3uFCeQCHMYCw/I/15181447886330.png">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/07/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/08/2018-02-08/"/>
 
 
 
 
 
-  <title>Hello World | 旦暮༗</title>
+  <title>MYSQL 查询优化 | 旦暮༗</title>
   
 
 
@@ -305,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/07/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/08/2018-02-08/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wengfe">
@@ -322,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">MYSQL 查询优化</h1>
         
 
         <div class="post-meta">
@@ -334,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-07T22:08:47+08:00">
-                2017-07-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T14:05:42+08:00">
+                2018-02-08
               </time>
             
 
@@ -345,6 +348,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -352,7 +388,7 @@
 
           
           
-             <span id="/2017/07/07/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
+             <span id="/2018/02/08/2018-02-08/" class="leancloud_visitors" data-flag-title="MYSQL 查询优化">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -383,18 +419,74 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=534313799&auto=1&height=66"></iframe>
-
-
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><p>` bash<br>$ hexo new “My New Post”<br>`</p>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <blockquote>
+<p>本文主要目的就是对数据库的优化查询，但查询过程中碰到了一个不明缘由的问题，希望有大神能够帮忙解释一波。</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>从 csv 文件中随机选取 100 条 Ip 地址，并在表中查询这 100条 ip 的所在地。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>读取样本，组装列表</li>
+<li>表建立索引</li>
+<li>优化 sql 语法</li>
+<li>联合查询</li>
+</ol>
+<h3 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h3><p>读取文件和上一篇文章所讲的一样，利用 <code>with</code> 语法避免文件句柄关闭操作，给 <code>open</code> 函数增加 encoding 参数。</p>
+<p>然后将读取的数据进行拆分和整理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">with open(&apos;./ipdata.csv&apos;, &apos;r&apos;, encoding=&apos;utf-8&apos;) as f:</div><div class="line">    lines = f.readlines()</div><div class="line"></div><div class="line">nl_p_list = []</div><div class="line">for l in lines:</div><div class="line">    ls = l.strip().split(&apos;,&apos;, 4)</div><div class="line">    c1, c2, c3, c4, c5 = ls[0], ip2int(ls[1]), ip2int(ls[2]), ls[3], ls[4]</div><div class="line">    nl = [c1, c2, c3, c4, c5]</div><div class="line">    nl_p_list.append(nl)</div></pre></td></tr></table></figure>
+<h3 id="表建立索引"><a href="#表建立索引" class="headerlink" title="表建立索引"></a>表建立索引</h3><p>使用 navicat 连接表，进入 「设计表」 模块，为 startip 和 endip 建立索引。</p>
+<p><img src="https://lh3.googleusercontent.com/-DSlRdJkahQw/Wn0NYQj7g4I/AAAAAAAAAE8/g4XE-atLN2MeANH5ZU_mNsrWRcE3uFCeQCHMYCw/I/15181447886330.png" alt=""></p>
+<h3 id="优化-sql-语法"><a href="#优化-sql-语法" class="headerlink" title="优化 sql 语法"></a>优化 sql 语法</h3><p>如果使用复杂语法的 sql 语句，是无法利用索引大幅提升查询效率的，比如通过 between and 查询：</p>
+<p><code>SELECT * FROM ipdata WHERE IpNum BETWEEN startip AND endip</code></p>
+<p>因为 ip 是连续的，所以只要这个 Ip 地址大于或等于某一个号段的起始地址，那么依照降序排序第一的 ip 段的所在地，就是被查询的 ip 地址的所在地。</p>
+<p><code>SELECT * FROM ipdata WHERE IpNum &gt;=  startip ORDER BY startip DESC  LIMIT 1</code></p>
+<p>经过对比发现，查询速度果然是有质的飞跃。但也出现了问题。问题详情我会在文末写明。</p>
+<h3 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h3><p>利用索引的 sql 语句果然是如有神助，在我的运行环境里， between and 查询语句，查询 100 条记录需要 32s+ ，但在优化后能提升到 0.7s 左右。</p>
+<p>但是在使用联合查询后，还能提升将近 2 倍的速率。</p>
+<p>联合查询的 sql 语法： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT t1.* FROM (SELECT * FROM ipdata WHERE 1780997668 &gt;=  startip ORDER BY startip DESC  LIMIT 1) t1</div><div class="line">UNION ALL</div><div class="line">SELECT t2.* FROM (SELECT * FROM ipdata WHERE 3425736747 &gt;=  startip ORDER BY startip DESC  LIMIT 1) t2;</div></pre></td></tr></table></figure>
+<p>下一步，就是加工 sql 联合语句了。联合查询的 sql 语句，不宜过长，比较适合的长度就是 100 条。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sql_str = &apos;SELECT &#123;0&#125;.* FROM (SELECT * FROM ipdata WHERE %s &gt;=  startip ORDER BY startip DESC  LIMIT 1) &#123;0&#125;&apos;</div><div class="line">for i in range(len(ip_list)):</div><div class="line">    sql_list.append(sql_str.format(&apos;t&apos; + str(i)) % ip_list[i])</div><div class="line">sql = &apos; union all &apos;.join(sql_list)</div></pre></td></tr></table></figure>
+<p>使用 format 函数填充别名， %s 填充 IP 地址 。<br>最后执行 sql 语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cursor.execute(sql)</div></pre></td></tr></table></figure>
+<p>效果也是有的，将查询的速度提升到了 0.3s 左右。</p>
+<p>至此， sql 的数据表查询优化部分那就结束了。</p>
+<h2 id="遇到的灵异现象"><a href="#遇到的灵异现象" class="headerlink" title="遇到的灵异现象"></a>遇到的灵异现象</h2><p>如图所示，我注释了 t1, t2, t3, t4 之间的代码。</p>
+<p><img src="https://lh3.googleusercontent.com/-2AM1CQajz5I/Wn0UnC1xR1I/AAAAAAAAAFM/YCcLuMZPZTwGOmbkIzWjEnzc8X4Z0nh_wCHMYCw/I/15181466856116.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>时间段</th>
+<th>含义</th>
+<th>运行速度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>t0 ~ t1</td>
+<td>联合优化 sql 语句查询</td>
+<td>0.0318</td>
+</tr>
+<tr>
+<td>t1 ~ t2</td>
+<td>优化 sql 语句查询</td>
+<td>9.5367</td>
+</tr>
+<tr>
+<td>t3 ~ t2</td>
+<td>between and 语句查询</td>
+<td>1.1920</td>
+</tr>
+<tr>
+<td>t4 ~ t3</td>
+<td>联合 between and 语句查询</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+<p>事实上，除了 t0 ~ t1 之间的时间是大致在 0.03s ~ 0.07s 波动，剩余的三个时间段的代码已经被我注释，理论上应该是不耗费时间的，但会随机在剩余的三个时间段 打印出 9s 左右的耗时。希望有大神能够帮助一波。</p>
+<hr>
+<p>源码地址:<br>    『NiuCodeLesson/insertSQL/』：<a href="https://github.com/wengfe/NiuCodeLesson/tree/master/insertSQL" target="_blank" rel="external">https://github.com/wengfe/NiuCodeLesson/tree/master/insertSQL</a></p>
 
       
     </div>
@@ -412,9 +504,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Testing/" rel="tag"># Testing</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
-            <a href="/tags/Another-Tag/" rel="tag"># Another Tag</a>
+            <a href="/tags/MYSQL/" rel="tag"># MYSQL</a>
           
         </div>
       
@@ -427,15 +519,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/02/07/2018-02-07/" rel="next" title="MYSQL 批量插入操作">
+                <i class="fa fa-chevron-left"></i> MYSQL 批量插入操作
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/18/优秀代码片段1/" rel="prev" title="优秀代码一">
-                优秀代码一 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -630,7 +722,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#读取文件"><span class="nav-number">2.1.</span> <span class="nav-text">读取文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表建立索引"><span class="nav-number">2.2.</span> <span class="nav-text">表建立索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化-sql-语法"><span class="nav-number">2.3.</span> <span class="nav-text">优化 sql 语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合查询"><span class="nav-number">2.4.</span> <span class="nav-text">联合查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的灵异现象"><span class="nav-number">3.</span> <span class="nav-text">遇到的灵异现象</span></a></li></ol></div>
             
 
           </div>
