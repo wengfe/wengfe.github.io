@@ -87,8 +87,7 @@
 <meta property="og:site_name" content="旦暮༗">
 <meta property="og:description" content="城堡中有多个房间，用户通过输入north, south, east, west等来确认去哪一个房间（此时窗口会有提示转到哪个房间），如果此时多出一个房间，需要使用up, down才能到达，修改代码则需要代码具有可扩展性，对原来的代码进行优化来实现这个功能。">
 <meta property="og:image" content="https://lh3.googleusercontent.com/-Yuxc580Y0us/XBNED1_TOnI/AAAAAAAAAM0/_mhongGhzCIyUvmy32umPm4atk3WI6VRwCHMYCw/I/15447664673033.png">
-<meta property="og:image" content="https://lh3.googleusercontent.com/-u4bIl1_OYrg/XBNK3EwThDI/AAAAAAAAANQ/pWFniyhzAFAD1l6Xk-9j-4LgO6lYpR1NwCHMYCw/I/15447682134914.png">
-<meta property="og:updated_time" content="2018-12-17T04:59:38.346Z">
+<meta property="og:updated_time" content="2018-12-17T05:36:27.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 城堡游戏（代码优化思想）">
 <meta name="twitter:description" content="城堡中有多个房间，用户通过输入north, south, east, west等来确认去哪一个房间（此时窗口会有提示转到哪个房间），如果此时多出一个房间，需要使用up, down才能到达，修改代码则需要代码具有可扩展性，对原来的代码进行优化来实现这个功能。">
@@ -411,7 +410,8 @@
         <p>城堡中有多个房间，用户通过输入north, south, east, west等来确认去哪一个房间（此时窗口会有提示转到哪个房间），如果此时多出一个房间，需要使用up, down才能到达，修改代码则需要代码具有可扩展性，对原来的代码进行优化来实现这个功能。</p>
 <a id="more"></a>
 <p>优化前代码结构：<br><img src="https://lh3.googleusercontent.com/-Yuxc580Y0us/XBNED1_TOnI/AAAAAAAAAM0/_mhongGhzCIyUvmy32umPm4atk3WI6VRwCHMYCw/I/15447664673033.png" alt=""></p>
-<h2 id="优化路程"><a href="#优化路程" class="headerlink" title="优化路程"></a>优化路程</h2><h3 id="将类中相同的代码抽离，转为一个公用的方法"><a href="#将类中相同的代码抽离，转为一个公用的方法" class="headerlink" title="将类中相同的代码抽离，转为一个公用的方法"></a>将类中相同的代码抽离，转为一个公用的方法</h3><p>如图将注释的代码抽离成一个方法，供调用：<br><img src="https://lh3.googleusercontent.com/-u4bIl1_OYrg/XBNK3EwThDI/AAAAAAAAANQ/pWFniyhzAFAD1l6Xk-9j-4LgO6lYpR1NwCHMYCw/I/15447682134914.png" alt=""></p>
+<h2 id="优化路程"><a href="#优化路程" class="headerlink" title="优化路程"></a>优化路程</h2><h3 id="将类中相同的代码抽离，转为一个公用的方法"><a href="#将类中相同的代码抽离，转为一个公用的方法" class="headerlink" title="将类中相同的代码抽离，转为一个公用的方法"></a>将类中相同的代码抽离，转为一个公用的方法</h3><p>将注释的代码抽离成一个方法，供调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">private void nowRoom()&#123;</div><div class="line">        System.out.println(&quot;现在你在&quot; + currentRoom);</div><div class="line">        System.out.print(&quot;出口有：&quot;);</div><div class="line">//        将出口信息封装在Room类中，降低程序之间的耦合</div><div class="line">//        if(currentRoom.northExit != null)</div><div class="line">//            System.out.print(&quot;north &quot;) ;</div><div class="line">//        if(currentRoom.eastExit != null)</div><div class="line">//            System.out.print(&quot;east &quot;);</div><div class="line">//        if(currentRoom.southExit != null)</div><div class="line">//            System.out.print(&quot;south &quot;);</div><div class="line">//        if(currentRoom.westExit != null)</div><div class="line">//            System.out.print(&quot;west &quot;);</div><div class="line">        System.out.println(currentRoom.getExitDesc());</div><div class="line">        System.out.println();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <h3 id="将-Room-类中的变量转为私有变量"><a href="#将-Room-类中的变量转为私有变量" class="headerlink" title="将 Room 类中的变量转为私有变量"></a>将 <strong>Room</strong> 类中的变量转为私有变量</h3><p>Room 类和 Game 类有大量的代码出口相关，Game 类中大量使用了 Room 类中的成员变量；利用封装来降低类和类之间的耦合；便于代码后续的维护。</p>
 <p>在将 Room 类的变量转为私有后，发现 Game 类中有几处报错；说明 Game 类中调用到了 Room 类的成员变量；<br>第一处是上一步中提取的方法，阅读代码功能；是显示当前 Room 的<strong>出口信息</strong>。</p>
 <h4 id="优化思想：调用者不做被调用类的逻辑处理"><a href="#优化思想：调用者不做被调用类的逻辑处理" class="headerlink" title="优化思想：调用者不做被调用类的逻辑处理"></a>优化思想：调用者不做被调用类的逻辑处理</h4><p>出口信息能否只在 Room 中做逻辑处理，Game 类中只负责调用就好。</p>
@@ -430,6 +430,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">public String getExitDesc()&#123;</div><div class="line">//        使用 StringBuffer 是因为 String 对象是管理者，每次对 String 对象的修改都是新增一个 String 对象，</div><div class="line">//        对系统开销比较大，但是 StringBuffer支持修改</div><div class="line">        StringBuffer sb = new StringBuffer();</div><div class="line">        for (String dir :</div><div class="line">                exits.keySet()) &#123;</div><div class="line">            sb.append(dir+&quot; &quot;);</div><div class="line">        &#125;</div><div class="line">//        if (northExit != null)</div><div class="line">//            sb.append(&quot;north &quot;);</div><div class="line">//        if (eastExit != null)</div><div class="line">//            sb.append(&quot;east &quot;);</div><div class="line">//        if (westExit != null)</div><div class="line">//            sb.append(&quot;west &quot;);</div><div class="line">//        if (southExit != null)</div><div class="line">//            sb.append(&quot;south &quot;);</div><div class="line">        return sb.toString();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>因为修改了 Room 类中的房间出口信息设置方法，Game 类中的 creatRooms 方法报错。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">private void createRooms()</div><div class="line">    &#123;</div><div class="line">        Room outside, lobby, pub, study, bedroom;</div><div class="line">      </div><div class="line">        //	制造房间</div><div class="line">        outside = new Room(&quot;城堡外&quot;);</div><div class="line">        lobby = new Room(&quot;大堂&quot;);</div><div class="line">        pub = new Room(&quot;小酒吧&quot;);</div><div class="line">        study = new Room(&quot;书房&quot;);</div><div class="line">        bedroom = new Room(&quot;卧室&quot;);</div><div class="line">        </div><div class="line">        //	初始化房间的出口</div><div class="line">//        outside.setExits(null, lobby, study, pub);</div><div class="line">//        lobby.setExits(null, null, null, outside);</div><div class="line">//        pub.setExits(null, outside, null, null);</div><div class="line">//        study.setExits(outside, bedroom, null, null);</div><div class="line">//        bedroom.setExits(null, null, null, study);</div><div class="line">        </div><div class="line">        outside.setExit(&quot;eastExit&quot;,lobby);</div><div class="line">        outside.setExit(&quot;southExit&quot;,study);</div><div class="line">        outside.setExit(&quot;westExit&quot;,pub);</div><div class="line">        lobby.setExit(&quot;westExit&quot;,outside);</div><div class="line">        pub.setExit(&quot;eastExit&quot;,outside);</div><div class="line">        study.setExit(&quot;northExit&quot;,outside);</div><div class="line">        study.setExit(&quot;eastExit&quot;,bedroom);</div><div class="line">        bedroom.setExit(&quot;westExit&quot;,study);</div><div class="line">        </div><div class="line">        currentRoom = outside;  //	从城堡门外开始</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>到这里，如果想要增加一个新的出口信息，只要在 Game 类中初始化一个新的房间，增加新的出口信息类型就可以了；</p>
 <h3 id="以框架-数据来提高可扩展性"><a href="#以框架-数据来提高可扩展性" class="headerlink" title="以框架+数据来提高可扩展性"></a>以框架+数据来提高可扩展性</h3><h4 id="优化思想：将硬编码改成-框架-数据"><a href="#优化思想：将硬编码改成-框架-数据" class="headerlink" title="优化思想：将硬编码改成 框架 + 数据"></a>优化思想：将硬编码改成 框架 + 数据</h4><p>城堡游戏中 main 函数中的 go,help,bye 三个命令解析，依旧是硬编码的；优化成框架和数据的形式。</p>
 <h4 id="优化做法："><a href="#优化做法：" class="headerlink" title="优化做法："></a>优化做法：</h4><ul>
 <li>命令的解析脱离 if-else</li>
@@ -444,6 +445,7 @@
 <p>将原来 main 函数中的循环体，提取成一个新的方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">public void play()&#123;</div><div class="line">        Scanner in = new Scanner(System.in);</div><div class="line"></div><div class="line">        while ( true ) &#123;</div><div class="line">        		String line = in.nextLine();</div><div class="line">        		String[] words = line.split(&quot; &quot;);</div><div class="line">//                利用Hash表&lt;K, V&gt;的特性，如果用户输入&quot;bye&quot;，通过handler.get()得出handler</div><div class="line">//                类型下面这句就相当于：Handler handler = new HandlerBye();</div><div class="line">        		Handler handler = handlers.get(words[0]);</div><div class="line">        		String value = &quot; &quot;;</div><div class="line">        		if (words.length &gt; 1)&#123;</div><div class="line">        		    value = words[1];</div><div class="line">                &#125;</div><div class="line">        		if (handler != null)&#123;</div><div class="line">//                    此时handler为HandlerBye型，没有value值</div><div class="line">        		    handler.doCmd(value);</div><div class="line">//                    HandlerBye继承了Handler中的isBye()方法并将其覆盖，此时handler.isBye()返回true</div><div class="line">        		    if (handler.isBye())&#123;</div><div class="line">        		        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">//        		if ( words[0].equals(&quot;help&quot;) ) &#123;</div><div class="line">//        			game.printHelp();</div><div class="line">//        		&#125; else if (words[0].equals(&quot;go&quot;) ) &#123;</div><div class="line">//        			game.goRoom(words[1]);</div><div class="line">//        		&#125; else if ( words[0].equals(&quot;bye&quot;) ) &#123;</div><div class="line">//        			break;</div><div class="line">//        		&#125;</div><div class="line">        &#125;</div><div class="line">        in.close();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>优化完成，代码运行正常；优化完成后，当需要新增动作命令时，只需要新增一个 handler类型，并在构造器里新增新类型的 map 键值对。而不用对 play 函数做改动。这就是通过 框架 + 数据 实现的<strong>可扩展性</strong>。</p>
+<p>github代码地址 <a href="https://github.com/wengfe/JAVA/tree/master/castle" target="_blank" rel="external">https://github.com/wengfe/JAVA/tree/master/castle</a><br>简书地址：</p>
 
       
     </div>
@@ -483,6 +485,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/17/2018-12-17/" rel="prev" title="Java 接口初解">
+                Java 接口初解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -606,7 +612,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -617,7 +623,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -628,7 +634,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -697,7 +703,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
