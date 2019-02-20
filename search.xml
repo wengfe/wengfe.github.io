@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JAVA 的输入输出]]></title>
+    <url>%2F2019%2F02%2F18%2F2019-02-18-3%2F</url>
+    <content type="text"><![CDATA[处理输入输出的方式称为流。 Stream（流）的特性是一维的，单方向的。 流的基础类InputStreamOutputStream 标准输入/出流字节层面的流传输。 System.out.println(“Text”) System.in 1Scanner in = new Scanner(System.in)； 文件流字节层面的流传输。FileOutputStreamFileInputStream FileOutputStream 示例： 1234567891011121314151617181920public class File_Stream &#123; public static void main(String[] args) &#123; System.out.println(&quot;hello world&quot;); byte[] buf = new byte[10]; for (int i=0; i&lt;buf.length;i++)&#123; buf[i] = (byte)i; &#125; try &#123; FileOutputStream out = new FileOutputStream(&quot;a.dat&quot;); out.write(buf); out.close(); &#125; catch (FileNotFoundException e)&#123; e.printStackTrace(); &#125; catch (IOException e) &#123; e.printStackTrace(); &#125; &#125;&#125; 流过滤器以介质流对象为基础层构建过滤器流，最终形成的流对象能在数据的输入输出过程中，逐层使用过滤器流的方法来读写数据。 DataInput(Output)Stream 类可以进行基本数据类型的传输。 （字节流）fileInpitStream | bufferedInputStream | DataInputStream | 基本数据类型 下文代码就增加了 buffer 和 data 两个流过滤器。因为流过滤器需要在文件流的基础上进行再次封装，所以引用文件流程的代码进行修改： 12345678910try &#123; DataOutputStream out = new DataOutputStream( new BufferedOutputStream( new FileOutputStream(&quot;b.dat&quot;)));// FileOutputStream out = new FileOutputStream(&quot;a.dat&quot;);// out.write(buf); int i = 0xcafebabe; out.writeInt(i); out.close(); &#125; 需要注意的是 DataOutputStream 是将存储在内存中的数据，保存到文件中；并没有转换成自然语言，所以读取也需要通过相应的方式进行 DataInputStream的 封装； 12345678910111213141516try &#123; DataOutputStream out = new DataOutputStream( new BufferedOutputStream( new FileOutputStream(&quot;b.dat&quot;)));// FileOutputStream out = new FileOutputStream(&quot;a.dat&quot;);// out.write(buf); int i = 0xcafebabe; out.writeInt(i); out.close(); DataInputStream in = new DataInputStream( new BufferedInputStream( new FileInputStream(&quot;b.dat&quot;))); int j = in.readInt(); System.out.println(j); &#125; 文本流Reader/Writerreader/Writer 本身是处理 Unicode 字符的。但在使用场景上，因为有多种文本编码格式，所以需要借助流来打开文件，用流过滤器来建立 Reader/Writer 来进行输入和输出。 123456789101112131415161718// Reader/Writer PrintWriter out_p = new PrintWriter( new BufferedWriter(// OutputStreamWriter 构建了 Stream 和 Writer 之间的桥梁 new OutputStreamWriter( new FileOutputStream(&quot;a.txt&quot;)))); int k = 123456;// 文本流中的 print 表示打印到文件中？ out_p.print(k); out_p.close();// 读文件 BufferedReader in_r = new BufferedReader( new InputStreamReader( new FileInputStream(&quot;src/../a.txt&quot;))); String line; while ((line=in_r.readLine()) != null)&#123; System.out.println(line); &#125; 常用 BufferedReader 来读文件， readLine()来获取内容。LineNumberReader 读文件可以得到行号， getLineNumber()。 FileReader InputStreamReader 的子类，所有方法都从父类中继承而来。 FileReader(File file) 在给定从中读取数据的 File 的情况下创建一个新 FileReader FileReader(String fileName) 在给定从中读取数据的文件名的情况下创建一个新的 FileReader FileReader 不能指定编码转换方式。 格式化输入输出输出PrintWriter format(“格式”，。。。); printf(“格式”，。。。); print(各种基本类型); println(各种基本类型); 输入Scnner 在 InputStream 或 Reader 上简历一个 Scanner 对象可以从流中文本解析出以文本表达的各种基本类型 next…() 流的应用使用 sicket 活的流数据。本地调式需在 mac 本地输入命令 nc -l 12345 1234567891011121314151617181920212223242526public class SocketStream &#123; public static void main(String[] args) &#123; try &#123; Socket socket = new Socket(InetAddress.getByName(&quot;localhost&quot;),12345); PrintWriter out = new PrintWriter( new BufferedWriter( new OutputStreamWriter( socket.getOutputStream()))); out.println(&quot;Hello&quot;);// 若不刷新缓存，服务端不会显示 hello out.flush(); BufferedReader reader = new BufferedReader( new InputStreamReader( socket.getInputStream())); String line; while ((line=reader.readLine())!=null) &#123; System.out.println(line); &#125; out.close(); socket.close(); &#125; catch (IOException e) &#123; e.printStackTrace(); &#125; &#125;&#125; 因为 read()函数是阻塞的，在督导所需的内容之前会停下来 使用read() “高级”的函数，入nextInt()、readLine()都是同样的 所以常用单独的线程来做 socket 读的等待，或使用 nio 的channel 选择机制 对于socket，可以设置 SO 时间 setSoTimeout(int timeOut) 对象串行化对象通过写出描述自己状态的数值来记录自己 ，这个过程叫对象的串行化(Serialization) 。串行化的主要任务是写出对象实例变量的数值。如果变量是另一对象的引用，则引用的对象也要串行化。这个过程是递归的，串行化可能要涉及一个复杂树结构的单行化，包括原有对象、对象的对象、对象的对象的对象等等。对象所有权的层次结构称为图表(graph)。 自己写的类对象写到文件里。 ObjectInpuStream 类 readObject() ObjectOutputStream 类 writeObject() Serializable 接口 1234567891011121314151617181920212223242526272829303132333435363738394041424344class Student implements Serializable &#123; private String name; private int age; private int grade; public Student(String name, int age, int grade) &#123; this.name = name; this.age = age; this.grade = grade; &#125; @Override public String toString() &#123; return &quot;Student&#123;&quot; + &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; + &quot;, age=&quot; + age + &quot;, grade=&quot; + grade + &apos;&#125;&apos;; &#125;&#125;public class ObjectStream &#123; public static void main(String[] args) &#123; try &#123; Student s1 = new Student(&quot;John&quot;,18,8); System.out.println(s1);// obj stream 写到文件 ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream(&quot;obj.dat&quot;)); out.writeObject(s1); out.close();// obj stream 读 ObjectInputStream in = new ObjectInputStream( new FileInputStream(&quot;src/../obj.dat&quot;)); Student s2 = (Student) in.readObject(); System.out.println(s2); in.close(); System.out.println(s1==s2); &#125; catch (IOException e) &#123; e.printStackTrace(); &#125; catch (ClassNotFoundException e) &#123; e.printStackTrace(); &#125; &#125;&#125; 读回来的虽然内容一致，但对象新造的不同对象。]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java输入输出</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[第三讲 事务隔离：为什么你改了我还看不见]]></title>
     <url>%2F2019%2F02%2F18%2F2019-02-18-2%2F</url>
     <content type="text"><![CDATA[提到事务，你肯定不陌生，和数据库打交道的时候，我们总是会用到事务。最经典的例子就是转账，你要给朋友小王转100块钱，而此时你的银行卡只有100块钱。 转账过程具体到程序里会有一系列的操作，比如查询余额、做加减法、更新余额等，这些操作必须保证是一体的，不然等程序查完之后，还没做减法之前，你这100块钱，完全可以借着这个时间差再查一次，然后再给另外一个朋友转账，如果银行这么整，不就乱了么？这时就要用到“事务”这个概念了。 事务就是要保证一组数据库操作，要么全部成功，要么全部失败。在MySQL中，事务支持是在引擎层实现的。MySQL是一个支持多引擎的系统，但并不是所有的引擎都支持事务。比如MySQL原生的MyISAM引擎不支持事务，这也是MyISAM被InnoDB取代的重要原因之一。 以InnoDB为例，剖析 MySQL 在事务支持方面的特定实现，并基于原理给出相应的实践建议。 隔离性和隔离级别事务涉及到 ACID（Atomicity、Consistency、Isolation、Durability，即原子性、一致性、隔离性、持久性），这里来说说其中 I ，也就是“隔离性”。 当数据库上有多个事务同时执行的时候，就可能出现脏读（dirty read）、不可重复读（non-repeatable read）、幻读（phantom read）的问题，为了解决这些问题，就有了“隔离级别”的概念。 首先明确一点，隔离级越高，效率越低。因此，需要在二者之间寻找一个平衡。SQL标准的事务隔离级别包括：读未提交（read uncommitted）、读提交（read committed）、可重复读（repeatable read）和串行化（serializable ）。逐一解释： 读未提交是指，一个事务还没提交时，它做的变更就能被别的事务看到。 新数据存在内存里，InnoDB buffer poo 读提交是指，一个事务提交之后，它做的变更才会被其他事务看到。 可重复读是指，一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在可重复读隔离级别下，未提交变更对其他事务也是不可见的。 串行化，顾名思义是对于同一行记录，“写”会加“写锁”，“读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，才能继续执行。 各级别效果假设数据表T中只有一列，其中一行的值为1，下面是按照时间顺序执行两个事务的行为。 12mysql&gt; create table T(c int) engine=InnoDB;insert into T(c) values(1); 事务A 事务B 启动事务查询得到值 1 启动事务 查询得到值 1 将 1 改成 2 查询得到值 V1 提交事务B 查询得到值 V2 提交事务 A 查询得到值 V3 在不同的隔离级别下，事务A会有哪些不同的返回结果，V1、V2、V3的返回值分别是什么。 若隔离级别是“读未提交”， 则V1的值就是2。这时候事务B虽然还没有提交，但是结果已经被A看到了。因此，V2、V3也都是2。 若隔离级别是“读提交”，则V1是1，V2的值是2。事务B的更新在提交后才能被A看到。所以， V3的值也是2。 若隔离级别是“可重复读”，则V1、V2是1，V3是2。之所以V2还是1，遵循的就是这个要求：事务在执行期间看到的数据前后必须是一致的。 若隔离级别是“串行化”，则在事务B执行“将1改成2”的时候，会被锁住。直到事务A提交后，事务B才可以继续执行。所以从A的角度看， V1、V2值是1，V3的值是2。 读未提交：别人改数据的事务尚未提交，我在我的事务中也能读到。读已提交：别人改数据的事务已经提交，我在我的事务中才能读到。可重复读：别人改数据的事务已经提交，我在我的事务中也不去读。串行：我的事务尚未提交，别人就别想改数据。这4种隔离级别，并行性能依次降低，安全性依次提高。 重复读和读提交的性能差异 建立视图没什么成本的，就是拷贝一个事务数组；所以性能的差异不是体现在这里；一般我们说可重复的效率相对的低（其实也还好，不会低多少），主要还是因为可重复读的锁范围可能更大（有gap lock），锁时间更长（事务结束才释放），影响并发度 在实现上，数据库里面会创建一个视图，访问的时候以视图的逻辑结果为准。在“可重复读”隔离级别下，这个视图是在事务启动时创建的，整个事务存在期间都用这个视图。在“读提交”隔离级别下，这个视图是在每个SQL语句开始执行的时候创建的。在“读未提交”隔离级别下直接返回记录上的最新值，没有视图概念；在“串行化”隔离级别下直接用加锁的方式来避免并行访问。 我们可以看到在不同的隔离级别下，数据库行为是有所不同的。Oracle数据库的默认隔离级别其实就是“读提交”，因此对于一些从Oracle迁移到MySQL的应用，为保证数据库隔离级别的一致，你一定要记得将MySQL的隔离级别设置为“读提交”。 配置的方式是，将启动参数 transaction-isolation 的值设置成 READ-COMMITTED 。可以用 show variables 来查看当前的值。 1234567891011mysql&gt; show variables like &apos;transaction_isolation&apos;;+-----------------------+----------------+| Variable_name | Value |+-----------------------+----------------+| transaction_isolation | READ-COMMITTED |+-----------------------+----------------+ 可重复读级别的应用总结来说，存在即合理，哪个隔离级别都有它自己的使用场景，根据自己的业务情况来定。如需要“可重复读”的场景。 一个数据校对逻辑的案例。 假设你在管理一个个人银行账户表。一个表存了每个月月底的余额，一个表存了账单明细。这时候你要做数据校对，也就是判断上个月的余额和当前余额的差额，是否与本月的账单明细一致。你一定希望在校对过程中，即使有用户发生了一笔新的交易，也不影响你的校对结果。 这时候使用“可重复读”隔离级别就很方便。事务启动时的视图可以认为是静态的，不受其他事务更新的影响。 事务隔离的实现再来看看事务隔离具体是怎么实现的。这里展开说明“可重复读”。 在 MySQL 中，实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。 假设一个值从 1 被按顺序改成了2、3、4，在回滚日志里面就会有类似下面的记录。 当前值是4，但是在查询这条记录的时候，不同时刻启动的事务会有不同的read-view。如图中看到的，在视图A、B、C里面，这一个记录的值分别是1、2、4，同一条记录在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）。对于read-view A，要得到1，就必须将当前值依次执行图中所有的回滚操作得到。 同时你会发现，即使现在有另外一个事务正在将4改成5，这个事务跟read-view A、B、C对应的事务是不会冲突的。 你一定会问，回滚日志总不能一直保留吧，什么时候删除呢？答案是，在不需要的时候才删除。也就是说，系统会判断，当没有事务再需要用到这些回滚日志时，回滚日志会被删除。 什么时候才不需要了呢？就是当系统里没有比这个回滚日志更早的read-view的时候。 基于上面的说明，我们来讨论一下为什么建议你尽量不要使用长事务。 长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致大量占用存储空间。 在MySQL 5.5及以前的版本，回滚日志是跟数据字典一起放在ibdata文件里的，即使长事务最终提交，回滚段被清理，文件也不会变小。我见过数据只有20GB，而回滚段有200GB的库。最终只好为了清理回滚段，重建整个库。 除了对回滚段的影响，长事务还占用锁资源，也可能拖垮整个库，这个我们会在后面讲锁的时候展开。 事务的启动方式如前面所述，长事务有这些潜在风险，我当然是建议你尽量避免。其实很多时候业务开发同学并不是有意使用长事务，通常是由于误用所致。MySQL的事务启动方式有以下几种： 显式启动事务语句， begin 或 start transaction。配套的提交语句是commit，回滚语句是rollback。 set autocommit=0，这个命令会将这个线程的自动提交关掉。意味着如果你只执行一个select语句，这个事务就启动了，而且并不会自动提交。这个事务持续存在直到你主动执行commit 或 rollback 语句，或者断开连接。 有些客户端连接框架会默认连接成功后先执行一个set autocommit=0的命令。这就导致接下来的查询都在事务中，如果是长连接，就导致了意外的长事务。 因此，我会建议你总是使用set autocommit=1, 通过显式语句的方式来启动事务。 但是有的开发同学会纠结“多一次交互”的问题。对于一个需要频繁使用事务的业务，第二种方式每个事务在开始时都不需要主动执行一次 “begin”，减少了语句的交互次数。如果你也有这个顾虑，我建议你使用commit work and chain语法。 在autocommit为1的情况下，用begin显式启动的事务，如果执行commit则提交事务。如果执行 commit work and chain，则是提交事务并自动启动下一个事务，这样也省去了再次执行begin语句的开销。同时带来的好处是从程序开发的角度明确地知道每个语句是否处于事务中。 你可以在information_schema库的innodb_trx这个表中查询长事务，比如下面这个语句，用于查找持续时间超过60s的事务。 1select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started))&gt;60 小结介绍了MySQL的事务隔离级别的现象和实现，根据实现原理分析了长事务存在的风险，以及如何用正确的方式避免长事务。]]></content>
@@ -52,8 +63,7 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>JAVA</tag>
-        <tag>接口</tag>
+        <tag>JAVA接口</tag>
       </tags>
   </entry>
   <entry>
@@ -64,7 +74,7 @@
         <category>Java</category>
       </categories>
       <tags>
-        <tag>代码优化</tag>
+        <tag>Java代码优化</tag>
       </tags>
   </entry>
   <entry>
@@ -123,8 +133,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>Django</tag>
         <tag>note</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -136,8 +146,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>Django</tag>
         <tag>note</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -149,8 +159,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>Django</tag>
         <tag>note</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -163,8 +173,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>note</tag>
         <tag>render</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
