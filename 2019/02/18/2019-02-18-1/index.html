@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="通过对一句 updata 语句，来解析 Mysql 的日志系统。 例如我们创建了表 T, 如下命令： 1mysql&amp;gt; create table T(ID int primary key, c int); 更新语句： 1mysql&amp;gt; update T set c=c+1 where ID=2; 更新语句也会同查询语句一样，通过连接器、分析器、优化器、执行器；最后到达存储引擎。">
+<meta name="description" content="通过对一句 updata 语句，来解析 Mysql 的日志系统。 例如我们创建了表 T, 如下命令： 1mysql&amp;gt; create table T(ID int primary key, c int);">
 <meta name="keywords" content="MySQL实战45讲">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第二讲 一条 sql 更新语句的执行">
 <meta property="og:url" content="http://yoursite.com/2019/02/18/2019-02-18-1/index.html">
 <meta property="og:site_name" content="旦暮༗">
-<meta property="og:description" content="通过对一句 updata 语句，来解析 Mysql 的日志系统。 例如我们创建了表 T, 如下命令： 1mysql&amp;gt; create table T(ID int primary key, c int); 更新语句： 1mysql&amp;gt; update T set c=c+1 where ID=2; 更新语句也会同查询语句一样，通过连接器、分析器、优化器、执行器；最后到达存储引擎。">
+<meta property="og:description" content="通过对一句 updata 语句，来解析 Mysql 的日志系统。 例如我们创建了表 T, 如下命令： 1mysql&amp;gt; create table T(ID int primary key, c int);">
 <meta property="og:image" content="http://yoursite.com/media/534AA3DE-3576-407B-95C4-97585C049708-1.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/18/2019-02-18-1/media/15501289585079/15501318526955.png">
 <meta property="og:image" content="http://yoursite.com/media/15501318526955.png">
-<meta property="og:updated_time" content="2019-02-18T02:49:54.085Z">
+<meta property="og:updated_time" content="2019-02-20T06:41:30.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第二讲 一条 sql 更新语句的执行">
-<meta name="twitter:description" content="通过对一句 updata 语句，来解析 Mysql 的日志系统。 例如我们创建了表 T, 如下命令： 1mysql&amp;gt; create table T(ID int primary key, c int); 更新语句： 1mysql&amp;gt; update T set c=c+1 where ID=2; 更新语句也会同查询语句一样，通过连接器、分析器、优化器、执行器；最后到达存储引擎。">
+<meta name="twitter:description" content="通过对一句 updata 语句，来解析 Mysql 的日志系统。 例如我们创建了表 T, 如下命令： 1mysql&amp;gt; create table T(ID int primary key, c int);">
 <meta name="twitter:image" content="http://yoursite.com/media/534AA3DE-3576-407B-95C4-97585C049708-1.png">
 
 
@@ -412,10 +412,10 @@
         <p>通过对一句 updata 语句，来解析 Mysql 的日志系统。</p>
 <p>例如我们创建了表 T, 如下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; create table T(ID int primary key, c int);</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>更新语句：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; update T set c=c+1 where ID=2;</div></pre></td></tr></table></figure>
 <p>更新语句也会同查询语句一样，通过连接器、分析器、优化器、执行器；最后到达存储引擎。</p>
-<a id="more"></a>
 <h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>执行语句前要先连接数据库，这是连接器的工作。</p>
 <p>在一个表上有更新的时候，跟这个表有关的查询缓存会失效，所以这条语句就会把表 T 上所有缓存结果都清空。这也是一般不建议使用查询缓存的原因。</p>
 <p>接下来，分析器会通过词法和语法解析知道这是一条更新语句。优化器决定要使用 ID 这个索引。然后，执行器负责具体执行，找到这一行，然后更新。</p>
@@ -658,7 +658,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -669,7 +669,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -680,7 +680,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
