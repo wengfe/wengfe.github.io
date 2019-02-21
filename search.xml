@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Servlet初次使用-hello world]]></title>
+    <url>%2F2019%2F02%2F20%2F2019-02-20-5%2F</url>
+    <content type="text"><![CDATA[Servlet 介绍Java Servlet 是运行在 Web 服务器或应用服务器上的程序，它是作为来自 Web 浏览器或其他 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。 使用 Servlet，您可以收集来自网页表单的用户输入，呈现来自数据库或者其他源的记录，还可以动态创建网页。Java Servlet 通常情况下与使用 CGI（Common Gateway Interface，公共网关接口）实现的程序可以达到异曲同工的效果。但是相比于 CGI，Servlet 有以下几点优势： 性能明显更好。 Servlet 在 Web 服务器的地址空间内执行。这样它就没有必要再创建一个单独的进程来处理每个客户端请求。 Servlet 是独立于平台的，因为它们是用 Java 编写的。 服务器上的 Java 安全管理器执行了一系列限制，以保护服务器计算机上的资源。因此，Servlet 是可信的。 Java 类库的全部功能对 Servlet 来说都是可用的。它可以通过 sockets 和 RMI 机制与 applets、数据库或其他软件进行交互。 一个 Servlet 就是一个 Java 类，并提供基于请求-相应模式的 web 服务。 Servlet 容器 装载和管理 Servlet 服务端程序 第一个 servlet 程序1. 新建 web 项目新建一个 project，选择 Java Enterprise -&gt; WebApplication -&gt; Application Server 中选择之前下载的 Tomcat 安装目录 1.2 创建项目，初始项目目录如下： 2.创建 servlet在 src 目录右键新建一个 servlet。 2.2 为 servlet 容器建名 2.3 成功创建 servlet 容器后的项目目录 2.4 在web/WEB-INF下创建两个文件夹：classes和libclasses用来存放编译后输出的class文件，lib用于存放第三方jar包。 打开 file -&gt; project Structure选择 Paths -&gt; 选择”Use module compile output path” -&gt; 将Output path和Test output path都选择刚刚创建的classes文件夹。 选择Dependencies -&gt; 将Module SDK选择为本机的jdk -&gt; 点击坐下的“+”号 -&gt; 选择1 “Jars or Directories” -&gt; 选择刚刚创建的lib文件夹 -&gt; 选择“jar directory” 部署servlet编辑在 WEB-INF 目录下的 web.xml 文件。新增 servlet 和 servlet-mapping 两个节点。 12345678&lt;servlet&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;servlet-class&gt;SimpleServlet&lt;/servlet-class&gt; &lt;/servlet&gt; &lt;servlet-mapping&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;/se&lt;/url-pattern&gt; &lt;/servlet-mapping&gt; 首先配置servlet。 这是使用元素完成的。 在这里给servlet一个名字，并写下servlet的类名。 其次，将servlet映射到URL或URL模式。 这在元素中完成。 在上面的例子中，所有以.html结尾的URL都被发送到servlet。 实现 servlet 类返回 src 目录下。 123456789101112131415161718public class SimpleServlet extends HttpServlet &#123; @Override protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123; System.out.println(&quot;service method&quot;); super.service(req, resp); &#125; @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123; System.out.println(&quot;doGTE method&quot;); PrintWriter pw = resp.getWriter(); pw.print(&quot;hello world&quot;); pw.close();// super.doGet(req, resp); &#125;&#125; 运行 servlet控制台 打印 deployed successfully 就是部署成功了。 在 run congfig 配置项中可以看到 Tomcat 部署的 url 路径和端口号。 在浏览器中输入url + 端口号 + web.xml 配置的路径映射 页面显示 servlet 类中返回的数据，并且在控制台中也打印了日志。]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Servlet</category>
+      </categories>
+      <tags>
+        <tag>servlet</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Maven 基本命令]]></title>
     <url>%2F2019%2F02%2F20%2F2019-02-20-4%2F</url>
     <content type="text"><![CDATA[maven 基本命令mvn archetype:generate 使用模板生成项目mvn compile 编译源代码mvn test 单元测试mvn package 打包mvn deploy 部署mvn site 生成项目文档相关站点mvn cleanmvn install 安装相关插件 Tomcat 插件获取帮助文档:mvn help:describe -Dplugin=tomcat7 常见命令启动嵌入 Tomcat 实例 需要在 tomcat 项目目录下执行mvn tomcat:runmvn tomcat:deploymvn tomcat:undeploy 流程1.生成项目模板1mvn archetype:generate -DgroupId=com.netease.restrurant -DartifactId=Kitchen -Dpackage=com.netease -Dversion=1.0.0-SNAPSHOT -DarchetypeArtifactId=maven-archetype-quickstart 2.发布部署mvn tomcat:run 多项目管理]]></content>
@@ -188,8 +200,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>note</tag>
         <tag>Django</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -201,8 +213,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>note</tag>
         <tag>Django</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -214,8 +226,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>note</tag>
         <tag>Django</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -228,8 +240,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>render</tag>
         <tag>note</tag>
+        <tag>render</tag>
       </tags>
   </entry>
   <entry>
