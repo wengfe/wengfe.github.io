@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Servlet web.xml配置]]></title>
+    <url>%2F2019%2F02%2F25%2F2019-02-25%2F</url>
+    <content type="text"><![CDATA[web.xml 文件位于 WEB-INF 目录下，被称为 部署描述符 XML 文件 设置 web 应用程序的组件部署信息 Servlet 容器需要支持部署描述符的所有元素 前两章包含部分的部署设置：Servlet 声明：1.一个servlet 支持多个 节点存在；2. 节点支持模糊匹配 123456789&lt;servlet&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;servlet-class&gt;SimpleServlet&lt;/servlet-class&gt; &lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;/se&lt;/url-pattern&gt; &lt;url-pattern&gt;/se2&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; ServletMapping 匹配规则按优先级降级排序 精确路径匹配 最长路径匹配 扩展名匹配 default servlet 或者放弃 ServletConfig 配置下方在 servlet 节点内的 init-param , load-on-startup 节点为 ServletConfig 配置 init-param 为单个 servlet 配置的外部数据load-on-startup 为当前 Servlet 需要在容器初始化时就被加载所设置，多个 servlet 配置，按照配置的 参数正数大小顺序加载；不设置或设置为负数不会在容器初始化时加载。 1234567891011121314151617&lt;servlet&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;servlet-class&gt;SimpleServlet&lt;/servlet-class&gt; &lt;init-param&gt; &lt;param-name&gt;data1&lt;/param-name&gt; &lt;param-value&gt;value1&lt;/param-value&gt; &lt;/init-param&gt; &lt;init-param&gt; &lt;param-name&gt;data2&lt;/param-name&gt; &lt;param-value&gt;value2&lt;/param-value&gt; &lt;/init-param&gt; &lt;load-on-startup&gt;0&lt;/load-on-startup&gt;&lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;/se&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; ServletContext不依赖于容器，配置与 节点同级。供全局所有 servlet 使用。 123456789101112&lt;servlet&gt; &lt;servlet-name&gt;SimpleServletTwo&lt;/servlet-name&gt; &lt;servlet-class&gt;SimpleServletTwo&lt;/servlet-class&gt;&lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;SimpleServletTwo&lt;/servlet-name&gt; &lt;url-pattern&gt;/sese&lt;/url-pattern&gt;&lt;/servlet-mapping&gt;&lt;context-param&gt; &lt;param-name&gt;globalData1&lt;/param-name&gt; &lt;param-value&gt;globalValue1&lt;/param-value&gt;&lt;/context-param&gt; 错误页面跳转1234&lt;error-page&gt; &lt;error-code&gt;404&lt;/error-code&gt; &lt;location&gt;/404.html&lt;/location&gt;&lt;/error-page&gt;]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Servlet</category>
+      </categories>
+      <tags>
+        <tag>servlet</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Servlet 3种数据配置数据配置]]></title>
     <url>%2F2019%2F02%2F21%2F2019-02-21-1%2F</url>
     <content type="text"><![CDATA[http://localhost:8080/manager/html/tomcat 后台管理页面地址 servlet config 功能单个 servlet 中的数据配置。避免硬编码，将数据库账号密码等数据放在 web.xml 文件中。 Servlet 初始化过程中 参数将被封装到 ServletConfig 每个 Servlet 支持设置一个或者多个 以 Servlet 为单位，不是全局共享 12345678910111213141516&lt;servlet&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;servlet-class&gt;SimpleServlet&lt;/servlet-class&gt; &lt;init-param&gt; &lt;param-name&gt;data1&lt;/param-name&gt; &lt;param-value&gt;value1&lt;/param-value&gt; &lt;/init-param&gt; &lt;init-param&gt; &lt;param-name&gt;data2&lt;/param-name&gt; &lt;param-value&gt;value2&lt;/param-value&gt; &lt;/init-param&gt;&lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;/se&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; 在 web.xml 中添加 节点。init-param 需要放在 和 节点之下。 12345678 @Overridepublic void init() throws ServletException &#123; System.out.println(&quot;init method&quot;); ServletConfig config = this.getServletConfig(); String v1 = config.getInitParameter(&quot;data1&quot;); String v2 = config.getInitParameter(&quot;data2&quot;); System.out.println(&quot;v1 = &quot; + v1 + &quot;, v2 = &quot; + v2);&#125; 在 init 方法中创建 ServletConfig 参数来获取配置文件中的数据。 在多个 Servlet 中共享配置文件在多个 servlet 中共享配置文件，需要在 web.xml 中新增 context-param 节点。以下代码新增了一个 servlet 节点和两个共享配置。 12345678910111213141516&lt;context-param&gt; &lt;param-name&gt;globalData1&lt;/param-name&gt; &lt;param-value&gt;globalValue1&lt;/param-value&gt;&lt;/context-param&gt;&lt;context-param&gt; &lt;param-name&gt;globalData2&lt;/param-name&gt; &lt;param-value&gt;globalValue2&lt;/param-value&gt;&lt;/context-param&gt;&lt;servlet&gt; &lt;servlet-name&gt;SimpleServletTwo&lt;/servlet-name&gt; &lt;servlet-class&gt;SimpleServletTwo&lt;/servlet-class&gt;&lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;SimpleServletTwo&lt;/servlet-name&gt; &lt;url-pattern&gt;/sese&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; 在 servlet 的 init 方法中获取 节点中保存的配置信息。 1234567891011121314 @Override public void init() throws ServletException &#123; System.out.println(&quot;init method&quot;);// super.init(); ServletConfig config = this.getServletConfig(); String v1 = config.getInitParameter(&quot;data1&quot;); String v2 = config.getInitParameter(&quot;data2&quot;); System.out.println(&quot;v1 = &quot; + v1 + &quot;, v2 = &quot; + v2);// 获取 context-param 中的配置数据 ServletContext context = this.getServletContext(); String gv1 = context.getInitParameter(&quot;globalData1&quot;); String gv2 = context.getInitParameter(&quot;globalData2&quot;); System.out.println(&quot;gv1 = &quot; + gv1 + &quot;, gv2 = &quot; + gv2); &#125; servlet 动态属性共享在不同的 Servlet 之间，动态共享数据。 setAttribute(key,value) getAttribute(key) 在第一个 servlet 类的 init 方法中通过 setAttribute 存入需要共享的键值对。 12ServletContext context = this.getServletContext();context.setAttribute(&quot;attribute1&quot;,&quot;111&quot;); 在第二个 servlet 类中的 init 方法中获取第一个 servlet 类中共享的值。 12ServletContext context = this.getServletContext();String attribute = (String) context.getAttribute(&quot;attribute1&quot;); 读取外部资源配置文件信息 ServletContext getResource getResourceAsStream getRealPath 1.首先创建工具类12345678910111213141516public class GeneralUtil &#123; public static String generateId()&#123; return UUID.randomUUID().toString().replaceAll(&quot;-&quot;,&quot;&quot;); &#125; public static String getProperty(String key, InputStream in)&#123; Properties props = new Properties(); try &#123; props.load(in); &#125; catch (IOException e) &#123; e.printStackTrace(); &#125; String value = props.getProperty(key); return value; &#125;&#125; 2.getResource 三种方法的实现123456789101112131415161718192021222324252627282930// getResource 方法 try &#123; URL url = context.getResource(&quot;/WEB-INF/classes/log4j.properties&quot;); InputStream in = url.openStream(); String propertyValue = GeneralUtil.getProperty(&quot;log4j.rootLogger&quot;,in); System.out.println(propertyValue); &#125; catch (MalformedURLException e) &#123; e.printStackTrace(); &#125; catch (IOException e) &#123; e.printStackTrace(); &#125; System.out.println(&quot;===============================================&quot;);// getResourceAsStream 方法，比较常用 省去了转换的过程 InputStream in2 = context.getResourceAsStream(&quot;/WEB-INF/classes/log4j.properties&quot;); String p2 = GeneralUtil.getProperty(&quot;log4j.rootLogger&quot;,in2); System.out.println(&quot;p2 &quot; + p2); System.out.println(&quot;===============================================&quot;);// getRealPath 方法 String path = context.getRealPath(&quot;/WEB-INF/classes/log4j.properties&quot;); System.out.println(&quot;Real path: &quot; + path); File f = new File(path); try &#123; InputStream in3 = new FileInputStream(f); String p3 = GeneralUtil.getProperty(&quot;log4j.rootLogger&quot;,in3); System.out.println(&quot;p3: &quot; + p3); &#125; catch (FileNotFoundException e) &#123; e.printStackTrace(); &#125;]]></content>
@@ -212,8 +224,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>Django</tag>
         <tag>note</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -225,8 +237,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>Django</tag>
         <tag>note</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -238,8 +250,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>Django</tag>
         <tag>note</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -252,8 +264,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>note</tag>
         <tag>render</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
