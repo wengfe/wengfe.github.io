@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Cookie与Session]]></title>
+    <url>%2F2019%2F02%2F27%2F2019-02-27%2F</url>
+    <content type="text"><![CDATA[会话会话是一种持久网络协议，在用户（或用户代理）端和服务器端之间建立关联，从而起到交换数据包的作用机制。 Cookie会话数据保存在浏览器客户端 会话数据 保存在客户端 key-value 形式 工作流程识别返回用户包括三个步骤： 服务器脚本向浏览器发送一组 Cookie。例如：姓名、年龄或识别号码等。 浏览器将这些信息存储在本地计算机上，以备将来使用。 当下一次浏览器向 Web 服务器发送任何请求时，浏览器会把这些 Cookie 信息发送到服务器，服务器将使用这些信息来识别用户。 cookie 的生命周期会话周期：cookie 数据保存在内存中，浏览器关闭后，会话失效。 setMaxAge 设置 cookie 有效期;默认 30 mincookie 数据保存在硬盘中，浏览器关闭后依然后效，直到超出有效期 cookie 缺陷大小和数量的限制：一般每个站点最多保存 20 个。大小在 4k 以内。 数据安全性：http 中的 cookie 为明文传递。 Session会话数据保存在服务器端session 在不同场合有不同的定义，此文主要为 HttpSession. 工作原理 客户端发送一条 http 请求到 服务器端； 服务器端生成一个 Session 对象，保存一些客户端数据到 Cookie 并与 SessionId 绑定，返回给客户端； 客户端再次发送一条包含 SessionId 的 http 请求，服务器端根据 SessionId 与服务器端保存的对象绑定。 Session 的生命周期setMaxInactiveInterval 设置有效期;默认 30 min通过部署描述符配置有效期主动调用接口使 session 失效； invalidate 接口。 部署描述符设置 session 失效时间；单位 min123&lt;session-config&gt; &lt;session-timeout&gt;2&lt;/session-timeout&gt;&lt;/session-config&gt; 总结cookie： 明文存储 客户端 生命周期累计时间 每个站点 20 个 cookie，单个小于 4ksession： 存放服务器端 生命周期间隔时间 存放于服务器端，避免大容量对象存储]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Servlet</category>
+      </categories>
+      <tags>
+        <tag>servlet</tag>
+        <tag>cookie</tag>
+        <tag>session</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Servlet web.xml配置]]></title>
     <url>%2F2019%2F02%2F25%2F2019-02-25%2F</url>
     <content type="text"><![CDATA[web.xml 文件位于 WEB-INF 目录下，被称为 部署描述符 XML 文件 设置 web 应用程序的组件部署信息 Servlet 容器需要支持部署描述符的所有元素 前两章包含部分的部署设置：Servlet 声明：1.一个servlet 支持多个 节点存在；2. 节点支持模糊匹配 123456789&lt;servlet&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;servlet-class&gt;SimpleServlet&lt;/servlet-class&gt; &lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;/se&lt;/url-pattern&gt; &lt;url-pattern&gt;/se2&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; ServletMapping 匹配规则按优先级降级排序 精确路径匹配 最长路径匹配 扩展名匹配 default servlet 或者放弃 ServletConfig 配置下方在 servlet 节点内的 init-param , load-on-startup 节点为 ServletConfig 配置 init-param 为单个 servlet 配置的外部数据load-on-startup 为当前 Servlet 需要在容器初始化时就被加载所设置，多个 servlet 配置，按照配置的 参数正数大小顺序加载；不设置或设置为负数不会在容器初始化时加载。 1234567891011121314151617&lt;servlet&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;servlet-class&gt;SimpleServlet&lt;/servlet-class&gt; &lt;init-param&gt; &lt;param-name&gt;data1&lt;/param-name&gt; &lt;param-value&gt;value1&lt;/param-value&gt; &lt;/init-param&gt; &lt;init-param&gt; &lt;param-name&gt;data2&lt;/param-name&gt; &lt;param-value&gt;value2&lt;/param-value&gt; &lt;/init-param&gt; &lt;load-on-startup&gt;0&lt;/load-on-startup&gt;&lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;SimpleServlet&lt;/servlet-name&gt; &lt;url-pattern&gt;/se&lt;/url-pattern&gt;&lt;/servlet-mapping&gt; ServletContext不依赖于容器，配置与 节点同级。供全局所有 servlet 使用。 123456789101112&lt;servlet&gt; &lt;servlet-name&gt;SimpleServletTwo&lt;/servlet-name&gt; &lt;servlet-class&gt;SimpleServletTwo&lt;/servlet-class&gt;&lt;/servlet&gt;&lt;servlet-mapping&gt; &lt;servlet-name&gt;SimpleServletTwo&lt;/servlet-name&gt; &lt;url-pattern&gt;/sese&lt;/url-pattern&gt;&lt;/servlet-mapping&gt;&lt;context-param&gt; &lt;param-name&gt;globalData1&lt;/param-name&gt; &lt;param-value&gt;globalValue1&lt;/param-value&gt;&lt;/context-param&gt; 错误页面跳转1234&lt;error-page&gt; &lt;error-code&gt;404&lt;/error-code&gt; &lt;location&gt;/404.html&lt;/location&gt;&lt;/error-page&gt;]]></content>
