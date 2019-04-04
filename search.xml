@@ -1,6 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[MyBatis 入门]]></title>
+    <url>%2F2019%2F04%2F03%2F2019-04-03%2F</url>
+    <content type="text"><![CDATA[MyBatis前身是 apach 基金会下的一个开源项目 iBatis 支持自定义 SQL 、存储过程和高级映射的持久化框架 使用 XML 或者注解配置 能够映射基本数据元素、接口、Java对象到数据库 MyBatis是一款支持普通SQL查询、存储过程和高级映射的持久层框架。MyBatis消除了几乎所有的JDBC代码、参数的设置和结果集的检索。MyBatis可以使用简单的XML或注解用于参数配置和原始映射，将接口和Java POJO（普通Java对象）映射成数据库中的记录。 映射方式 数据库的每一行映射为每一个对象 每一列映射为对象的每一个属性 工作流程机制 根据 XML 或者注解加载 SQL 语句、参数映射、结果映射到内存 应用程序调用 API 传入参数和 SQL ID. MyBatis 自动生成 SQL 语句完成数据库访问，转换执行结果返回应用程序 以查询操作来对整个过程进行描述 配置jar 加载 mybatis-3.2.3 mysql-connector-java SQLSessionFactory每个 MyBatis 应用都基于 SqlSessionFactory 实例为中心。通过该实例，MyBatis 可以获取对对象的操作转换为对数据库数据进行操作的 sql 的 session。 SqlSessionFactory 的全局配置⽂文件，⽂文件名为conf.XML。 该⽂文件需要放在根目录下，即src/main/java目录下 该文件包含了对 MyBatis 的核心配置。 transactionManage 对后端连接数据库实例的数据源，决定数据范围和数据管理方式的事务管理器 dataSource 后端数据库源：driver、url、username、password conf.xml 配置示例123456789101112131415161718&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;!DOCTYPE configuration PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot; &quot;http:// mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;&lt;configuration&gt; &lt;environments default=&quot;development&quot;&gt; &lt;environment id=&quot;development&quot;&gt; &lt;transactionManager type=&quot;jdbc&quot;/&gt; &lt;!-- 配置数据库连接信息 --&gt; &lt;dataSource type=&quot;POOLED&quot;&gt; &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt; &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/test?useSSL=true&quot;/&gt; &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt; &lt;property name=&quot;password&quot; value=&quot;admin&quot;/&gt; &lt;/dataSource&gt; &lt;/environment&gt; &lt;/environments&gt;&lt;/configuration&gt; Java 对象构建(Bean类)构造对象123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566public class User &#123; private int id; private String name; private String password; private int sex; private int account; public User(int id, String name, String password, int sex, int account) &#123; this.id = id; this.name = name; this.password = password; this.sex = sex; this.account = account; &#125; public int getId() &#123; return id; &#125; public String getName() &#123; return name; &#125; public String getPasswors() &#123; return password; &#125; public int getSex() &#123; return sex; &#125; public int getAccount() &#123; return account; &#125; public void setId(int id) &#123; this.id = id; &#125; public void setName(String name) &#123; this.name = name; &#125; public void setPasswors(String password) &#123; this.password = password; &#125; public void setSex(int sex) &#123; this.sex = sex; &#125; public void setAccount(int account) &#123; this.account = account; &#125; @Override public String toString() &#123; return &quot;User&#123;&quot; + &quot;id=&quot; + id + &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; + &quot;, password=&apos;&quot; + password + &apos;\&apos;&apos; + &quot;, sex=&quot; + sex + &quot;, account=&quot; + account + &apos;&#125;&apos;; &#125;&#125; 构建接口123456public interface GetUserInfo &#123; public User getUser(int id); public void addUser(User user); public void updateUser(User user); public void deleteUser(User user);&#125; 构建 Java 对象和 SQL 语句映射关系配置文件在 src 目录下新建 userMapper.xml 文件 12345678&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt; &lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http:// mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;&lt;mapper namespace=&quot;GetUserInfo&quot;&gt; &lt;select id=&quot;getUser&quot; parameterType=&quot;int&quot; resultType=&quot;User&quot;&gt; select id,name,password,sex,account from user where id = #&#123;id&#125; &lt;/select&gt;&lt;/mapper&gt; 在 conf.xml 文件中注册 mapperSqlSessionFactory中添加mapper映射。 123456... &lt;/environments&gt; &lt;mappers&gt; &lt;mapper resource=&quot;userMapper.xml&quot; /&gt; &lt;/mappers&gt;&lt;/configuration&gt; 数据查询操作工作流程 加载配置文件 应用配置文件 关联映射文件 sqlSession 生成 SQLSessionFactory 获取 SQLSession 执行查询 Session 执行SQL 测试程序1234567891011121314151617181920212223public class HelloMyBatis &#123; public static void main(String[] args) &#123;// 1.声明配置文件的目录读值 String resource = &quot;conf.xml&quot;;// 2. 加载应⽤用配置⽂文件 InputStream is = HelloMyBatis.class.getClassLoader() .getResourceAsStream(resource);// 3. 创建SqlSessonFactory SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);// 4. 获取Session SqlSession session = sessionFactory.openSession(); try &#123;// 5. 获取操作类 GetUserInfo getUserInfo = session.getMapper(GetUserInfo.class);// 6. 完成查询操作 User user = getUserInfo.getUser(2); System.out.println(user.getId() + &quot; &quot; + user.getName() + &quot; &quot; + user.getAccount()); &#125; finally &#123;// 7.关闭Session session.close(); &#125; &#125;&#125; 映射通过注解的方式声明不需要添加 接口类的 Mapper.xml 文件，也不用在 SQLSessionFactory 中声明 mapper.xml 。 1. 在接口类的方法上添加 sql 注解123456789import org.apache.ibatis.annotations.Select;public interface GetUserInfoAnnotation &#123; @Select(&quot;select id,name,password,sex,account from user where id = #&#123;id&#125;&quot;) public User getUser(int id); public void addUser(User user); public void updateUser(User user); public void deleteUser(User user);&#125; 2. 在主程序中添加映射关系到接口对象12345 3. 创建SqlSessionFactory SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);// 3.1 添加映射关系到类对象 注解方式 Configuration conf = sessionFactory.getConfiguration(); conf.addMapper(GetUserInfoAnnotation.class); 其他步骤与文件映射方法一致。 其他 SQL 操作（增删改）###文件映射方式在 Mapper 文件中添加 sql 的文件。 1234567891011121314151617181920&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt; &lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http:// mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;&lt;mapper namespace=&quot;GetUserInfo&quot;&gt; &lt;select id=&quot;getUser&quot; parameterType=&quot;int&quot; resultType=&quot;User&quot;&gt; select id,name,password,sex,account from user where id = #&#123;id&#125; &lt;/select&gt; &lt;insert id=&quot;addUser&quot; parameterType=&quot;User&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt; insert into user (name,password,sex,account) values(#&#123;name&#125;,#&#123;password&#125;,#&#123;sex&#125;,#&#123;account&#125;) &lt;/insert&gt; &lt;update id=&quot;updateUser&quot; parameterType=&quot;User&quot;&gt; update user set account = #&#123;account&#125; where id = #&#123;id&#125; &lt;/update&gt; &lt;delete id=&quot;deleteUser&quot; parameterType=&quot;User&quot;&gt; delete from user where id = #&#123;id&#125; &lt;/delete&gt;&lt;/mapper&gt; 运行 MyBatis1234567891011121314151617181920212223242526272829303132333435363738394041import org.apache.ibatis.session.SqlSession;import org.apache.ibatis.session.SqlSessionFactory;import org.apache.ibatis.session.SqlSessionFactoryBuilder;import java.io.InputStream;public class moreMybatis &#123; public static void main(String[] args) &#123;// 1. 声明配置⽂文件 String resource = &quot;conf.xml&quot;;// 2. 加载应⽤用配置⽂文件 InputStream is = moreMybatis.class.getClassLoader().getResourceAsStream(resource);// 3. 创建SqlSessonFactory SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);// 关闭sql事务模式 SqlSession session = sessionFactory.openSession(true); try&#123;// 5. 获取操作类 GetUserInfo getUserInfo = session.getMapper(GetUserInfo.class);// 插⼊入⽤用户 User user = new User(7,&quot;xiaoBai&quot;,&quot;123456&quot;,0,10000); getUserInfo.addUser(user); System.out.println(user.getId());// 查询⽤用户 user = getUserInfo.getUser(user.getId()); System.out.println(user);// 更新用户账户信息 user.setAccount(800); getUserInfo.updateUserAccount(user);// 删除⽤用户 getUserInfo.deleteUser(user.getId()); &#125;finally &#123; session.close(); &#125; &#125;&#125; MyBatis 的优劣 优势： 入门门槛较低 更加灵活，SQL 优化 劣势 需要自己编写 SQL ，工作量大 数据库移植性差]]></content>
+      <categories>
+        <category>Java</category>
+        <category>MyBatis</category>
+      </categories>
+      <tags>
+        <tag>数据库框架</tag>
+        <tag>MyBatis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[死锁的分析与解决]]></title>
+    <url>%2F2019%2F04%2F02%2F2019-04-02%2F</url>
+    <content type="text"><![CDATA[死锁指两个或者两个以上的事务在执行过程中，因争夺锁资源而造成的一种互相等待的现象。 死锁产生的必要条件互斥 并发执行的事务为了进行必要的隔离保证执行正确，在事务结束前，需要对修改的数据库记录持锁，保证多个事务对相同数据库记录串行修改。 串行修改：a 事务尚未提交，b 事务不能修改同个数据记录 对于大型并发系统无法避免 请求与保持 已经持有一个锁资源，等待另外一个锁资源 死锁仅发生在请求两个或两个以上的锁对象 由于应用需要，难以消除 不剥夺 已经获得锁资源的事务，在未执行前，不能被强制剥夺，只能使用完时，由事务自己释放。 一般用于已经出现死锁时，通过破坏该条件达到解除死锁的目的。 数据库系统通常通过一定的死锁检测机制发现死锁，强制回滚代价相对较小的事务，达到解除死锁的目的。 环路等待 发生死锁时，必然存在一个事务—锁的环形链 按照同一顺序获取锁，可以破坏该条件 通过分析死锁事务之间的锁竞争关系，调整 SQL 的顺序，达到消除死锁的目的。 MySQL 中的锁排他锁与其他任何锁都是冲突的。 共享锁多个事务可以共享一把锁。 加锁方式外部加锁由应用程序执行特定语句，显式的加锁； 可以通过分析 sql 语句，比较容易看清锁的依赖关系 共享锁 select * from table lock in share mode 排他锁 select * from table for update 内部加锁为了实现 ACID 特性，由数据库内部自动添加 加锁规则繁琐，与 SQL 执行计划、事务隔离级别、表索引结果有关，不容易排查死锁情况 哪些 SQL 需要持有锁 快照读 所有 select 语句都属于快照读 Innodb 实现了多版本控制（MVCC），支持不加锁的快照度 「保证 select 语句的性能」 能够保证同一个 select 结果集一致 不能保证同一个事务内部，select 语句和其他语句的数据一致性，如有业务需要，需外部显式加锁 当前读 select * from table lock in share mode select * from table for update Update from table set … Insert into … Delete from table … 显式加锁的读，以及更新插入删除操作语句，都是可触发 MySQL 内部加锁的 捕获死锁的 sql 语句sql 语句： 1show engine innodb status]]></content>
+      <categories>
+        <category>Java</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>死锁</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[事务原理]]></title>
+    <url>%2F2019%2F04%2F01%2F2019-04-01%2F</url>
+    <content type="text"><![CDATA[事务事务是并发控制的基本单位，指作为单个逻辑工作单元执行的一系列操作，而这些逻辑工作需要满足 ACID 特性。 ACID 原子性（Atomicity）:事务是数据库逻辑工作单元，事务中包含的操作要么都执行成功，要么都执行失败。 一致性（Consistency）：事务执行的结果必须是使数据库数据从一个一致性状态变到另外一种一致性状态。 隔离性（Isolation）：一个事务的执行过程中不能影响到其他事务的执行，事务内部的操作及使用的数据对其他事务是隔离的，并发执行各个事务之间无不干扰。 持续性（Durability）：即一个事务执一旦提交，它对数据库数据的改变是永久性的。之后的其它操作不应该对其执行结果有任何影响。 JDBC 的事务控制Connection 对象下的三个方法实现对事务的控制。 setAutoCommit() 设置为 false，将所属 Connection 对象的后续语句作为 JDBC 事务进行处理，直到调用 commit() 方法。 true 将所属对象的后续每个语句作为单独的 sql 语句进行处理（默认状态）。 commit()提交事务，使事务中的所有 sql 生效。 rollback()回滚事务- 回滚到事务开始之前的状态 1234567891011121314conn = ds.getConnection();// 开启事务 conn.setAutoCommit(false); psta = conn.prepareStatement(&quot;update user set account = ? where name = ?&quot;); psta.setInt(1, 0); psta.setString(2, &quot;Mike&quot;); psta.execute(); psta.setString(1, &quot;100&quot;); psta.setString(2, &quot;Bob&quot;); psta.execute();// 提交事务 conn.commit(); 在事务未提交之前，所有的 sql 语句都不会执行。 设置检查点setSavePoint()设置数据库保存点，在出现异常后，可以回复到该点的状态 rollback(SavePoint savePoint)回复方法 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950public void Transaction() &#123; Connection conn = null; PreparedStatement psta = null; ResultSet rs = null; Savepoint sp = null; try &#123; conn = ds.getConnection();// 开启事务 conn.setAutoCommit(false); psta = conn.prepareStatement(&quot;update user set account = ? where name = ?&quot;); psta.setInt(1, 0); psta.setString(2, &quot;Mike&quot;); psta.execute(); sp = conn.setSavepoint(); psta.setString(1, &quot;100&quot;); psta.setString(2, &quot;Bob&quot;); psta.execute();// 提交事务// conn.commit(); throw new SQLException(); &#125; catch (SQLException e) &#123; try &#123;// 回滚事务到检查点 conn.rollback(sp); psta.setString(1, &quot;100&quot;); psta.setString(2, &quot;GuoSi&quot;); psta.execute(); conn.commit(); &#125; catch (SQLException ex) &#123; ex.printStackTrace(); &#125;// e.printStackTrace(); &#125; finally &#123; try &#123; if (conn != null) conn.close(); if (psta != null) psta.close(); if (rs != null) rs.close(); &#125; catch (SQLException e) &#123; e.printStackTrace(); &#125; &#125; &#125; 设置 JDBC 中的隔离级别getTranactionIlsoLation()setTranactionIlsoLation() 各个隔离级别内容在 MySQL 45讲 第三讲内容中 『项目地址』：https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloTransaction.java]]></content>
+      <categories>
+        <category>Java</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>事务</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[SQL注入与防范]]></title>
+    <url>%2F2019%2F03%2F31%2F2019-03-31%2F</url>
+    <content type="text"><![CDATA[SQL注入通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。 SQL 注入实例：登录请求 情境 登录名 密码 正常 zhangsan 123456 SQL 注入 zhangsan’;– 123 正常查询语句为： 1select * from user where userName = &apos;zhangsan&apos; and passwoad = &apos;123456&apos; 注入后： 1select * from user where userName = &apos;zhangsan&apos;;-- &apos; and passwoad = &apos;123456&apos; 因为后面添加的单引号和分号断开了查询的后续条件，并通过 “– “ 进行了注释，使原sql 语句语义发生了改变。 解决办法通过 connect 下的 preparedStatement 方法来预编译 sql，后续加入参数；因为 sql 语句进行了预编译，保障了参数传入后，整条语句的语义不会发生变化，从而防范了 SQL 注入的问题。 『项目地址』: https://github.com/wengfe/JAVA/tree/master/HelloJDBC/src]]></content>
+      <categories>
+        <category>Java</category>
+        <category>SQL注入与防范</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>preparedSatement</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[数据库连接池]]></title>
+    <url>%2F2019%2F03%2F26%2F2019-03-26%2F</url>
+    <content type="text"><![CDATA[因为每次创建一个数据库链接都是一次极大的资源消费，所以连接复用。通过建立一个数据库连接池以及一套连接使用管理策略，可以使一个数据库连接可以得到高效、安全的复用，能避免了数据库连接频繁建立、关闭的开销。 连接池的本质：介于 Java 应用 和 JDBC 之间的 Java 架包. 使用 数据库连接池，需要先引入 3 个架包： commons-logging commons-dbcp2 commons-pool2前两个架包可以直接在 apache 找到， pool2 架包在 码农文库中找到； 调用 connection.close() 方法，在连接池中被重写，在连接池中调用 close 方法，是释放归还数据库连接，供其他线程调用，并不是销毁连接。 流程1.导入 3 个架包2.初始化连接池3.通过连接池连接数据库（类似JDBC）4.拿到结果5.清理环境 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758import org.apache.commons.dbcp2.BasicDataSource;import java.sql.Connection;import java.sql.ResultSet;import java.sql.SQLException;import java.sql.Statement;public class HelloDBCP &#123; public static BasicDataSource ds = null; public static final String JDBC_DRIVER = &quot;com.mysql.jdbc.Driver&quot;; public static final String JDBC_URL = &quot;jdbc:mysql://localhost/test?useSSL=true&quot;; public static final String USER = &quot;root&quot;; public static final String PASSWORD = &quot;admin&quot;;// 初始化 连接池 public static void dbpoolInit() &#123; ds = new BasicDataSource(); ds.setDriverClassName(JDBC_DRIVER); ds.setUrl(JDBC_URL); ds.setUsername(USER); ds.setPassword(PASSWORD); &#125; public void dsPoolTest() &#123; Connection conn = null; Statement stat = null; ResultSet rs = null; try &#123; conn = ds.getConnection(); stat = conn.createStatement(); rs = stat.executeQuery(&quot;select * from user&quot;); while (rs.next()) &#123; System.out.println(rs.getString(&quot;name&quot;)); &#125; &#125; catch (SQLException e) &#123; e.printStackTrace(); &#125; finally &#123; try &#123; if (conn != null) conn.close(); if (stat != null) stat.close(); if (rs != null) rs.close(); &#125; catch (SQLException e) &#123; e.printStackTrace(); &#125; &#125; &#125; public static void main(String[] args) &#123; dbpoolInit(); new HelloDBCP().dsPoolTest(); &#125;&#125; 连接池参数配置BAsicDataSource.setInitialSize() 在连接池启用的时候预制一定数量的数据库连接.setMaxTotal() 连接池最大线程连接数.setMaxWaitMillis() 线程最大等待时间.setMaxIdle() 空闲连接数超过该设置，连接池销毁数据库连接.setMinIdle() 空闲连接数低于该设置，连接池创建数据库连接.setTestWhileIdle(True) 检查空闲数据库连接是否已与数据库断开连接，断开后销毁连接.setMinEvictableIdleTimeMillis() 销毁连接的最小连接时间，当连接时间超过该设置，被自动销毁.setTimeBetweenEvicationRunsMillis() 检查运行时间的间隔 『项目地址』:https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloDBCP.java]]></content>
+      <categories>
+        <category>Java</category>
+        <category>DBCP</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>DBCP</tag>
+        <tag>preparedSatement</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JDBC 进阶]]></title>
+    <url>%2F2019%2F03%2F22%2F2019-03-22-1%2F</url>
+    <content type="text"><![CDATA[游标操作方式-分批查询游标提供一种客户端读取部分服务器端结果集的机制。当 sql 语句的匹配条件太弱时，sql 结果会返回大量的数据，就有可能导出出现内存溢出。所以就出现了将结果分批处理的方式； 流程：1.在配置 JDBC URL 时，在最后加上参数： useCursorFetch=true 开启游标属性 1static String DB_URL = &quot;jdbc:mysql://localhost:3306/test?useCursorFetch=true&quot; 2.创建 preparedSatement 对象，在使用 prepareStatement 方法创建对象时，预编译 sql 语句。 conn.prepareStatement(sql,游标类型,能否更新记录);游标类型：ResultSet.TYPE_FORWORD_ONLY:只进游标ResultSet.TYPE_SCROLL_INSENSITIVE:可滚动。但是不受其他用户对数据库更改的影响。ResultSet.TYPE_SCROLL_SENSITIVE:可滚动。当其他用户更改数据库时这个记录也会改变。能否更新记录：ResultSet.CONCUR_READ_ONLY,只读ResultSet.CONCUR_UPDATABLE,可更新 3.使用 setFetchSize 方法，设置分批处理的结果数 4.通过 setString 方法传入条件参数，第一个参数表示 参数位置，第二个参数为条件值 preparedSatement 可以写动态参数化查询preparedSatement 可以预编译 sql 语句preparedSatement 可以防止SQL注入式攻击 代码实例： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960import java.sql.*;public class Main &#123; static final String JDBC_DRIVER = &quot;com.mysql.jdbc.Driver&quot;; static String DB_URL = &quot;jdbc:mysql://localhost:3306/test?useSSL=true&quot;; static final String USER = &quot;root&quot;; static final String PASSWORD = &quot;admin&quot;; public static void main(String[] args) throws ClassNotFoundException&#123; Connection conn = null; Statement statement = null; PreparedStatement preparedStatement = null; ResultSet rs = null;// 1. 装载数据库驱动程序； Class.forName(JDBC_DRIVER);// 2. 通过JDBC建立数据库连接； try &#123; //在 url 中 开启 游标属性 DB_URL = DB_URL + &quot;&amp;useCursorFetch=true&quot;; conn = DriverManager.getConnection(DB_URL,USER,PASSWORD);// 3.访问数据库，执行SQL语句；// statement = conn.createStatement();// rs = statement.executeQuery(&quot;select name from test.user &quot;);// 对 preparedStatement 的 sql 语句进行预编译, ？ 表示参数 preparedStatement = conn.prepareStatement(&quot;select * from test.ipdata where id=? and startip = ?&quot;);// 通过 preparedStatement 使用游标 进行分批查询语句 preparedStatement.setFetchSize(1);// 通过setInt 或者 setString 将，预编译的 sql 语句中的 条件参数传递进去 preparedStatement.setInt(1,13); preparedStatement.setString(2,&quot;16844800&quot;); rs = preparedStatement.executeQuery();// 4.获得执行结果 while(rs.next()) &#123; System.out.println(&quot;Hello &quot; + rs.getString(&quot;country&quot;)); &#125; &#125; catch (SQLException e) &#123;// 异常处理 e.printStackTrace(); &#125; finally &#123; // 5. 断开数据库连接，清理环境 try &#123; if(conn != null) &#123; conn.close(); &#125; if(statement != null) &#123; statement.close(); &#125; if(rs != null) &#123; rs.close(); &#125; &#125; catch (SQLException e) &#123; // pass &#125; &#125; &#125;&#125; 大对象读取-流方式当读取大对象时，有可能出现对象内容太大，内存放不下，从而出现的内存溢出问题。 主要涉及方法 ResultSet.getBinaryStream() 方法。 流程 通过对 ResultSet 对象使用 getBinaryStream() 获取流对象。 每次读取流对象中的一行内容输出到外部文件中 重复2 步骤，直至读取完流对象内容。 123456789101112131415161718192021222324252627282930313233343536373839404142434445public static void main(String[] args) throws ClassNotFoundException &#123; Connection conn = null; PreparedStatement preparedStatement = null; ResultSet resultSet = null; Class.forName(JDBC_DRIVER); try &#123; conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);// 创建 preparedStatement 对象 preparedStatement = conn.prepareStatement(&quot;select * from blog where id = ?&quot;); preparedStatement.setInt(1, 1);// 执行 sql resultSet = preparedStatement.executeQuery(); while (resultSet.next()) &#123;// 获取对象流 InputStream in = resultSet.getBinaryStream(&quot;context&quot;);// 将对象流写入文件 File f = new File(FILE_URL); OutputStream out = new FileOutputStream(f); int temp = 0; while ((temp = in.read()) != -1) &#123;//边读边写 out.write(temp); &#125; in.close(); out.close(); &#125; &#125; catch (SQLException e) &#123; e.printStackTrace(); &#125; catch (FileNotFoundException e) &#123; e.printStackTrace(); &#125; catch (IOException e) &#123; e.printStackTrace(); &#125; finally &#123; try &#123; if (conn != null) conn.close(); if (preparedStatement != null) preparedStatement.close(); if (resultSet != null) resultSet.close(); &#125; catch (SQLException e) &#123; e.printStackTrace(); &#125; &#125;&#125; 一条语句多条执行- sql 的批处理流程： statement 对象使用 addBatch() 方法添加 sql 语句 statement 对象使用 executeBatch() 方法执行所有添加的 sql 语句 statement 对象使用 clearBatch() 方法清空已执行的 sql 语句 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758public class HelloBatch &#123; static final String JDBC_DRIVER = &quot;com.mysql.jdbc.Driver&quot;; static String DB_URL = &quot;jdbc:mysql://localhost:3306/test?useSSL=true&quot;; static final String USER = &quot;root&quot;; static final String PASSWORD = &quot;admin&quot;; static void insertUsers(Set&lt;String&gt; users) throws ClassNotFoundException&#123; Connection conn = null; Statement statement = null; ResultSet rs = null;// 1. 装载数据库驱动程序； Class.forName(JDBC_DRIVER);// 2. 通过JDBC建立数据库连接； try &#123; conn = DriverManager.getConnection(DB_URL,USER,PASSWORD);// 3.访问数据库，执行SQL语句； statement = conn.createStatement();// 添加 sql 语句到 Batch for (String user : users) &#123; statement.addBatch(&quot;insert into user(name) values (&apos;&quot; + user + &quot;&apos;)&quot;); System.out.println(&quot;insert into user(name) values (&quot; + user + &quot;)&quot;); &#125;// 批执行 sql 语句 statement.executeBatch();// 清空已执行语句 statement.clearBatch(); &#125; catch (SQLException e) &#123;// 异常处理 e.printStackTrace(); &#125; finally &#123; // 5. 断开数据库连接，清理环境 try &#123; if(conn != null) &#123; conn.close(); &#125; if(statement != null) &#123; statement.close(); &#125; if(rs != null) &#123; rs.close(); &#125; &#125; catch (SQLException e) &#123; // pass &#125; &#125; &#125; public static void main(String[] args) throws ClassNotFoundException &#123; Set&lt;String&gt; users = new HashSet&lt;&gt;(); users.add(&quot;GuoYi&quot;); users.add(&quot;GuoEi&quot;); users.add(&quot;GuoSi&quot;); insertUsers(users); &#125;&#125; jdbc 设置字符集在 JDBC URL 中添加参数 characterEncoding=utf8 数据库设置字符集]]></content>
+      <categories>
+        <category>Java</category>
+        <category>JDBC</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>JDBC</tag>
+        <tag>preparedSatement</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JDBC 基础（下）]]></title>
+    <url>%2F2019%2F03%2F22%2F2019-03-22%2F</url>
+    <content type="text"><![CDATA[Java 应用程序访问数据库本文通过代码 JDBC 访问数据库，并解决两个在使用 JDBC 新手常见的问题；前置：本机安装 Mysql 服务，且已在本地创建了 test 库 user 表 intellij 创建 HelloJDBC 类： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849import java.sql.*;public class Main &#123; static final String JDBC_DRIVER = &quot;com.mysql.jdbc.Driver&quot;; static final String DB_URL = &quot;jdbc:mysql://localhost:3306/test?useSSL=true&quot;; static final String USER = &quot;root&quot;; static final String PASSWORD = &quot;admin&quot;; public static void main(String[] args) throws ClassNotFoundException&#123; Connection conn = null; Statement statemente = null; ResultSet rs = null;// 1. 装载数据库驱动程序； Class.forName(JDBC_DRIVER);// 2. 通过JDBC建立数据库连接； try &#123; conn = DriverManager.getConnection(DB_URL,USER,PASSWORD);// 3.访问数据库，执行SQL语句； statemente = conn.createStatement(); rs = statemente.executeQuery(&quot;select name from test.user &quot;);// 4.获得执行结果 while(rs.next()) &#123; System.out.println(&quot;Hello &quot; + rs.getString(&quot;name&quot;)); &#125; &#125; catch (SQLException e) &#123;// 异常处理 e.printStackTrace(); &#125; finally &#123; // 5. 断开数据库连接，清理环境 try &#123; if(conn != null) &#123; conn.close(); &#125; if(statemente != null) &#123; statemente.close(); &#125; if(rs != null) &#123; rs.close(); &#125; &#125; catch (SQLException e) &#123; // pass &#125; &#125; &#125;&#125; 运行报错：in thread “main” java.lang.ClassNotFoundException: com.mysql.jdbc.Driver项目未安装 mysql-connector-java 依赖；我下载的是 mysql-connector-java-5.1.47.tar.gz 在 file -&gt; project structure -&gt; Libraries -&gt; 点击 + 号 选择 java -&gt; 选择刚刚下载的 mysql-connector-java 包。 Establishing SSL connection without server’s identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established…MySQL在高版本需要指明是否进行SSL连接。需要在 JDBC URL 中增加参数：ssl=true或者false 1url = jdbc:mysql://127.0.0.1:3306/framework?characterEncoding=utf8&amp;useSSL=true 『项目地址』:https://github.com/wengfe/JAVA/tree/master/HelloJDBC/src]]></content>
+      <categories>
+        <category>Java</category>
+        <category>JDBC</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>JDBC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JDBC 基础（上）]]></title>
+    <url>%2F2019%2F03%2F21%2F2019-03-21%2F</url>
+    <content type="text"><![CDATA[本文针对 JDBC 的流程介绍，以及 JDBC API 和 statement API 和 ResultSet API 的解释。 JDBC URL 的创建JDBC URL：后端数据库的唯一标识符。jdbc:子协议，并且载入服务器的主机名、端口、数据库名(或引用)。 1jdbc:mysql://10.164.172.20:3306/cloud_study jdbc 协议，固定不变的 mysql 子协议，DriverManager 确定数据库驱动 10.164.172.20:3306/cloud_study 子名称部分 10.164.172.20 主机 3306 数据库端口号 cloud_study 数据库 database 常用的三种 jdbc url 创建12345jdbc:mysql://&lt;ip&gt;:&lt;port&gt;/databasejdbc:oracle:thin:@&lt;ip&gt;:&lt;port&gt;:databasejdbc:microsoft:sqlserver://&lt;ip&gt;:&lt;port&gt;;DatabaseName=database JDBC API JDBC Driver 通过 Class.forName 向 DriverManager 加载数据库驱动； DriverManager 的 getConnection 方法建立一条到后端数据库的物理连接； Connection 对象创建通过 createStatement 方法创建一个或者多个 Statement 对象； statement 对象执行 sql 语句，返回 ResultSet 对象或者 int 对象； Statement 对象相当于 sql 容器；可以承载 sql 语句；并通过 executeQuery 执行查询语句，返回一个 ResultSet 对象。execute 执行删语句，executeUpdate 执行更新语句 返回一个 int 对象； statement API1234567891. execute(String sql):执行SQL 删语句，如果返回值是结果集则为true,否则为false2. executeQuery(String sql):执行SQL 查询语句，返回值为ResultSet3. executeUpdate(String sql):执行SQL 更新语句，返回值为所影响的行数 4. addBatch(String sql):向当前Statement对象的命令列表中添加新的批处理SQL语句5. clearBatch():清空当前Statement对象的命令列表6. executeBatch()：执行当前Statement对象的批处理语句，返回值为每个语句所影响的函数数组7. getConnection():返回创建了该Statement对象的Connection对象8. getQueryTimeout():获取等待处理结果的时间9. setQueryTimeout():设置等待处理结果的时间 ResultSet APIResultSet 对象代表了 sql 查询的一个结果，所以 ResultSet 对象的内容其实是一张二元表。 1234567891011121314151617181920211. first()/beforeFirst():将游标移动到ResultSet中第一条记录(的前面，通过 next() 方法返回第一条记录位置)2. last()/afterLast():将游标移动到ResultSet中最后一条记录(的后面，通过 previous() 方法返回第一条记录位置)3. absolute(int column):将游标移动到相对于第一行的指定行，负数则为相对于最后一条记录4. relative(int rows):将游标移动到相对于当前行的第几行,正为向下，负为向上5. next():将游标下移一行6. previous():将游标上移一行7. insertRow():向当前ResultSet和数据库中被插入行处插入一条记录8. deleteRow():将当前ResultSet中的当前行和数据库中对应的记录删除9. updateRow():用当前ResultSet中已更新的记录更新数据库中对应的记录10. cancelUpdate():取消当前对ResultSet和数据库中所做的操作11. findColumn(String columnName):返回当前ResultSet中与指定列名对应的索引12. getRow():返回ResultSet中的当前行号13. refreshRow():更新当前ResultSet中的所有记录14. getMetaData():返回描述ResultSet的ResultSetMetaData对象15. isAfterLast(): 是否到了结尾16. isBeforeFirst(): 是否到了开头17. isFirst():是否第一条记录 18. isLast(): 是否最后一条记录19. wasNull():检查列值是否为NULL值，如果列的类型为基本类型，且数据库中的值为0，那么这项检查就很重要。由于数据库NULL也返回0，所以0值和数据库的NULL不能区分。如果列的类型为对象，可以简单地将返回值与null比较20. close():关闭当前ResultSet]]></content>
+      <categories>
+        <category>Java</category>
+        <category>JDBC</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>JDBC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[JSP 浅入]]></title>
     <url>%2F2019%2F03%2F20%2F2019-03-20-1%2F</url>
     <content type="text"><![CDATA[JSP（全称Java Server Pages）是由 Sun Microsystems 公司倡导和许多公司参与共同创建的一种使软件开发者可以响应客户端请求，而动态生成 HTML、XML 或其他格式文档的Web网页的技术标准。 简化的 Servlet JSP = HTML + JAVA + JSP tag JSP vs Servlet 侧重点 JSP 侧重试图 Servlet 侧重逻辑控制 内置对象 JSP 有内置对象供选择 Servlet 没有 本质JSP 是对 Servlet 的简化。使用 JSP 只需要开发完成需要输出到客户端的内容；JSP 中的 Java 脚本如何内嵌到类中是由 JSP 容器完成的；Servlet 是一个完整的 Java 类。 JSP 处理流程 Tomcat 既是一个 Servlet 容器，也是一个 JSP 容器。 客户端发送 JSP 请求到 JSP 容器 -&gt; 请求对应的 JSP 文件 -&gt; JSP容器载入对应的 JSP 文件，并转为对应的 Servlet 文件 -&gt; JSP 容器将 Servlet 文件编译为可执行的类(.class) -&gt; 将原始请求传递给 Servlet 容器 -&gt; web 服务器组件调用 Servlet 容器，载入 Servlet 实例 -&gt; Servlet 容器产出 html 页面输出到 HttpResponse 中交给 web 服务器 -&gt; web 服务器以静态页面的形式将 response 返回给客户端 JSP 基本语法JSP 语法主要包含JSP元素和模板数据两类。 模板数据JSP 引擎不处理的地方，如 html 页面。主要为：静态内容 JSP 元素主要为： 指令、注释、表达式、声明、脚本 JSP 声明参数变量声明 一个声明语句可声明一个或多个变量、方法，供后面的 Java 代码使用 书写格式： 1&lt;%! declaration;[declaration;]+ ... %&gt; 实例： 1&lt;%! int a, b, c; %&gt; JSP 表达式包含了脚本语言的表达式，先转换为 String，然后被插入在表达式出现的地方；所以可以在文本行中使用表达式，不用管是否是 html 标签 表达式元素中可以包含任何符合 Java 语言规范的表达式，但是不能使用分号来结束表达式 书写格式： 1&lt;%= 表达式 %&gt; 实例： 1&lt;p&gt; Today&apos;s date: &lt;%= ( new java.util.Date()).toLocaleString()%&gt;&lt;/p&gt; 嵌入到 html 标签的表达式 JSP 脚本 可以是任意量的 Java 语句、变量、方法或表达式 书写格式： 1&lt;% 代码片段 %&gt; 实例： 1&lt;%= out.println(&quot;your ip address is&quot; + request.getRemoteAddr());%&gt; JSP 注释 主要为代码作注释以及将某段代码注释 书写格式： 1&lt;%-- 注释内容 --%&gt; JSP 指令设置 JSP 页面相关属性，不会有可见的相关输出 page 指令 定义页面的依赖属性，比如脚本语言、error页面、缓存需求等等 import、 errorPage 指令 include 指令 向当前页面插入一个静态的文件内容 taglib 指令 引入自定义标签库，并可指定前缀JSP 内置对象JSP 对每个页面提供的 Java 对象;开发者可以直接使用，而不用先进行显式声明。亦称为预定义变量; 对象 描述 request HttpServletRequest 类的实例 response HttpServletResponse 类的实例 out printWriter 类的实例，用于把结果输出至网页 session HttpSession 类的实例 application ServletContext 类的实例，与应用上下文有关 Config ServletConfig 类的实例 page 类似于 Java 类中的 this 关键字 pageContext PageContext 类的实例，提供对 JSP 页面所有对象以及命名空间的访问 Exception Exception 类的对象，代表发生错误的 JSP 页面中对用的异常对象 创建一个 JSP 项目1.创建 maven web 项目 手动创建五个文件夹 2.选中 webapp 右键创建 JSP 文件。 1234567891011121314151617181920212223242526&lt;%-- Created by IntelliJ IDEA. User: fuyiweng Date: 2019-03-21 Time: 10:36 To change this template use File | Settings | File Templates.--%&gt;&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;&lt;%-- JSP page 配置指令 --%&gt;&lt;html&gt;&lt;head&gt; &lt;title&gt;hello JSP&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;%! String name; %&gt;&lt;!-- 变量声明 --&gt;request uri is &lt;%=request.getRequestURI() %&gt;&lt;!-- 内置对象的使用 --&gt;&lt;/br&gt;&lt;% name = &quot;abc&quot;; out.println(&quot;name is &quot; + name);%&gt;&lt;!-- JSP 脚本 --&gt;&lt;/body&gt;&lt;/html&gt; 在使用内置对象的时候，发现没有引用内置对象的方法；原因是没有引用 Tomcat 目录下的servlet-api.jar,jsp-api.jar 和 tomcat-api.jar 依赖。 引入依赖包 File-&gt; Project Structure-&gt; Libraries -&gt; 点加号，选择 java -&gt; 将Tomcat安装路径下lib文件夹下的servlet-api, jsp-api, tomcat-api 包导入 JSP 编译后的 Java 文件位置一般来说，编译后的 java 文件位置是在 Tomcat 目录下的/apache-tomcat-8.5.37/work/Catalina/localhost但我找不到我的编译文件。 『项目地址』：https://github.com/wengfe/JAVA/tree/master/JSPTest/src/main/webapp]]></content>
@@ -291,8 +397,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>Django</tag>
         <tag>note</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -304,8 +410,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>Django</tag>
         <tag>note</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -317,8 +423,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>Django</tag>
         <tag>note</tag>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -331,8 +437,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>note</tag>
         <tag>render</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -384,8 +490,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>SQLAlchemy</tag>
         <tag>MYSQL</tag>
+        <tag>SQLAlchemy</tag>
       </tags>
   </entry>
   <entry>
@@ -398,8 +504,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>SQLAlchemy</tag>
         <tag>MYSQL</tag>
+        <tag>SQLAlchemy</tag>
       </tags>
   </entry>
   <entry>
