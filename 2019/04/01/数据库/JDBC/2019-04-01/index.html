@@ -6,10 +6,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-code.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数据库,事务," />
+  <meta name="keywords" content="数据库,事务,">
 
 
 
@@ -86,6 +86,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/04/01/数据库/JDBC/2019-04-01/index.html">
 <meta property="og:site_name" content="旦暮༗">
 <meta property="og:description" content="事务事务是并发控制的基本单位，指作为单个逻辑工作单元执行的一系列操作，而这些逻辑工作需要满足 ACID 特性。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-04-04T09:19:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事务原理">
@@ -119,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/01/数据库/JDBC/2019-04-01/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/01/数据库/JDBC/2019-04-01/">
 
 
 
@@ -172,7 +173,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">旦暮༗</span>
         <span class="logo-line-after"><i></i></span>
@@ -202,7 +203,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -212,7 +213,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -222,7 +223,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -232,7 +233,7 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
             
             公益404
           </a>
@@ -245,7 +246,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -266,9 +267,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -309,7 +308,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wengfe">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
@@ -345,7 +344,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -434,15 +433,15 @@
 </ul>
 <h4 id="commit"><a href="#commit" class="headerlink" title="commit()"></a>commit()</h4><p>提交事务，使事务中的所有 sql 生效。</p>
 <h4 id="rollback"><a href="#rollback" class="headerlink" title="rollback()"></a>rollback()</h4><p>回滚事务- 回滚到事务开始之前的状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">conn = ds.getConnection();</div><div class="line">//            开启事务</div><div class="line">            conn.setAutoCommit(false);</div><div class="line">            psta = conn.prepareStatement(&quot;update user set account = ? where name = ?&quot;);</div><div class="line">            psta.setInt(1, 0);</div><div class="line">            psta.setString(2, &quot;Mike&quot;);</div><div class="line">            psta.execute();</div><div class="line"></div><div class="line">            psta.setString(1, &quot;100&quot;);</div><div class="line">            psta.setString(2, &quot;Bob&quot;);</div><div class="line">            psta.execute();</div><div class="line"></div><div class="line">//            提交事务</div><div class="line">            conn.commit();</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">conn = ds.getConnection();</span><br><span class="line">//            开启事务</span><br><span class="line">            conn.setAutoCommit(false);</span><br><span class="line">            psta = conn.prepareStatement(&quot;update user set account = ? where name = ?&quot;);</span><br><span class="line">            psta.setInt(1, 0);</span><br><span class="line">            psta.setString(2, &quot;Mike&quot;);</span><br><span class="line">            psta.execute();</span><br><span class="line"></span><br><span class="line">            psta.setString(1, &quot;100&quot;);</span><br><span class="line">            psta.setString(2, &quot;Bob&quot;);</span><br><span class="line">            psta.execute();</span><br><span class="line"></span><br><span class="line">//            提交事务</span><br><span class="line">            conn.commit();</span><br></pre></td></tr></table></figure>
 <p>在事务未提交之前，所有的 sql 语句都不会执行。</p>
 <h2 id="设置检查点"><a href="#设置检查点" class="headerlink" title="设置检查点"></a>设置检查点</h2><h4 id="setSavePoint"><a href="#setSavePoint" class="headerlink" title="setSavePoint()"></a>setSavePoint()</h4><p>设置数据库保存点，在出现异常后，可以回复到该点的状态</p>
 <h4 id="rollback-SavePoint-savePoint"><a href="#rollback-SavePoint-savePoint" class="headerlink" title="rollback(SavePoint savePoint)"></a>rollback(SavePoint savePoint)</h4><p>回复方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">public void Transaction() &#123;</div><div class="line">        Connection conn = null;</div><div class="line">        PreparedStatement psta = null;</div><div class="line">        ResultSet rs = null;</div><div class="line">        Savepoint sp = null;</div><div class="line"></div><div class="line">        try &#123;</div><div class="line">            conn = ds.getConnection();</div><div class="line">//            开启事务</div><div class="line">            conn.setAutoCommit(false);</div><div class="line">            psta = conn.prepareStatement(&quot;update user set account = ? where name = ?&quot;);</div><div class="line">            psta.setInt(1, 0);</div><div class="line">            psta.setString(2, &quot;Mike&quot;);</div><div class="line">            psta.execute();</div><div class="line">            sp = conn.setSavepoint();</div><div class="line"></div><div class="line">            psta.setString(1, &quot;100&quot;);</div><div class="line">            psta.setString(2, &quot;Bob&quot;);</div><div class="line">            psta.execute();</div><div class="line"></div><div class="line">//            提交事务</div><div class="line">//            conn.commit();</div><div class="line">            throw new SQLException();</div><div class="line">        &#125; catch (SQLException e) &#123;</div><div class="line">            try &#123;</div><div class="line">//                回滚事务到检查点</div><div class="line">                conn.rollback(sp);</div><div class="line">                psta.setString(1, &quot;100&quot;);</div><div class="line">                psta.setString(2, &quot;GuoSi&quot;);</div><div class="line">                psta.execute();</div><div class="line">                conn.commit();</div><div class="line">            &#125; catch (SQLException ex) &#123;</div><div class="line">                ex.printStackTrace();</div><div class="line">            &#125;</div><div class="line">//            e.printStackTrace();</div><div class="line">        &#125; finally &#123;</div><div class="line"></div><div class="line">            try &#123;</div><div class="line">                if (conn != null)</div><div class="line">                    conn.close();</div><div class="line">                if (psta != null)</div><div class="line">                    psta.close();</div><div class="line">                if (rs != null)</div><div class="line">                    rs.close();</div><div class="line">            &#125; catch (SQLException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">public void Transaction() &#123;</span><br><span class="line">        Connection conn = null;</span><br><span class="line">        PreparedStatement psta = null;</span><br><span class="line">        ResultSet rs = null;</span><br><span class="line">        Savepoint sp = null;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            conn = ds.getConnection();</span><br><span class="line">//            开启事务</span><br><span class="line">            conn.setAutoCommit(false);</span><br><span class="line">            psta = conn.prepareStatement(&quot;update user set account = ? where name = ?&quot;);</span><br><span class="line">            psta.setInt(1, 0);</span><br><span class="line">            psta.setString(2, &quot;Mike&quot;);</span><br><span class="line">            psta.execute();</span><br><span class="line">            sp = conn.setSavepoint();</span><br><span class="line"></span><br><span class="line">            psta.setString(1, &quot;100&quot;);</span><br><span class="line">            psta.setString(2, &quot;Bob&quot;);</span><br><span class="line">            psta.execute();</span><br><span class="line"></span><br><span class="line">//            提交事务</span><br><span class="line">//            conn.commit();</span><br><span class="line">            throw new SQLException();</span><br><span class="line">        &#125; catch (SQLException e) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">//                回滚事务到检查点</span><br><span class="line">                conn.rollback(sp);</span><br><span class="line">                psta.setString(1, &quot;100&quot;);</span><br><span class="line">                psta.setString(2, &quot;GuoSi&quot;);</span><br><span class="line">                psta.execute();</span><br><span class="line">                conn.commit();</span><br><span class="line">            &#125; catch (SQLException ex) &#123;</span><br><span class="line">                ex.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">//            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line"></span><br><span class="line">            try &#123;</span><br><span class="line">                if (conn != null)</span><br><span class="line">                    conn.close();</span><br><span class="line">                if (psta != null)</span><br><span class="line">                    psta.close();</span><br><span class="line">                if (rs != null)</span><br><span class="line">                    rs.close();</span><br><span class="line">            &#125; catch (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="设置-JDBC-中的隔离级别"><a href="#设置-JDBC-中的隔离级别" class="headerlink" title="设置 JDBC 中的隔离级别"></a>设置 JDBC 中的隔离级别</h2><h4 id="getTranactionIlsoLation"><a href="#getTranactionIlsoLation" class="headerlink" title="getTranactionIlsoLation()"></a>getTranactionIlsoLation()</h4><h4 id="setTranactionIlsoLation"><a href="#setTranactionIlsoLation" class="headerlink" title="setTranactionIlsoLation()"></a>setTranactionIlsoLation()</h4><blockquote>
 <p>各个隔离级别内容在 MySQL 45讲 第三讲内容中</p>
 </blockquote>
-<h5 id="『项目地址』：https-github-com-wengfe-JAVA-blob-master-HelloJDBC-src-HelloTransaction-java"><a href="#『项目地址』：https-github-com-wengfe-JAVA-blob-master-HelloJDBC-src-HelloTransaction-java" class="headerlink" title="『项目地址』：https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloTransaction.java"></a>『项目地址』：<a href="https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloTransaction.java" target="_blank" rel="external">https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloTransaction.java</a></h5>
+<h5 id="『项目地址』：https-github-com-wengfe-JAVA-blob-master-HelloJDBC-src-HelloTransaction-java"><a href="#『项目地址』：https-github-com-wengfe-JAVA-blob-master-HelloJDBC-src-HelloTransaction-java" class="headerlink" title="『项目地址』：https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloTransaction.java"></a>『项目地址』：<a href="https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloTransaction.java" target="_blank" rel="noopener">https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloTransaction.java</a></h5>
       
     </div>
     
@@ -595,9 +594,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.png"
-                alt="Wengfe" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Wengfe">
             
               <p class="site-author-name" itemprop="name">Wengfe</p>
               <p class="site-description motion-element" itemprop="description">涸辙遗鲋，旦暮成枯;人而无志，与彼何殊。</p>
@@ -681,7 +678,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC-的事务控制"><span class="nav-number">1.1.</span> <span class="nav-text">JDBC 的事务控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setAutoCommit"><span class="nav-number">1.1.1.</span> <span class="nav-text">setAutoCommit()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#commit"><span class="nav-number">1.1.2.</span> <span class="nav-text">commit()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rollback"><span class="nav-number">1.1.3.</span> <span class="nav-text">rollback()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置检查点"><span class="nav-number">2.</span> <span class="nav-text">设置检查点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setSavePoint"><span class="nav-number">2.0.1.</span> <span class="nav-text">setSavePoint()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rollback-SavePoint-savePoint"><span class="nav-number">2.0.2.</span> <span class="nav-text">rollback(SavePoint savePoint)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-JDBC-中的隔离级别"><span class="nav-number">3.</span> <span class="nav-text">设置 JDBC 中的隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getTranactionIlsoLation"><span class="nav-number">3.0.1.</span> <span class="nav-text">getTranactionIlsoLation()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setTranactionIlsoLation"><span class="nav-number">3.0.2.</span> <span class="nav-text">setTranactionIlsoLation()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#『项目地址』：https-github-com-wengfe-JAVA-blob-master-HelloJDBC-src-HelloTransaction-java"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">『项目地址』：https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloTransaction.java</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC-的事务控制"><span class="nav-number">1.1.</span> <span class="nav-text">JDBC 的事务控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setAutoCommit"><span class="nav-number">1.1.1.</span> <span class="nav-text">setAutoCommit()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#commit"><span class="nav-number">1.1.2.</span> <span class="nav-text">commit()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rollback"><span class="nav-number">1.1.3.</span> <span class="nav-text">rollback()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置检查点"><span class="nav-number">2.</span> <span class="nav-text">设置检查点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setSavePoint"><span class="nav-number">2.0.1.</span> <span class="nav-text">setSavePoint()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rollback-SavePoint-savePoint"><span class="nav-number">2.0.2.</span> <span class="nav-text">rollback(SavePoint savePoint)</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-JDBC-中的隔离级别"><span class="nav-number">3.</span> <span class="nav-text">设置 JDBC 中的隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getTranactionIlsoLation"><span class="nav-number">3.0.1.</span> <span class="nav-text">getTranactionIlsoLation()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setTranactionIlsoLation"><span class="nav-number">3.0.2.</span> <span class="nav-text">setTranactionIlsoLation()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#『项目地址』：https-github-com-wengfe-JAVA-blob-master-HelloJDBC-src-HelloTransaction-java"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">『项目地址』：https://github.com/wengfe/JAVA/blob/master/HelloJDBC/src/HelloTransaction.java</span></a></li></ol></li></ol></li></div>
             
 
           </div>

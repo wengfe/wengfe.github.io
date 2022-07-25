@@ -6,10 +6,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-code.png?v=5.1.4">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="conf.xml,MyBatis," />
+  <meta name="keywords" content="MyBatis,conf.xml,">
 
 
 
@@ -80,12 +80,13 @@
 
 
 <meta name="description" content="SQLSessionFactory 配置文件解析在入门文章里，配置了两个 xml 文件，本文来解析 SQLSessionFactory 的环境配置文件。在前文中命名未 conf.xml">
-<meta name="keywords" content="conf.xml,MyBatis">
+<meta name="keywords" content="MyBatis,conf.xml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MyBatis-SQLSessionFactory 配置文件解析">
 <meta property="og:url" content="http://yoursite.com/2019/04/05/Java/Mybatis/2019-04-05/index.html">
 <meta property="og:site_name" content="旦暮༗">
 <meta property="og:description" content="SQLSessionFactory 配置文件解析在入门文章里，配置了两个 xml 文件，本文来解析 SQLSessionFactory 的环境配置文件。在前文中命名未 conf.xml">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-04-27T14:57:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis-SQLSessionFactory 配置文件解析">
@@ -119,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/05/Java/Mybatis/2019-04-05/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/05/Java/Mybatis/2019-04-05/">
 
 
 
@@ -172,7 +173,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">旦暮༗</span>
         <span class="logo-line-after"><i></i></span>
@@ -202,7 +203,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -212,7 +213,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -222,7 +223,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -232,7 +233,7 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
             
             公益404
           </a>
@@ -245,7 +246,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -266,9 +267,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -309,7 +308,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wengfe">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.png">
     </span>
 
@@ -345,7 +344,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -418,21 +417,21 @@
       
         <h1 id="SQLSessionFactory-配置文件解析"><a href="#SQLSessionFactory-配置文件解析" class="headerlink" title="SQLSessionFactory 配置文件解析"></a>SQLSessionFactory 配置文件解析</h1><p>在入门文章里，配置了两个 xml 文件，本文来解析 SQLSessionFactory 的环境配置文件。在前文中命名未 conf.xml</p>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;!DOCTYPE configuration PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</div><div class="line">        &quot;http:// mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</div><div class="line">&lt;configuration&gt;</div><div class="line"></div><div class="line">    &lt;environments default=&quot;development&quot;&gt;</div><div class="line">        &lt;environment id=&quot;development&quot;&gt;</div><div class="line">            &lt;transactionManager type=&quot;jdbc&quot;/&gt;</div><div class="line">            &lt;!-- 配置数据库连接信息 --&gt;</div><div class="line">            &lt;dataSource type=&quot;POOLED&quot;&gt;</div><div class="line">                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</div><div class="line">                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/test?useSSL=true&quot;/&gt;</div><div class="line">                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</div><div class="line">                &lt;property name=&quot;password&quot; value=&quot;admin&quot;/&gt;</div><div class="line">            &lt;/dataSource&gt;</div><div class="line">        &lt;/environment&gt;</div><div class="line"></div><div class="line">    &lt;/environments&gt;</div><div class="line">    &lt;mappers&gt;</div><div class="line">        &lt;mapper resource=&quot;userMapper.xml&quot; /&gt;</div><div class="line">    &lt;/mappers&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;!DOCTYPE configuration PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">        &quot;http:// mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">    &lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">        &lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">            &lt;transactionManager type=&quot;jdbc&quot;/&gt;</span><br><span class="line">            &lt;!-- 配置数据库连接信息 --&gt;</span><br><span class="line">            &lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/test?useSSL=true&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">                &lt;property name=&quot;password&quot; value=&quot;admin&quot;/&gt;</span><br><span class="line">            &lt;/dataSource&gt;</span><br><span class="line">        &lt;/environment&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/environments&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;mapper resource=&quot;userMapper.xml&quot; /&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
 <p>下面来解析一下 <configuration></configuration> 里面的一些内容。</p>
 <h3 id="environments"><a href="#environments" class="headerlink" title="environments"></a>environments</h3><p>MyBatis可以配置多种环境，这会帮助你将 SQL 映射应用于多种数据库之中。例如测试和生产环境。或者你可能有多重生产级数据库却共享相同的模式，所以你会想到对不同数据库使用相同的SQL映射。</p>
 <p>但是配置多种环境，<strong>只能为每个SqlSessionFactory实例选择一个</strong>。</p>
 <p>我们之前在文中加载环境配置文件的方法是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);</span><br></pre></td></tr></table></figure>
 <p>其实该 build 有其他的重载方法。其中有配置环境参数的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public SqlSessionFactory build(InputStream inputStream, String environment) &#123;</div><div class="line">        return this.build((InputStream)inputStream, environment, (Properties)null);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public SqlSessionFactory build(InputStream inputStream, String environment) &#123;</span><br><span class="line">        return this.build((InputStream)inputStream, environment, (Properties)null);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>即传入 environment ，指定的 environment 被绑定到 SqlSessionFactory ；如果不传入 environment ，default 指定的 environment 被绑定到 SqlSessionFactory。</p>
 <h4 id="1-transactionManager"><a href="#1-transactionManager" class="headerlink" title="1 transactionManager"></a>1 transactionManager</h4><p>在MyBatis中有两种事物管理器类型，一种是JDBC，一种是MANAGED。</p>
 <ul>
 <li>JDBC—-这个配置直接简单使用了JDBC的提交和回滚设置，它依赖于数据源得到的连接来管理事物范围</li>
 <li>MANAGED—-这个配置几乎不做什么。它从来不提交或回滚一个连接，而它会让容器来管理事物的整个生命周期（比如Spring或J2EE应用服务器的上下文），默认情况下它会关闭连接，然而一些容器并不希望这样，因此如果你需要从连接中停止它，将closeConnection属性设置为false.</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;transactionManager type=&quot;MANAGED&quot;&gt;</div><div class="line">    &lt;property name=&quot;closeConnection&quot; value=&quot;false&quot;/&gt;</div><div class="line">&lt;/transactionManager&gt;&lt;transactionManager type=&quot;MANAGED&quot;&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;transactionManager type=&quot;MANAGED&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;closeConnection&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">&lt;/transactionManager&gt;&lt;transactionManager type=&quot;MANAGED&quot;&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="2-dataSource"><a href="#2-dataSource" class="headerlink" title="2 dataSource"></a>2 dataSource</h4><p>dataSource 元素使用基本的 JDBC 数据源接口来配置 JDBC 连接对象的资源。许多MyBatis的应用程序将会按照上面的示例来配置数据源，然而它并不是必须的，要知道为了方便使用延迟加载，数据源才是必须的。有三种内建的数据源类型（也就是type=”XXX”）：</p>
 <h5 id="2-1-UNPOOLED"><a href="#2-1-UNPOOLED" class="headerlink" title="2.1 UNPOOLED"></a>2.1 UNPOOLED</h5><p>这个数据源的实现是每次被请求时打开和关闭连接。它有一点慢，这是对简单应用程序的一个很好的选择，因为它不需要及时的可用连接，不同的数据库对这个的表现也是不一样的，所以对某些数据库来说配置数据源并不重要，这个配置也是闲置的。UNPOOLED 类型的数据源仅仅用来配置以下六种属性： </p>
 <ul>
@@ -459,7 +458,7 @@
 <p>和其它数据源配置相似，它也可以通过名为”env.”的前缀直接向初始上下文发送属性。</p>
 </blockquote>
 <h4 id="3-mappers"><a href="#3-mappers" class="headerlink" title="3 mappers"></a>3 mappers</h4><p>MyBatis 的行为已经由上述元素配置好，下面是告诉 MyBatis 到哪里找到 SQL 的映射文件。可以通过使用相对路径的资源引用，或者字符表示，或者url引用的完全限定名。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// 使用相对于类路径的资源</div><div class="line">&lt;mappers&gt;</div><div class="line">    &lt;mapper resource=&quot;org/mybatis/builder/AuthorMapper.xml&quot;/&gt;</div><div class="line">    &lt;mapper resource=&quot;org/mybatis/builder/BlogMapper.xml&quot;/&gt;</div><div class="line">    &lt;mapper resource=&quot;org/mybatis/builder/PostMapper.xml&quot;/&gt;</div><div class="line">&lt;/mappers&gt;</div><div class="line">// 使用完全限定路径</div><div class="line">&lt;mappers&gt;</div><div class="line">    &lt;mapper url=&quot;file:///var/sqlmaps/AuthorMapper.xml&quot;/&gt;</div><div class="line">    &lt;mapper url=&quot;file:///var/sqlmaps/BlogMapper.xml&quot;/&gt;</div><div class="line">    &lt;mapper url=&quot;file:///var/sqlmaps/PostMapper.xml&quot;/&gt;</div><div class="line">&lt;/mappers&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 使用相对于类路径的资源</span><br><span class="line">&lt;mappers&gt;</span><br><span class="line">    &lt;mapper resource=&quot;org/mybatis/builder/AuthorMapper.xml&quot;/&gt;</span><br><span class="line">    &lt;mapper resource=&quot;org/mybatis/builder/BlogMapper.xml&quot;/&gt;</span><br><span class="line">    &lt;mapper resource=&quot;org/mybatis/builder/PostMapper.xml&quot;/&gt;</span><br><span class="line">&lt;/mappers&gt;</span><br><span class="line">// 使用完全限定路径</span><br><span class="line">&lt;mappers&gt;</span><br><span class="line">    &lt;mapper url=&quot;file:///var/sqlmaps/AuthorMapper.xml&quot;/&gt;</span><br><span class="line">    &lt;mapper url=&quot;file:///var/sqlmaps/BlogMapper.xml&quot;/&gt;</span><br><span class="line">    &lt;mapper url=&quot;file:///var/sqlmaps/PostMapper.xml&quot;/&gt;</span><br><span class="line">&lt;/mappers&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="4-settings"><a href="#4-settings" class="headerlink" title="4 settings"></a>4 settings</h4><p>下面多讲一个属性，这个属性可以不在config.xml中出现，但是比较重要</p>
 <p>settings，是非常重要的参数，它们会改变MyBatis在运行时的行为方式。这面这个表格描述了设置信息，它们的含义和默认值：</p>
 <table>
@@ -540,7 +539,7 @@
 </tbody>
 </table>
 <p>完整的设置信息元素的示例配置如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;settings&gt;</div><div class="line">    &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</div><div class="line">    &lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;</div><div class="line">    &lt;setting name=&quot;multipleResultSetsEnabled&quot; value=&quot;true&quot;/&gt;</div><div class="line">    &lt;setting name=&quot;useColumnLabel&quot; value=&quot;true&quot;/&gt;</div><div class="line">    &lt;setting name=&quot;useGeneratedKeys&quot; value=&quot;false&quot;/&gt;</div><div class="line">    &lt;setting name=&quot;enhancementEnabled&quot; value=&quot;false&quot;/&gt;</div><div class="line">    &lt;setting name=&quot;defaultExecutorType&quot; value=&quot;SIMPLE&quot;/&gt;</div><div class="line">    &lt;setting name=&quot;defaultStatementTimeout&quot; value=&quot;25000&quot;/&gt;</div><div class="line">&lt;/settings&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;settings&gt;</span><br><span class="line">    &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">    &lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">    &lt;setting name=&quot;multipleResultSetsEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">    &lt;setting name=&quot;useColumnLabel&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">    &lt;setting name=&quot;useGeneratedKeys&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">    &lt;setting name=&quot;enhancementEnabled&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">    &lt;setting name=&quot;defaultExecutorType&quot; value=&quot;SIMPLE&quot;/&gt;</span><br><span class="line">    &lt;setting name=&quot;defaultStatementTimeout&quot; value=&quot;25000&quot;/&gt;</span><br><span class="line">&lt;/settings&gt;</span><br></pre></td></tr></table></figure>
 <p>主要的配置信息就是上面这些，前三个比较重要，settings 属于高级设置.</p>
 
       
@@ -559,9 +558,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/conf-xml/" rel="tag"># conf.xml</a>
-          
             <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
+          
+            <a href="/tags/conf-xml/" rel="tag"># conf.xml</a>
           
         </div>
       
@@ -695,9 +694,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.png"
-                alt="Wengfe" />
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Wengfe">
             
               <p class="site-author-name" itemprop="name">Wengfe</p>
               <p class="site-description motion-element" itemprop="description">涸辙遗鲋，旦暮成枯;人而无志，与彼何殊。</p>
@@ -781,7 +778,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQLSessionFactory-配置文件解析"><span class="nav-number">1.</span> <span class="nav-text">SQLSessionFactory 配置文件解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#environments"><span class="nav-number">1.0.1.</span> <span class="nav-text">environments</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-transactionManager"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">1 transactionManager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-dataSource"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">2 dataSource</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-UNPOOLED"><span class="nav-number">1.0.1.2.1.</span> <span class="nav-text">2.1 UNPOOLED</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-POOLED"><span class="nav-number">1.0.1.2.2.</span> <span class="nav-text">2.2 POOLED</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-JNDI"><span class="nav-number">1.0.1.2.3.</span> <span class="nav-text">2.3 JNDI</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-mappers"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">3 mappers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-settings"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">4 settings</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQLSessionFactory-配置文件解析"><span class="nav-number">1.</span> <span class="nav-text">SQLSessionFactory 配置文件解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#environments"><span class="nav-number">1.0.1.</span> <span class="nav-text">environments</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-transactionManager"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">1 transactionManager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-dataSource"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">2 dataSource</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-UNPOOLED"><span class="nav-number">1.0.1.2.1.</span> <span class="nav-text">2.1 UNPOOLED</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-POOLED"><span class="nav-number">1.0.1.2.2.</span> <span class="nav-text">2.2 POOLED</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-JNDI"><span class="nav-number">1.0.1.2.3.</span> <span class="nav-text">2.3 JNDI</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-mappers"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">3 mappers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-settings"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">4 settings</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

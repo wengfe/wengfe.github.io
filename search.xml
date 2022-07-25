@@ -46,8 +46,8 @@
         <category>MyBatis</category>
       </categories>
       <tags>
-        <tag>conf.xml</tag>
         <tag>MyBatis</tag>
+        <tag>conf.xml</tag>
       </tags>
   </entry>
   <entry>
@@ -59,8 +59,8 @@
         <category>MyBatis</category>
       </categories>
       <tags>
-        <tag>MyBatis</tag>
         <tag>数据库框架</tag>
+        <tag>MyBatis</tag>
       </tags>
   </entry>
   <entry>
@@ -447,8 +447,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>note</tag>
         <tag>Django</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -460,8 +460,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>note</tag>
         <tag>Django</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -473,8 +473,8 @@
         <category>Django</category>
       </categories>
       <tags>
-        <tag>note</tag>
         <tag>Django</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -487,8 +487,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>render</tag>
         <tag>note</tag>
+        <tag>render</tag>
       </tags>
   </entry>
   <entry>
@@ -582,8 +582,8 @@
       <tags>
         <tag>python</tag>
         <tag>菜鸟训练营</tag>
-        <tag>sorted</tag>
         <tag>format</tag>
+        <tag>sorted</tag>
       </tags>
   </entry>
   <entry>
@@ -597,9 +597,9 @@
       <tags>
         <tag>python</tag>
         <tag>菜鸟训练营</tag>
+        <tag>sorted</tag>
         <tag>map</tag>
         <tag>reduce</tag>
-        <tag>sorted</tag>
       </tags>
   </entry>
   <entry>
