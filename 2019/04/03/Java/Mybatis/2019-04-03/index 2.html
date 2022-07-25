@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-code.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-code.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-code.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库框架,MyBatis," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MyBatis前身是 apach 基金会下的一个开源项目 iBatis  支持自定义 SQL 、存储过程和高级映射的持久化框架 使用 XML 或者注解配置 能够映射基本数据元素、接口、Java对象到数据库">
+<meta name="keywords" content="数据库框架,MyBatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis 入门">
+<meta property="og:url" content="http://yoursite.com/2019/04/03/Java/Mybatis/2019-04-03/index.html">
+<meta property="og:site_name" content="旦暮༗">
+<meta property="og:description" content="MyBatis前身是 apach 基金会下的一个开源项目 iBatis  支持自定义 SQL 、存储过程和高级映射的持久化框架 使用 XML 或者注解配置 能够映射基本数据元素、接口、Java对象到数据库">
+<meta property="og:updated_time" content="2019-04-05T10:55:20.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MyBatis 入门">
+<meta name="twitter:description" content="MyBatis前身是 apach 基金会下的一个开源项目 iBatis  支持自定义 SQL 、存储过程和高级映射的持久化框架 使用 XML 或者注解配置 能够映射基本数据元素、接口、Java对象到数据库">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/03/Java/Mybatis/2019-04-03/"/>
+
+
+
+
+
+  <title>MyBatis 入门 | 旦暮༗</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-112253103-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bc5d696ac12feeb1a8c26ba78e9a06a5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旦暮༗</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/03/Java/Mybatis/2019-04-03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wengfe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旦暮༗">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MyBatis 入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-03T15:23:34+08:00">
+                2019-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/MyBatis/" itemprop="url" rel="index">
+                    <span itemprop="name">MyBatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/03/Java/Mybatis/2019-04-03/" class="leancloud_visitors" data-flag-title="MyBatis 入门">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="MyBatis"><a href="#MyBatis" class="headerlink" title="MyBatis"></a>MyBatis</h1><p>前身是 apach 基金会下的一个开源项目 iBatis</p>
+<ul>
+<li>支持自定义 SQL 、存储过程和高级映射的持久化框架</li>
+<li>使用 XML 或者注解配置</li>
+<li>能够映射基本数据元素、接口、Java对象到数据库</li>
+</ul>
+<a id="more"></a>
+<blockquote>
+<p>MyBatis是一款支持普通SQL查询、存储过程和高级映射的持久层框架。MyBatis消除了几乎所有的JDBC代码、参数的设置和结果集的检索。MyBatis可以使用简单的XML或注解用于参数配置和原始映射，将接口和Java POJO（普通Java对象）映射成数据库中的记录。</p>
+</blockquote>
+<ul>
+<li>映射方式<ul>
+<li>数据库的每一行映射为每一个对象</li>
+<li>每一列映射为对象的每一个属性</li>
+</ul>
+</li>
+</ul>
+<h2 id="工作流程机制"><a href="#工作流程机制" class="headerlink" title="工作流程机制"></a>工作流程机制</h2><ul>
+<li>根据 XML 或者注解加载 SQL 语句、参数映射、结果映射到内存</li>
+<li>应用程序调用 API 传入参数和 SQL ID.</li>
+<li>MyBatis 自动生成 SQL 语句完成数据库访问，转换执行结果返回应用程序</li>
+</ul>
+<p>以查询操作来对整个过程进行描述</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>jar 加载</p>
+<ul>
+<li>mybatis-3.2.3</li>
+<li>mysql-connector-java</li>
+</ul>
+<h3 id="SQLSessionFactory"><a href="#SQLSessionFactory" class="headerlink" title="SQLSessionFactory"></a>SQLSessionFactory</h3><p>每个 MyBatis 应用都基于 SqlSessionFactory 实例为中心。通过该实例，MyBatis 可以获取对对象的操作转换为对数据库数据进行操作的 sql 的 session。 </p>
+<p>SqlSessionFactory 的全局配置⽂文件，⽂文件名为conf.XML。</p>
+<blockquote>
+<p>该⽂文件需要放在根目录下，即src/main/java目录下</p>
+</blockquote>
+<p>该文件包含了对 MyBatis 的核心配置。</p>
+<ul>
+<li>transactionManage<ul>
+<li>对后端连接数据库实例的数据源，决定数据范围和数据管理方式的事务管理器 </li>
+</ul>
+</li>
+<li>dataSource<ul>
+<li>后端数据库源：driver、url、username、password</li>
+</ul>
+</li>
+</ul>
+<h4 id="conf-xml-配置示例"><a href="#conf-xml-配置示例" class="headerlink" title="conf.xml 配置示例"></a>conf.xml 配置示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; &lt;!DOCTYPE configuration PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</div><div class="line">        &quot;http:// mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</div><div class="line">&lt;configuration&gt;</div><div class="line"></div><div class="line">    &lt;environments default=&quot;development&quot;&gt;</div><div class="line">        &lt;environment id=&quot;development&quot;&gt;</div><div class="line">            &lt;transactionManager type=&quot;jdbc&quot;/&gt;</div><div class="line">            &lt;!-- 配置数据库连接信息 --&gt;</div><div class="line">            &lt;dataSource type=&quot;POOLED&quot;&gt;</div><div class="line">                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</div><div class="line">                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/test?useSSL=true&quot;/&gt;</div><div class="line">                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</div><div class="line">                &lt;property name=&quot;password&quot; value=&quot;admin&quot;/&gt;</div><div class="line">            &lt;/dataSource&gt;</div><div class="line">        &lt;/environment&gt;</div><div class="line"></div><div class="line">    &lt;/environments&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<h3 id="Java-对象构建-Bean类"><a href="#Java-对象构建-Bean类" class="headerlink" title="Java 对象构建(Bean类)"></a>Java 对象构建(Bean类)</h3><h4 id="构造对象"><a href="#构造对象" class="headerlink" title="构造对象"></a>构造对象</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">public class User &#123;</div><div class="line">    private int id;</div><div class="line">    private String name;</div><div class="line">    private String password;</div><div class="line">    private int sex;</div><div class="line">    private int account;</div><div class="line"></div><div class="line">    public User(int id, String name, String password, int sex, int account) &#123;</div><div class="line">        this.id = id;</div><div class="line">        this.name = name;</div><div class="line">        this.password = password;</div><div class="line">        this.sex = sex;</div><div class="line">        this.account = account;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int getId() &#123;</div><div class="line">        return id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getName() &#123;</div><div class="line">        return name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getPasswors() &#123;</div><div class="line">        return password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int getSex() &#123;</div><div class="line">        return sex;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public int getAccount() &#123;</div><div class="line">        return account;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setId(int id) &#123;</div><div class="line">        this.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setName(String name) &#123;</div><div class="line">        this.name = name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setPasswors(String password) &#123;</div><div class="line">        this.password = password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setSex(int sex) &#123;</div><div class="line">        this.sex = sex;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public void setAccount(int account) &#123;</div><div class="line">        this.account = account;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toString() &#123;</div><div class="line">        return &quot;User&#123;&quot; +</div><div class="line">                &quot;id=&quot; + id +</div><div class="line">                &quot;, name=&apos;&quot; + name + &apos;\&apos;&apos; +</div><div class="line">                &quot;, password=&apos;&quot; + password + &apos;\&apos;&apos; +</div><div class="line">                &quot;, sex=&quot; + sex +</div><div class="line">                &quot;, account=&quot; + account +</div><div class="line">                &apos;&#125;&apos;;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="构建接口"><a href="#构建接口" class="headerlink" title="构建接口"></a>构建接口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public interface GetUserInfo &#123;</div><div class="line">    public User getUser(int id);</div><div class="line">    public void addUser(User user);</div><div class="line">    public void updateUser(User user);</div><div class="line">    public void deleteUser(User user);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="构建-Java-对象和-SQL-语句映射关系配置文件"><a href="#构建-Java-对象和-SQL-语句映射关系配置文件" class="headerlink" title="构建 Java 对象和 SQL 语句映射关系配置文件"></a>构建 Java 对象和 SQL 语句映射关系配置文件</h3><p>在 src 目录下新建 userMapper.xml 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt; &lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</div><div class="line">        &quot;http:// mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</div><div class="line">&lt;mapper namespace=&quot;GetUserInfo&quot;&gt;</div><div class="line"></div><div class="line">    &lt;select id=&quot;getUser&quot; parameterType=&quot;int&quot; resultType=&quot;User&quot;&gt;</div><div class="line">        select id,name,password,sex,account from user where id = #&#123;id&#125;</div><div class="line">    &lt;/select&gt;</div><div class="line">&lt;/mapper&gt;</div></pre></td></tr></table></figure>
+<h4 id="在-conf-xml-文件中注册-mapper"><a href="#在-conf-xml-文件中注册-mapper" class="headerlink" title="在 conf.xml 文件中注册 mapper"></a>在 conf.xml 文件中注册 mapper</h4><p>SqlSessionFactory中添加mapper映射。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">    &lt;/environments&gt;</div><div class="line">    &lt;mappers&gt;</div><div class="line">        &lt;mapper resource=&quot;userMapper.xml&quot; /&gt;</div><div class="line">    &lt;/mappers&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<h3 id="数据查询操作"><a href="#数据查询操作" class="headerlink" title="数据查询操作"></a>数据查询操作</h3><h4 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h4><ul>
+<li>加载配置文件<ul>
+<li>应用配置文件</li>
+<li>关联映射文件</li>
+</ul>
+</li>
+<li>sqlSession<ul>
+<li>生成 SQLSessionFactory</li>
+<li>获取 SQLSession</li>
+</ul>
+</li>
+<li>执行查询<ul>
+<li>Session 执行SQL</li>
+</ul>
+</li>
+</ul>
+<h5 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class HelloMyBatis &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">//        1.声明配置文件的目录读值</div><div class="line">        String resource = &quot;conf.xml&quot;;</div><div class="line">//        2. 加载应⽤用配置⽂文件</div><div class="line">        InputStream is = HelloMyBatis.class.getClassLoader()</div><div class="line">                .getResourceAsStream(resource);</div><div class="line">//        3. 创建SqlSessonFactory</div><div class="line">        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);</div><div class="line">//        4. 获取Session</div><div class="line">        SqlSession session = sessionFactory.openSession();</div><div class="line">        try &#123;</div><div class="line">//            5. 获取操作类</div><div class="line">            GetUserInfo getUserInfo = session.getMapper(GetUserInfo.class);</div><div class="line">//            6. 完成查询操作</div><div class="line">            User user = getUserInfo.getUser(2);</div><div class="line">            System.out.println(user.getId() + &quot; &quot; + user.getName() + &quot; &quot; + user.getAccount());</div><div class="line">        &#125; finally &#123;</div><div class="line">//            7.关闭Session</div><div class="line">            session.close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="映射通过注解的方式声明"><a href="#映射通过注解的方式声明" class="headerlink" title="映射通过注解的方式声明"></a>映射通过注解的方式声明</h3><p>不需要添加 接口类的 Mapper.xml 文件，也不用在 SQLSessionFactory 中声明 mapper.xml 。</p>
+<h4 id="1-在接口类的方法上添加-sql-注解"><a href="#1-在接口类的方法上添加-sql-注解" class="headerlink" title="1. 在接口类的方法上添加 sql 注解"></a>1. 在接口类的方法上添加 sql 注解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">import org.apache.ibatis.annotations.Select;</div><div class="line"></div><div class="line">public interface GetUserInfoAnnotation &#123;</div><div class="line">    @Select(&quot;select id,name,password,sex,account from user where id = #&#123;id&#125;&quot;)</div><div class="line">    public User getUser(int id);</div><div class="line">    public void addUser(User user);</div><div class="line">    public void updateUser(User user);</div><div class="line">    public void deleteUser(User user);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-在主程序中添加映射关系到接口对象"><a href="#2-在主程序中添加映射关系到接口对象" class="headerlink" title="2. 在主程序中添加映射关系到接口对象"></a>2. 在主程序中添加映射关系到接口对象</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">     3. 创建SqlSessionFactory</div><div class="line">        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);</div><div class="line">//        3.1 添加映射关系到类对象    注解方式</div><div class="line">        Configuration conf = sessionFactory.getConfiguration();</div><div class="line">        conf.addMapper(GetUserInfoAnnotation.class);</div></pre></td></tr></table></figure>
+<p>其他步骤与文件映射方法一致。</p>
+<h2 id="其他-SQL-操作（增删改）"><a href="#其他-SQL-操作（增删改）" class="headerlink" title="其他 SQL 操作（增删改）"></a>其他 SQL 操作（增删改）</h2><p>###文件映射方式<br>在 Mapper 文件中添加 sql 的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt; &lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</div><div class="line">        &quot;http:// mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</div><div class="line">&lt;mapper namespace=&quot;GetUserInfo&quot;&gt;</div><div class="line"></div><div class="line">    &lt;select id=&quot;getUser&quot; parameterType=&quot;int&quot; resultType=&quot;User&quot;&gt;</div><div class="line">        select id,name,password,sex,account from user where id = #&#123;id&#125;</div><div class="line">    &lt;/select&gt;</div><div class="line"></div><div class="line">    &lt;insert id=&quot;addUser&quot; parameterType=&quot;User&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;</div><div class="line">        insert into user (name,password,sex,account) values(#&#123;name&#125;,#&#123;password&#125;,#&#123;sex&#125;,#&#123;account&#125;)</div><div class="line">    &lt;/insert&gt;</div><div class="line"></div><div class="line">    &lt;update id=&quot;updateUser&quot; parameterType=&quot;User&quot;&gt;</div><div class="line">        update user set account = #&#123;account&#125; where id = #&#123;id&#125;</div><div class="line">    &lt;/update&gt;</div><div class="line"></div><div class="line">    &lt;delete id=&quot;deleteUser&quot; parameterType=&quot;User&quot;&gt;</div><div class="line">        delete from user where id = #&#123;id&#125;</div><div class="line">    &lt;/delete&gt;</div><div class="line">&lt;/mapper&gt;</div></pre></td></tr></table></figure>
+<h3 id="运行-MyBatis"><a href="#运行-MyBatis" class="headerlink" title="运行 MyBatis"></a>运行 MyBatis</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">import org.apache.ibatis.session.SqlSession;</div><div class="line">import org.apache.ibatis.session.SqlSessionFactory;</div><div class="line">import org.apache.ibatis.session.SqlSessionFactoryBuilder;</div><div class="line"></div><div class="line">import java.io.InputStream;</div><div class="line"></div><div class="line">public class moreMybatis &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">//        1. 声明配置⽂文件</div><div class="line">        String resource = &quot;conf.xml&quot;;</div><div class="line">//        2. 加载应⽤用配置⽂文件</div><div class="line">        InputStream is = moreMybatis.class.getClassLoader().getResourceAsStream(resource);</div><div class="line">//        3. 创建SqlSessonFactory</div><div class="line">        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(is);</div><div class="line"></div><div class="line">//        关闭sql事务模式</div><div class="line">        SqlSession session = sessionFactory.openSession(true);</div><div class="line">        try&#123;</div><div class="line">//            5. 获取操作类</div><div class="line">            GetUserInfo getUserInfo = session.getMapper(GetUserInfo.class);</div><div class="line"></div><div class="line">//            插⼊入⽤用户</div><div class="line">            User user = new User(7,&quot;xiaoBai&quot;,&quot;123456&quot;,0,10000);</div><div class="line">            getUserInfo.addUser(user);</div><div class="line">            System.out.println(user.getId());</div><div class="line"></div><div class="line">//            查询⽤用户</div><div class="line">            user = getUserInfo.getUser(user.getId());</div><div class="line">            System.out.println(user);</div><div class="line"></div><div class="line">//            更新用户账户信息</div><div class="line">            user.setAccount(800);</div><div class="line">            getUserInfo.updateUserAccount(user);</div><div class="line">//            删除⽤用户</div><div class="line">            getUserInfo.deleteUser(user.getId());</div><div class="line">        &#125;finally &#123;</div><div class="line">            session.close();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="MyBatis-的优劣"><a href="#MyBatis-的优劣" class="headerlink" title="MyBatis 的优劣"></a>MyBatis 的优劣</h3><ul>
+<li>优势：<ul>
+<li>入门门槛较低</li>
+<li>更加灵活，SQL 优化</li>
+</ul>
+</li>
+<li>劣势<ul>
+<li>需要自己编写 SQL ，工作量大</li>
+<li>数据库移植性差  </li>
+</ul>
+</li>
+</ul>
+<h5 id="『项目地址』-https-github-com-wengfe-JAVA-tree-master-HelloMybatis-src"><a href="#『项目地址』-https-github-com-wengfe-JAVA-tree-master-HelloMybatis-src" class="headerlink" title="『项目地址』:https://github.com/wengfe/JAVA/tree/master/HelloMybatis/src"></a>『项目地址』:<a href="https://github.com/wengfe/JAVA/tree/master/HelloMybatis/src" target="_blank" rel="external">https://github.com/wengfe/JAVA/tree/master/HelloMybatis/src</a></h5>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库框架/" rel="tag"># 数据库框架</a>
+          
+            <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/02/数据库/2019-04-02/" rel="next" title="死锁的分析与解决">
+                <i class="fa fa-chevron-left"></i> 死锁的分析与解决
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/05/Java/Mybatis/2019-04-05/" rel="prev" title="MyBatis-SQLSessionFactory 配置文件解析">
+                MyBatis-SQLSessionFactory 配置文件解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzEwMy85NjYy"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Wengfe" />
+            
+              <p class="site-author-name" itemprop="name">Wengfe</p>
+              <p class="site-description motion-element" itemprop="description">涸辙遗鲋，旦暮成枯;人而无志，与彼何殊。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wengfe" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:214952026@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MyBatis"><span class="nav-number">1.</span> <span class="nav-text">MyBatis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工作流程机制"><span class="nav-number">1.1.</span> <span class="nav-text">工作流程机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">1.1.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQLSessionFactory"><span class="nav-number">1.1.2.</span> <span class="nav-text">SQLSessionFactory</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#conf-xml-配置示例"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">conf.xml 配置示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-对象构建-Bean类"><span class="nav-number">1.1.3.</span> <span class="nav-text">Java 对象构建(Bean类)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造对象"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">构造对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建接口"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">构建接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建-Java-对象和-SQL-语句映射关系配置文件"><span class="nav-number">1.1.4.</span> <span class="nav-text">构建 Java 对象和 SQL 语句映射关系配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在-conf-xml-文件中注册-mapper"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">在 conf.xml 文件中注册 mapper</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据查询操作"><span class="nav-number">1.1.5.</span> <span class="nav-text">数据查询操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工作流程"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#测试程序"><span class="nav-number">1.1.5.1.1.</span> <span class="nav-text">测试程序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#映射通过注解的方式声明"><span class="nav-number">1.1.6.</span> <span class="nav-text">映射通过注解的方式声明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-在接口类的方法上添加-sql-注解"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">1. 在接口类的方法上添加 sql 注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-在主程序中添加映射关系到接口对象"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">2. 在主程序中添加映射关系到接口对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他-SQL-操作（增删改）"><span class="nav-number">1.2.</span> <span class="nav-text">其他 SQL 操作（增删改）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行-MyBatis"><span class="nav-number">1.2.1.</span> <span class="nav-text">运行 MyBatis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MyBatis-的优劣"><span class="nav-number">1.2.2.</span> <span class="nav-text">MyBatis 的优劣</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#『项目地址』-https-github-com-wengfe-JAVA-tree-master-HelloMybatis-src"><span class="nav-number">1.2.2.0.1.</span> <span class="nav-text">『项目地址』:https://github.com/wengfe/JAVA/tree/master/HelloMybatis/src</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wengfe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("75Tyh25kXJuDuJwL0IlHfBAi-gzGzoHsz", "ErNnrf92gQpOtPMaetd1d6yQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

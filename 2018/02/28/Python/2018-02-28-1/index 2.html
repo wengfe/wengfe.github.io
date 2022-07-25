@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-code.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-code.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-code.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="note,Django," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="主要是为熟悉，使用 Post 方法增加文章详情页评论功能。 本文django 表单创建流程：  准备工作 创建渲染表单 数据校验 数据存储 定制化表单">
+<meta name="keywords" content="note,Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django 项目4 文章评论功能">
+<meta property="og:url" content="http://yoursite.com/2018/02/28/Python/2018-02-28-1/index.html">
+<meta property="og:site_name" content="旦暮༗">
+<meta property="og:description" content="主要是为熟悉，使用 Post 方法增加文章详情页评论功能。 本文django 表单创建流程：  准备工作 创建渲染表单 数据校验 数据存储 定制化表单">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-4_HFciuFR-c/WpZw7zhAMsI/AAAAAAAAAKA/ubKxzKEKwM44BcUVqwif4FKkUGqYcs15ACHMYCw/I/15198087466698.png">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-fhYgpyLcyJY/WpZ8PZQKOhI/AAAAAAAAAKc/9nli0qr_DJA7BDFUzWAiehBjiJ7TP83yQCHMYCw/I/15198116363910.png">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-q7p4s3cQfFQ/WpZ8SyIpprI/AAAAAAAAAKg/pOQ5JF2fbcArfVO3ooT6qF6361BubQvuACHMYCw/I/15198116516010.png">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-4aYzkPAeIbI/WpfKLjhbVoI/AAAAAAAAALA/-OLFnRJSpDMGeYjnGdzGhuFVR1byLwZIQCHMYCw/I/15198971299548.png">
+<meta property="og:image" content="https://lh3.googleusercontent.com/-eEIBlrEIcao/WpfQKjFbxyI/AAAAAAAAALc/xb9VeShmZLc8_GrMzccQBpZgb0rxC0aSACHMYCw/I/15198986641265.png">
+<meta property="og:updated_time" content="2018-03-02T01:14:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django 项目4 文章评论功能">
+<meta name="twitter:description" content="主要是为熟悉，使用 Post 方法增加文章详情页评论功能。 本文django 表单创建流程：  准备工作 创建渲染表单 数据校验 数据存储 定制化表单">
+<meta name="twitter:image" content="https://lh3.googleusercontent.com/-4_HFciuFR-c/WpZw7zhAMsI/AAAAAAAAAKA/ubKxzKEKwM44BcUVqwif4FKkUGqYcs15ACHMYCw/I/15198087466698.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/28/Python/2018-02-28-1/"/>
+
+
+
+
+
+  <title>Django 项目4 文章评论功能 | 旦暮༗</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-112253103-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bc5d696ac12feeb1a8c26ba78e9a06a5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">旦暮༗</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/28/Python/2018-02-28-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wengfe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="旦暮༗">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Django 项目4 文章评论功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T15:39:17+08:00">
+                2018-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/28/Python/2018-02-28-1/" class="leancloud_visitors" data-flag-title="Django 项目4 文章评论功能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主要是为熟悉，使用 Post 方法增加文章详情页评论功能。</p>
+<p>本文django 表单创建流程：</p>
+<ol>
+<li>准备工作</li>
+<li>创建渲染表单</li>
+<li>数据校验</li>
+<li>数据存储</li>
+<li>定制化表单</li>
+</ol>
+<a id="more"></a>
+<h2 id="评论页面准备工作："><a href="#评论页面准备工作：" class="headerlink" title="评论页面准备工作："></a>评论页面准备工作：</h2><p>django 自带表单系统处理步骤：</p>
+<ol>
+<li>渲染表单</li>
+<li>绑定表单</li>
+<li>返回校验结果</li>
+</ol>
+<p>此处新建了一个文章详情页来创建表单功能，表单内容为评论部分；因此此处新添加了数据模型，重新分配了 url。</p>
+<h3 id="在-model-添加评论模型"><a href="#在-model-添加评论模型" class="headerlink" title="在 model 添加评论模型"></a>在 model 添加评论模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class comment(models.Model):</div><div class="line">    name = models.CharField(null=True, blank=True, max_length=50)</div><div class="line">    comment = models.TextField()</div><div class="line"></div><div class="line">    def __str__(self):</div><div class="line">        return self.comment</div></pre></td></tr></table></figure>
+<p>然后再终端中进行数据合并，执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">% python3 manage.py makemigrations</div><div class="line">Migrations for &apos;django_demo&apos;:</div><div class="line">  django_demo/migrations/0006_auto_20180228_0754.py</div><div class="line">    - Create model comment</div><div class="line">    - Alter field tag on article</div><div class="line">% python3 manage.py migrate</div><div class="line">Operations to perform:</div><div class="line">  Apply all migrations: admin, auth, contenttypes, django_demo, sessions</div><div class="line">Running migrations:</div><div class="line">  Applying django_demo.0006_auto_20180228_0754... OK</div></pre></td></tr></table></figure>
+<h3 id="view-添加逻辑"><a href="#view-添加逻辑" class="headerlink" title="view 添加逻辑"></a>view 添加逻辑</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">def detail(request):</div><div class="line">    context = &#123;&#125;</div><div class="line">    comment_list = Comment.objects.all()</div><div class="line">    context[&apos;comment_list&apos;] = comment_list</div><div class="line">    return render(request, &apos;detail.html&apos;, context)</div></pre></td></tr></table></figure>
+<h3 id="url-分配url"><a href="#url-分配url" class="headerlink" title="url 分配url"></a>url 分配url</h3><p>在 url 中 引入view内的 detail</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from django_demo.views import first_try, index, detail</div></pre></td></tr></table></figure>
+<p>在 urlpatterns 中添加 url</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">path(r&apos;detail/&apos;, detail, name=&apos;detail&apos;),</div></pre></td></tr></table></figure>
+<h2 id="渲染表单"><a href="#渲染表单" class="headerlink" title="渲染表单"></a>渲染表单</h2><h3 id="创建表单"><a href="#创建表单" class="headerlink" title="创建表单"></a>创建表单</h3><p>表单在  views.py 中创建。创建的方式与数据模型的创建非常相似。</p>
+<ol>
+<li>引入 forms </li>
+<li>创建表单函数</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">from django import forms</div><div class="line"></div><div class="line">class CommentForm(forms.Form):</div><div class="line">    name = forms.CharField(max_length=50)</div><div class="line">    comment = forms.CharField()</div></pre></td></tr></table></figure>
+<p>实例化 表单，并带入数据模型当中。<br>在 detail 数据模型类中 定义表单对象，并添加到内容中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">def detail(request):</div><div class="line">    form = CommentForm</div><div class="line">    context = &#123;&#125;</div><div class="line">    comment_list = Comment.objects.all()</div><div class="line">    context[&apos;comment_list&apos;] = comment_list</div><div class="line">    context[&apos;form&apos;] = form</div><div class="line">    return render(request, &apos;detail.html&apos;, context)</div></pre></td></tr></table></figure>
+<h3 id="模板层渲染"><a href="#模板层渲染" class="headerlink" title="模板层渲染"></a>模板层渲染</h3><p><img src="https://lh3.googleusercontent.com/-4_HFciuFR-c/WpZw7zhAMsI/AAAAAAAAAKA/ubKxzKEKwM44BcUVqwif4FKkUGqYcs15ACHMYCw/I/15198087466698.png" alt=""></p>
+<h2 id="绑定表单-amp-返回校验结果"><a href="#绑定表单-amp-返回校验结果" class="headerlink" title="绑定表单 &amp; 返回校验结果"></a>绑定表单 &amp; 返回校验结果</h2><p>在 views.py 中的 detail 数据模型下 修改代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">def detail(request):</div><div class="line">    if request.method == &apos;GET&apos;:</div><div class="line">        form = CommentForm</div><div class="line">    if request.method == &apos;POST&apos;:</div><div class="line">        #绑定表单， 是进行数据校验的前置步骤</div><div class="line">        form = CommentForm(request.POST)</div><div class="line">        print(form)</div><div class="line">        print(form.errors)</div><div class="line">    context = &#123;&#125;</div><div class="line">    comment_list = Comment.objects.all()</div><div class="line">    context[&apos;comment_list&apos;] = comment_list</div><div class="line">    context[&apos;form&apos;] = form</div><div class="line">    return render(request, &apos;detail.html&apos;, context)</div></pre></td></tr></table></figure>
+<p>一般在绑定表单后，就会<strong>触发数据验证</strong>，若有错误会将错误信息填写入 errorlist 中，可以通过<br><code>print(form.errors)</code> 来打印出。</p>
+<h2 id="表单数据存储"><a href="#表单数据存储" class="headerlink" title="表单数据存储"></a>表单数据存储</h2><p>需要 导入redirect，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from django.shortcuts import render, redirect</div></pre></td></tr></table></figure>
+<p>然后在 detail 数据模型中添加代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">def detail(request):</div><div class="line">    if request.method == &apos;GET&apos;:</div><div class="line">        form = CommentForm</div><div class="line">    if request.method == &apos;POST&apos;:</div><div class="line">        # 绑定表单， 是进行数据校验的前置步骤</div><div class="line">        form = CommentForm(request.POST)</div><div class="line">        # 判断绑定的表单是否通过数据验证</div><div class="line">        if form.is_valid():</div><div class="line">            # 表单数据通过后，会将数据存储在 cleaned_data 中</div><div class="line">            name = form.cleaned_data[&apos;name&apos;]</div><div class="line">            comment = form.cleaned_data[&apos;comment&apos;]</div><div class="line">            c = Comment(name=name, comment=comment)</div><div class="line">            c.save()</div><div class="line">            # redirect 重定向回 name=detail 的 url</div><div class="line">            return redirect(to=&apos;detail&apos;)</div><div class="line">    context = &#123;&#125;</div><div class="line">    comment_list = Comment.objects.all()</div><div class="line">    context[&apos;comment_list&apos;] = comment_list</div><div class="line">    context[&apos;form&apos;] = form</div><div class="line">    return render(request, &apos;detail.html&apos;, context)</div></pre></td></tr></table></figure>
+<p>当 校验信息返回 false 时，会直接将错误信息装填在绑定表单时生成的错误列表中，然后装填在form 中，进行错误信息的渲染。所以不需要进行 else 的逻辑判断。</p>
+<p>ps. form.is_valid() 以及 form = CommentForm(request.POST) 都会<strong>触发数据验证</strong> </p>
+<p>这一步完成后，就能在 detail 页面进行评论了。<br><img src="https://lh3.googleusercontent.com/-fhYgpyLcyJY/WpZ8PZQKOhI/AAAAAAAAAKc/9nli0qr_DJA7BDFUzWAiehBjiJ7TP83yQCHMYCw/I/15198116363910.png" alt=""><br><img src="https://lh3.googleusercontent.com/-q7p4s3cQfFQ/WpZ8SyIpprI/AAAAAAAAAKg/pOQ5JF2fbcArfVO3ooT6qF6361BubQvuACHMYCw/I/15198116516010.png" alt=""></p>
+<h2 id="定制化表单"><a href="#定制化表单" class="headerlink" title="定制化表单"></a>定制化表单</h2><ol>
+<li>添加更加详细的验证</li>
+<li>修改前段的表现形式</li>
+</ol>
+<h3 id="定制化表单的验证逻辑"><a href="#定制化表单的验证逻辑" class="headerlink" title="定制化表单的验证逻辑"></a>定制化表单的验证逻辑</h3><p>首先我们需要把 views.py 文件中的 CommentForm 类解耦到 form.py 文件中。</p>
+<p>新建 form.py 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from django import forms</div><div class="line"></div><div class="line"></div><div class="line">class CommentForm(forms.Form):</div><div class="line">    comment = forms.CharField()</div><div class="line">    name = forms.CharField(max_length=50)</div></pre></td></tr></table></figure>
+<p>接下来在该文件中，添加表单的逻辑。</p>
+<h4 id="自带的数据校验："><a href="#自带的数据校验：" class="headerlink" title="自带的数据校验："></a>自带的数据校验：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class CommentForm(forms.Form):</div><div class="line">    name = forms.CharField(max_length=50)</div><div class="line">    comment = forms.CharField(</div><div class="line">        widget=forms.Textarea(),</div><div class="line">        error_messages=&#123;</div><div class="line">            &apos;required&apos;: &apos;input your comment, please&apos;</div><div class="line">        &#125;</div><div class="line">    )</div></pre></td></tr></table></figure>
+<p>在需要添加校验的字段后添加参数 error_message， 复写错误提示语；一般提示语有三类<br><strong>required</strong>，<strong>invalid</strong>，<strong>max_length</strong><br>以字典形式写入。  这个自带的数据校验器，我并没有生效。</p>
+<h4 id="数据验证器"><a href="#数据验证器" class="headerlink" title="数据验证器"></a>数据验证器</h4><p>在 form.py 中引入 <code>from django.core.exceptions import ValidationError</code></p>
+<p>然后定义数据验证逻辑，在 error_messages 中写入 validators 列表中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">def words_validator(comment):</div><div class="line">    if len(comment) &lt; 4:</div><div class="line">        raise ValidationError(&apos;Not enough words&apos;)</div><div class="line"></div><div class="line"></div><div class="line">def comment_validator(comment):</div><div class="line">    if &apos;a&apos; in comment:</div><div class="line">        raise ValidationError(&apos;&quot;a&quot; is must not&apos;)</div><div class="line"></div><div class="line"></div><div class="line">class CommentForm(forms.Form):</div><div class="line">    name = forms.CharField(max_length=50)</div><div class="line">    comment = forms.CharField(</div><div class="line">        widget=forms.Textarea(),</div><div class="line">        error_messages=&#123;</div><div class="line">            &apos;required&apos;: &apos;input your comment, please&apos;,</div><div class="line">            &apos;invalid&apos;: &apos;invalid&apos;,</div><div class="line">            &apos;max_length&apos;: &apos;too much&apos;</div><div class="line">        &#125;,</div><div class="line">        validators=[words_validator, comment_validator]</div><div class="line">    )</div></pre></td></tr></table></figure>
+<p><strong>验证器不仅能在表单的数据校验中使用，也可以在数据模型中使用。</strong></p>
+<h3 id="定制表单的手工渲染"><a href="#定制表单的手工渲染" class="headerlink" title="定制表单的手工渲染"></a>定制表单的手工渲染</h3><p>对报错信息进行单独的手工渲染。</p>
+<p>现在的报错样式：<br><img src="https://lh3.googleusercontent.com/-4aYzkPAeIbI/WpfKLjhbVoI/AAAAAAAAALA/-OLFnRJSpDMGeYjnGdzGhuFVR1byLwZIQCHMYCw/I/15198971299548.png" alt=""></p>
+<h4 id="手工渲染表单"><a href="#手工渲染表单" class="headerlink" title="手工渲染表单"></a>手工渲染表单</h4><p>删除原先的 form.as_p</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;form class=&quot;ui tiny form&quot;  method=&quot;post&quot;&gt;</div><div class="line">               &#123;% for field in form %&#125;</div><div class="line">                   &lt;div class=&quot;field&quot;&gt;</div><div class="line">                       &#123;&#123; field.label &#125;&#125;</div><div class="line">                       &#123;&#123; field &#125;&#125;</div><div class="line">                   &lt;/div&gt;</div><div class="line">               &#123;% endfor %&#125;</div><div class="line"></div><div class="line">               &#123;% csrf_token %&#125;</div><div class="line"></div><div class="line">               &lt;button type=&quot;submit&quot; class=&quot;ui blue button&quot; &gt;Click&lt;/button&gt;</div><div class="line">           &lt;/form&gt;</div></pre></td></tr></table></figure>
+<p>返回网页端，进行测试，发现评论内容无法进行数据验证。</p>
+<h4 id="渲染报错信息"><a href="#渲染报错信息" class="headerlink" title="渲染报错信息"></a>渲染报错信息</h4><p><img src="https://lh3.googleusercontent.com/-eEIBlrEIcao/WpfQKjFbxyI/AAAAAAAAALc/xb9VeShmZLc8_GrMzccQBpZgb0rxC0aSACHMYCw/I/15198986641265.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"> &#123;#    semantic error form 布局#&#125;</div><div class="line">    &lt;form class=&quot;ui error tiny form&quot; method=&quot;post&quot;&gt;</div><div class="line">&#123;#    判断是否存在 error 信息#&#125;</div><div class="line">        &#123;% if form.errors %&#125;</div><div class="line">            &lt;div class=&quot;ui error message&quot;&gt;</div><div class="line">                &#123;&#123; form.errors &#125;&#125;</div><div class="line">            &lt;/div&gt;</div><div class="line">            &#123;% for field in form %&#125;</div><div class="line">&#123;#            遍历表单字段，不通过数据校验的字段渲染成出错样式 并给出提示#&#125;</div><div class="line">                &lt;div class=&quot;&#123;&#123; field.errors|yesno:&apos;error,&apos; &#125;&#125; field&quot;&gt;</div><div class="line">                    &#123;&#123; field.label &#125;&#125;</div><div class="line">                    &#123;&#123; field &#125;&#125;</div><div class="line">                &lt;/div&gt;</div><div class="line">            &#123;% endfor %&#125;</div><div class="line"></div><div class="line">        &#123;% else %&#125;</div><div class="line">            &#123;% for field in form %&#125;</div><div class="line">                &lt;div class=&quot;field&quot;&gt;</div><div class="line">                    &#123;&#123; field.label &#125;&#125;</div><div class="line">                    &#123;&#123; field &#125;&#125;</div><div class="line">                &lt;/div&gt;</div><div class="line">            &#123;% endfor %&#125;</div><div class="line"></div><div class="line">        &#123;% endif %&#125;</div><div class="line"></div><div class="line">        &#123;% csrf_token %&#125;</div><div class="line"></div><div class="line">        &lt;button type=&quot;submit&quot; class=&quot;ui blue button&quot;&gt;Click&lt;/button&gt;</div><div class="line">    &lt;/form&gt;</div></pre></td></tr></table></figure>
+<hr>
+<p>源码地址:<br>    『NiuCodeLesson/DjangoWeb/DjangoWebFirst/』:<a href="https://github.com/wengfe/NiuCodeLesson/tree/master/DjangoWeb/DjangoWebFirst" target="_blank" rel="external">https://github.com/wengfe/NiuCodeLesson/tree/master/DjangoWeb/DjangoWebFirst</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/note/" rel="tag"># note</a>
+          
+            <a href="/tags/Django/" rel="tag"># Django</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/28/Python/2018-02-28/" rel="next" title="Django 项目3 文章分类功能">
+                <i class="fa fa-chevron-left"></i> Django 项目3 文章分类功能
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/02/Python/2018-03-02/" rel="prev" title="python爬虫代理篇">
+                python爬虫代理篇 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzEwMy85NjYy"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Wengfe" />
+            
+              <p class="site-author-name" itemprop="name">Wengfe</p>
+              <p class="site-description motion-element" itemprop="description">涸辙遗鲋，旦暮成枯;人而无志，与彼何殊。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wengfe" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:214952026@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#评论页面准备工作："><span class="nav-number">1.</span> <span class="nav-text">评论页面准备工作：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在-model-添加评论模型"><span class="nav-number">1.1.</span> <span class="nav-text">在 model 添加评论模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#view-添加逻辑"><span class="nav-number">1.2.</span> <span class="nav-text">view 添加逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#url-分配url"><span class="nav-number">1.3.</span> <span class="nav-text">url 分配url</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染表单"><span class="nav-number">2.</span> <span class="nav-text">渲染表单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表单"><span class="nav-number">2.1.</span> <span class="nav-text">创建表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模板层渲染"><span class="nav-number">2.2.</span> <span class="nav-text">模板层渲染</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定表单-amp-返回校验结果"><span class="nav-number">3.</span> <span class="nav-text">绑定表单 & 返回校验结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表单数据存储"><span class="nav-number">4.</span> <span class="nav-text">表单数据存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定制化表单"><span class="nav-number">5.</span> <span class="nav-text">定制化表单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定制化表单的验证逻辑"><span class="nav-number">5.1.</span> <span class="nav-text">定制化表单的验证逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自带的数据校验："><span class="nav-number">5.1.1.</span> <span class="nav-text">自带的数据校验：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据验证器"><span class="nav-number">5.1.2.</span> <span class="nav-text">数据验证器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定制表单的手工渲染"><span class="nav-number">5.2.</span> <span class="nav-text">定制表单的手工渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#手工渲染表单"><span class="nav-number">5.2.1.</span> <span class="nav-text">手工渲染表单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#渲染报错信息"><span class="nav-number">5.2.2.</span> <span class="nav-text">渲染报错信息</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wengfe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("75Tyh25kXJuDuJwL0IlHfBAi-gzGzoHsz", "ErNnrf92gQpOtPMaetd1d6yQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
